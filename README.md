@@ -1,4 +1,4 @@
-# Iteration 1
+# Iteration 0
 
 ## Vision Statement
 
