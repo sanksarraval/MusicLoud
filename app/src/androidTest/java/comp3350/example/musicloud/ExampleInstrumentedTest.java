@@ -1,4 +1,4 @@
-package com.example.musicloud;
+package comp3350.example.musicloud;
 
 import android.content.Context;
 

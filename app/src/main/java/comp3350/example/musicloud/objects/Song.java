@@ -1,4 +1,4 @@
-package com.example.musicloud.objects;
+package comp3350.example.musicloud.objects;
 
 import java.io.*;
 

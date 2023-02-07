@@ -1,4 +1,4 @@
-package com.example.musicloud;
+package comp3350.example.musicloud.presentation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.musicloud.R;
 
 
 public class MainActivity extends AppCompatActivity {

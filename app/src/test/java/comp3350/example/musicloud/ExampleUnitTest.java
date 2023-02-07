@@ -1,4 +1,4 @@
-package com.example.musicloud;
+package comp3350.example.musicloud;
 
 import org.junit.Test;
 
