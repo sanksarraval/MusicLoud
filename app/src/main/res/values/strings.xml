@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MusicLoud</string>
+    <string name="Library">Library</string>
+    <string name="Songs">Songs</string>
+    <string name="Title">Title</string>
+    <string name="Artist">Artist</string>
+    <string name="Playlists">Playlists</string>
+    <string name="RecommendedSongs">Recommended Songs</string>
 </resources>
