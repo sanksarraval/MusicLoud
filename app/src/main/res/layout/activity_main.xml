@@ -10,7 +10,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40sp"
+        android:textColor="@color/black"
         android:text="@string/Library"
         android:id="@+id/library"
         android:layout_marginBottom="10dp" />
@@ -27,9 +28,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/Songs"
+        android:textSize="25sp"
         android:textColor="@color/black"
+        android:text="@string/Songs"
         android:id="@+id/songs"/>
 
 
@@ -55,8 +56,8 @@
                 android:paddingRight="10dp">
 
                 <Button
-                    android:layout_width="135dp"
-                    android:layout_height="135dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:backgroundTint="@color/gray" />
 
                 <TextView
@@ -84,8 +85,8 @@
                 android:paddingRight="10dp">
 
                 <Button
-                    android:layout_width="135dp"
-                    android:layout_height="135dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:backgroundTint="@color/gray" />
 
                 <TextView
@@ -112,8 +113,8 @@
                 android:paddingRight="10dp">
 
                 <Button
-                    android:layout_width="135dp"
-                    android:layout_height="135dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:backgroundTint="@color/gray" />
 
                 <TextView
@@ -140,8 +141,8 @@
                 android:paddingRight="10dp">
 
                 <Button
-                    android:layout_width="135dp"
-                    android:layout_height="135dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:backgroundTint="@color/gray" />
 
                 <TextView
@@ -170,7 +171,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp"
         android:text="@string/Playlists"
         android:textColor="@color/black"
         android:id="@+id/playlists"/>
@@ -197,8 +198,8 @@
                 android:paddingRight="10dp">
 
                 <Button
-                    android:layout_width="135dp"
-                    android:layout_height="135dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:backgroundTint="@color/gray" />
 
                 <TextView
@@ -217,8 +218,8 @@
                 android:paddingRight="10dp">
 
                 <Button
-                    android:layout_width="135dp"
-                    android:layout_height="135dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:backgroundTint="@color/gray" />
 
                 <TextView
@@ -237,8 +238,8 @@
                 android:paddingRight="10dp">
 
                 <Button
-                    android:layout_width="135dp"
-                    android:layout_height="135dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:backgroundTint="@color/gray" />
 
                 <TextView
@@ -257,8 +258,8 @@
                 android:paddingRight="10dp">
 
                 <Button
-                    android:layout_width="135dp"
-                    android:layout_height="135dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:backgroundTint="@color/gray" />
 
                 <TextView
@@ -278,7 +279,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp"
         android:text="@string/RecommendedSongs"
         android:textColor="@color/black"
         android:id="@+id/recommended"/>
@@ -305,8 +306,8 @@
                 android:paddingRight="10dp">
 
                 <Button
-                    android:layout_width="135dp"
-                    android:layout_height="135dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:backgroundTint="@color/gray" />
 
                 <TextView
@@ -333,8 +334,8 @@
                 android:paddingRight="10dp">
 
                 <Button
-                    android:layout_width="135dp"
-                    android:layout_height="135dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:backgroundTint="@color/gray" />
 
                 <TextView
@@ -361,8 +362,8 @@
                 android:paddingRight="10dp">
 
                 <Button
-                    android:layout_width="135dp"
-                    android:layout_height="135dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:backgroundTint="@color/gray" />
 
                 <TextView
@@ -389,8 +390,8 @@
                 android:paddingRight="10dp">
 
                 <Button
-                    android:layout_width="135dp"
-                    android:layout_height="135dp"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
                     android:backgroundTint="@color/gray" />
 
                 <TextView
