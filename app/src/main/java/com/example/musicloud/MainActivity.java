@@ -2,6 +2,8 @@ package com.example.musicloud;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,8 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.musicloud.presentation.LoginActivity;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends Activity {
 
     EditText username, password;
     Button loginBtn;
@@ -24,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        /*
         username = findViewById(R.id.username);
         password = findViewById(R.id.Password);
         loginBtn = findViewById(R.id.button);
@@ -52,6 +58,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+        */
+    }
+    public void buttonLoginOnClick(View v)
+    {
+        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+        MainActivity.this.startActivity(loginIntent);
     }
 }

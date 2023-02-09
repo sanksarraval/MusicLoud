@@ -1,6 +1,7 @@
 package com.example.musicloud.presentation;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -45,25 +46,28 @@ public class LoginActivity extends Activity {
 
 
                 // Validating Inputs
-                if(TextUtils.isEmpty(usernameEditText.getText().toString())|| TextUtils.isEmpty(passwordEditText.getText().toString()))
+                String userID = usernameEditText.getText().toString();
+                String pass = passwordEditText.getText().toString();
+                if(accessUsers.verifyUser(userID,pass))
+                {
+                    User currUser = accessUsers.returnAccount(userID);
+                    Toast.makeText(LoginActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
+                }
+                else if(TextUtils.isEmpty(usernameEditText.getText().toString())|| TextUtils.isEmpty(passwordEditText.getText().toString()))
                 {
                     Toast.makeText(LoginActivity.this,"Please input Username and password!", Toast.LENGTH_LONG).show();
-                } else if (usernameEditText.getText().toString().equals(correct_username))
-                {
-                    if(passwordEditText.getText().toString().equals(correct_password))
-                    {
-                        Toast.makeText(LoginActivity.this,"Login was successful", Toast.LENGTH_LONG).show();
-                    }
-                    else
-                    {
-                        Toast.makeText(LoginActivity.this,"Incorrect Password!", Toast.LENGTH_LONG).show();
-                    }
                 }
                 else
                 {
-                    Toast.makeText(LoginActivity.this,"Invalid Username/password!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Please register using the register Button!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    public void buttonRegisterOnClick(View v)
+    {
+        Intent loginIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+        LoginActivity.this.startActivity(loginIntent);
     }
 }

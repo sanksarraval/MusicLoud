@@ -58,7 +58,7 @@ public class RegisterActivity extends Activity {
                 {
                     User newUser = new User(userID,fullName,password);
                     accessUsers.addAccount(newUser);
-                    Toast.makeText(RegisterActivity.this, "Account has been created successfully!",Toast.LENGTH_SHORT);
+                    Toast.makeText(RegisterActivity.this, "Account has been created successfully!",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
 

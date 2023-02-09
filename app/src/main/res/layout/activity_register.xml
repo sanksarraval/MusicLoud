@@ -38,7 +38,8 @@
             android:id="@+id/user_name_edit_text"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:hint="User Name" />
+            android:hint="User Name"
+            android:textColorHint="@color/white"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -56,23 +57,25 @@
             android:id="@+id/full_name_edit_text"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:hint="Full Name" />
+            android:hint="Full Name"
+            android:textColorHint="@color/white"/>
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_edit_text"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColorHint="@color/white"/>
 
     </LinearLayout>
 
     <Button
         android:id="@+id/register_btn"
-        android:layout_width="249dp"
+        android:layout_width="207dp"
         android:layout_height="53dp"
         android:layout_marginBottom="127dp"
-        android:text="Button"
+        android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
