@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="@drawable/reg_background">
 
 
     <TextView
@@ -14,8 +14,9 @@
         android:layout_marginTop="62dp"
         android:layout_marginBottom="173dp"
         android:text="Register"
-        android:textColor="#151515"
-        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,8 +39,12 @@
             android:id="@+id/user_name_edit_text"
             android:layout_width="match_parent"
             android:layout_height="65dp"
+            android:background="@drawable/input_bg"
+            android:drawableLeft="@drawable/baseline_account_circle_24"
             android:hint="User Name"
-            android:textColorHint="@color/white"/>
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -57,25 +62,37 @@
             android:id="@+id/full_name_edit_text"
             android:layout_width="match_parent"
             android:layout_height="65dp"
+            android:background="@drawable/input_bg"
+            android:drawableLeft="@drawable/baseline_person_24"
             android:hint="Full Name"
-            android:textColorHint="@color/white"/>
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_edit_text"
             android:layout_width="match_parent"
             android:layout_height="65dp"
+            android:background="@drawable/input_bg"
+            android:drawableLeft="@drawable/baseline_lock_24"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColorHint="@color/white"/>
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
 
     </LinearLayout>
 
     <Button
         android:id="@+id/register_btn"
         android:layout_width="207dp"
-        android:layout_height="53dp"
-        android:layout_marginBottom="127dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="126dp"
         android:text="Register"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:background="@drawable/input_bg"
+        android:backgroundTint="@color/purple_500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
