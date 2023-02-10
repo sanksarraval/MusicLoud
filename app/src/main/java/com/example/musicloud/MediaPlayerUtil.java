@@ -1,11 +1,10 @@
-package com.example.musicloud.presentation;
+package com.example.musicloud;
 
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.text.TextUtils;
 
-import com.example.musicloud.MyApp;
 import com.example.musicloud.persistence.IPlayControlCallback;
 import com.example.musicloud.persistence.IPlayStateCallback;
 
