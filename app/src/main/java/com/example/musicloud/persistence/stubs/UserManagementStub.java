@@ -25,7 +25,7 @@ public class UserManagementStub implements UserManagement {
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        return userList;
     }
 
     public User getUser(String userID)
