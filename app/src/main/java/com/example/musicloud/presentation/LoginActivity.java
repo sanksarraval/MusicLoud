@@ -49,7 +49,7 @@ public class LoginActivity extends Activity {
                 if(accessUsers.verifyUser(userID,pass))
                 {
                     User currUser = accessUsers.returnAccount(userID);
-                    Toast.makeText(LoginActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Welcome!!", Toast.LENGTH_SHORT).show();
                     buttonLoginOnClick(view);
                 }
                 else if(TextUtils.isEmpty(usernameEditText.getText().toString())|| TextUtils.isEmpty(passwordEditText.getText().toString()))
