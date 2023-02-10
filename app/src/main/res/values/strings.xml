@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MusicLoud</string>
+    <string name="str_replay_msg">Music is playing, whether to play from the beginning ?</string>
 </resources>
