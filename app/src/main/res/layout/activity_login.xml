@@ -14,10 +14,10 @@
         android:layout_height="0dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/input_bg"
-        android:drawableLeft="@drawable/baseline_person_24"
+        android:drawableStart="@drawable/baseline_person_24"
         android:drawablePadding="20dp"
         android:ems="10"
-        android:hint="Username"
+        android:hint="@string/username"
         android:inputType="textPersonName"
         android:textSize="22sp"
         android:textColorHint="@color/white"
@@ -25,7 +25,8 @@
         app:layout_constraintBottom_toTopOf="@+id/Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/Password"
@@ -33,10 +34,10 @@
         android:layout_height="0dp"
         android:layout_marginBottom="156dp"
         android:background="@drawable/input_bg"
-        android:drawableLeft="@drawable/baseline_lock_24"
+        android:drawableStart="@drawable/baseline_lock_24"
         android:drawablePadding="20dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:textSize="22sp"
         android:textColorHint="@color/white"
@@ -44,7 +45,8 @@
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/username"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/button"
@@ -53,7 +55,7 @@
         android:layout_marginBottom="30dp"
         android:background="@drawable/input_bg"
         android:backgroundTint="@color/purple_500"
-        android:text="Login"
+        android:text="@string/login_btn"
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/register"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,9 +68,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="123dp"
-        android:text="Login"
+        android:text="@string/login_txt"
         android:textColor="@color/white"
-        android:textSize="55dp"
+        android:textSize="55sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/username"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +85,7 @@
         android:background="@drawable/input_bg"
         android:backgroundTint="@color/purple_500"
         android:onClick="buttonRegisterOnClick"
-        android:text="Register"
+        android:text="@string/register_btn"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
