@@ -42,14 +42,14 @@
         android:textSize="22sp"
         android:textColorHint="@color/white"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/login_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username"
         android:autofillHints="" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/login_btn"
         android:layout_width="207dp"
         android:layout_height="0dp"
         android:layout_marginBottom="30dp"
@@ -57,6 +57,7 @@
         android:backgroundTint="@color/purple_500"
         android:text="@string/login_btn"
         android:textSize="22sp"
+        android:onClick="buttonLoginOnClick"
         app:layout_constraintBottom_toTopOf="@+id/register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,5 +91,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/login_btn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

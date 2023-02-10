@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">MusicLoud</string>
-    <string name="title_activity_login">musicloud: Login</string>
-    <string name="title_activity_register">musicloud: Login</string>
+    <string name="str_replay_msg">Music is playing, whether to play from the beginning ?</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login_btn">Login</string>
@@ -12,4 +11,6 @@
     <string name="full_name">Full Name</string>
     <string name="password_txt">Password</string>
     <string name="register_btn_txt">Register</string>
+    <string name="title_activity_login">musicloud: Login</string>
+    <string name="title_activity_register">musicloud: Login</string>
 </resources>
