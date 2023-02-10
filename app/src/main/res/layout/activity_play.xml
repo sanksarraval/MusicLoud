@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="6dp"
+        android:ellipsize="end"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivPlay"
+        app:layout_constraintEnd_toStartOf="@id/ivLast"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivPlay" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivLast"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivPlay"
+        app:layout_constraintEnd_toStartOf="@id/ivPlay"
+        app:layout_constraintStart_toEndOf="@id/tvName"
+        app:layout_constraintTop_toTopOf="@id/ivPlay"
+        app:srcCompat="@mipmap/ic_last" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivPlay"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@id/ivNext"
+        app:layout_constraintStart_toEndOf="@id/ivLast"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_play" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivNext"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivPlay"
+        app:layout_constraintEnd_toStartOf="@id/ivReplay"
+        app:layout_constraintStart_toEndOf="@id/ivPlay"
+        app:layout_constraintTop_toTopOf="@id/ivPlay"
+        app:srcCompat="@mipmap/ic_next" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivReplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/ivPlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivNext"
+        app:layout_constraintTop_toTopOf="@id/ivPlay"
+        app:srcCompat="@mipmap/ic_replay" />
+
+    <ProgressBar
+        android:id="@+id/pbProgress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="10dp"
+        android:max="100"
+        android:minHeight="3dp"
+        android:progress="0"
+        android:progressDrawable="@drawable/layer_progress_bar_bg"
+        app:layout_constraintEnd_toEndOf="@id/ivNext"
+        app:layout_constraintStart_toStartOf="@id/tvName"
+        app:layout_constraintTop_toBottomOf="@id/ivPlay" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
