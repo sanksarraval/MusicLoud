@@ -1,421 +1,508 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!-- Songs -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="40sp"
-        android:textColor="@color/black"
-        android:text="@string/Library"
-        android:id="@+id/library"
-        android:layout_marginBottom="10dp" />
-
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000000"
-        android:id="@+id/separator"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:textColor="@color/black"
-        android:text="@string/Songs"
-        android:id="@+id/songs"/>
+        <!-- Songs -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="40sp"
+            android:textColor="@color/black"
+            android:text="@string/Library"
+            android:id="@+id/library"
+            android:layout_marginBottom="10dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"
+            android:id="@+id/separator"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:text="@string/Songs"
+            android:id="@+id/songs"/>
 
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
-
-        <!-- using linear layout to store multiple view
-             inside a Horizontal Scroll View -->
-        <LinearLayout
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="horizontal">
+            android:scrollbars="none">
 
-            <!-- multiple button views to show a
-                  scrollable horizontal list -->
+            <!-- using linear layout to store multiple view
+                 inside a Horizontal Scroll View -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="10dp">
+                android:background="@color/white"
+                android:orientation="horizontal">
 
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
-
-                <TextView
+                <!-- multiple button views to show a
+                      scrollable horizontal list -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Title"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/black" />
+                    android:orientation="vertical"
+                    android:paddingRight="10dp">
 
-                <TextView
-                    android:id="@+id/artist"
+                    <Button
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:backgroundTint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Title"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/artist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/Artist"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/Artist"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:orientation="vertical"
+                    android:paddingRight="10dp">
+
+                    <Button
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:backgroundTint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Title"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/Artist"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingRight="10dp">
+
+                    <Button
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:backgroundTint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Title"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/Artist"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingRight="10dp">
+
+                    <Button
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:backgroundTint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Title"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/Artist"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="10dp">
+        </HorizontalScrollView>
 
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
+        <!-- Playlists -->
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="@string/Playlists"
+            android:textColor="@color/black"
+            android:id="@+id/playlists"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Title"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/Artist"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="10dp">
-
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Title"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/Artist"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="10dp">
-
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Title"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/Artist"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </HorizontalScrollView>
-
-    <!-- Playlists -->
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:text="@string/Playlists"
-        android:textColor="@color/black"
-        android:id="@+id/playlists"/>
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
-
-        <!-- using linear layout to store multiple view
-             inside a Horizontal Scroll View -->
-        <LinearLayout
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="horizontal">
+            android:scrollbars="none">
 
-            <!-- multiple button views to show a
-                  scrollable horizontal list -->
+            <!-- using linear layout to store multiple view
+                 inside a Horizontal Scroll View -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="10dp">
+                android:background="@color/white"
+                android:orientation="horizontal">
 
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
-
-                <TextView
+                <!-- multiple button views to show a
+                      scrollable horizontal list -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Title"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/black" />
+                    android:orientation="vertical"
+                    android:paddingRight="10dp">
+
+                    <Button
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:backgroundTint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Title"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingRight="10dp">
+
+                    <Button
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:backgroundTint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Title"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingRight="10dp">
+
+                    <Button
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:backgroundTint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Title"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingRight="10dp">
+
+                    <Button
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:backgroundTint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Title"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="10dp">
+        </HorizontalScrollView>
 
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
+        <!-- Recommended Songs -->
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="@string/RecommendedSongs"
+            android:textColor="@color/black"
+            android:id="@+id/recommended"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Title"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/black" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="10dp">
-
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Title"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/black" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="10dp">
-
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Title"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/black" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </HorizontalScrollView>
-
-    <!-- Recommended Songs -->
-    <TextView
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        android:text="@string/RecommendedSongs"
-        android:textColor="@color/black"
-        android:id="@+id/recommended"/>
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
-
-        <!-- using linear layout to store multiple view
-             inside a Horizontal Scroll View -->
-        <LinearLayout
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="horizontal">
+            android:scrollbars="none">
 
-            <!-- multiple button views to show a
-                  scrollable horizontal list -->
+            <!-- using linear layout to store multiple view
+                 inside a Horizontal Scroll View -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="10dp">
+                android:background="@color/white"
+                android:orientation="horizontal">
 
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
-
-                <TextView
+                <!-- multiple button views to show a
+                      scrollable horizontal list -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Title"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/black" />
+                    android:orientation="vertical"
+                    android:paddingRight="10dp">
 
-                <TextView
+                    <Button
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:backgroundTint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Title"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/Artist"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/Artist"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:orientation="vertical"
+                    android:paddingRight="10dp">
+
+                    <Button
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:backgroundTint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Title"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/Artist"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingRight="10dp">
+
+                    <Button
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:backgroundTint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Title"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/Artist"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingRight="10dp">
+
+                    <Button
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:backgroundTint="@color/gray" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Title"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/Artist"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+        </HorizontalScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="10dp">
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="6dp"
+                android:ellipsize="end"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/ivPlay"
+                app:layout_constraintEnd_toStartOf="@id/ivLast"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ivPlay" />
 
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivLast"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintBottom_toBottomOf="@id/ivPlay"
+                app:layout_constraintEnd_toStartOf="@id/ivPlay"
+                app:layout_constraintStart_toEndOf="@id/tvName"
+                app:layout_constraintTop_toTopOf="@id/ivPlay"
+                app:srcCompat="@mipmap/back" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Title"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/black" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivPlay"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@id/ivNext"
+                app:layout_constraintStart_toEndOf="@id/ivLast"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/play" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/Artist"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivNext"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="15dp"
+                app:layout_constraintBottom_toBottomOf="@id/ivPlay"
+                app:layout_constraintEnd_toStartOf="@id/ivReplay"
+                app:layout_constraintStart_toEndOf="@id/ivPlay"
+                app:layout_constraintTop_toTopOf="@id/ivPlay"
+                app:srcCompat="@mipmap/next" />
 
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivReplay"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintBottom_toBottomOf="@id/ivPlay"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivNext"
+                app:layout_constraintTop_toTopOf="@id/ivPlay"
+                app:srcCompat="@mipmap/replay" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="10dp">
+            <ProgressBar
+                android:id="@+id/pbProgress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_marginTop="10dp"
+                android:max="100"
+                android:minHeight="3dp"
+                android:progress="0"
+                android:progressDrawable="@drawable/layer_progress_bar_bg"
+                app:layout_constraintEnd_toEndOf="@id/ivNext"
+                app:layout_constraintStart_toStartOf="@id/tvName"
+                app:layout_constraintTop_toBottomOf="@id/ivPlay" />
 
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Title"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/Artist"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingRight="10dp">
-
-                <Button
-                    android:layout_width="180dp"
-                    android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Title"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:text="@string/Artist"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </HorizontalScrollView>
-
-</LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</ScrollView>

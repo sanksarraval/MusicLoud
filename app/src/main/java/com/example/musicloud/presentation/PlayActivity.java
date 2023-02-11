@@ -31,7 +31,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play);
+        setContentView(R.layout.activity_main);
         MediaPlayerUtil mediaPlayerUtil = MediaPlayerUtil.getInstance();
         //Register for playback status listening
         mediaPlayerUtil.registerCallback(this);
@@ -163,7 +163,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void setMusicInfo(String name) {
         tvName.setText(name);
-        ivPlay.setImageResource(MediaPlayerUtil.getInstance().isPlaying() ? R.mipmap.ic_pause : R.mipmap.ic_play);
+        ivPlay.setImageResource(MediaPlayerUtil.getInstance().isPlaying() ? R.mipmap.pause : R.mipmap.play);
     }
 
 
