@@ -1,6 +1,7 @@
 package com.example.musicloud.presentation;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -44,14 +45,54 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         //Prepare music list data
         List<String> musicList = new ArrayList<>();
         String name = "Guns N' Roses-Don't Cry";
+
+        musicList.add("Guns N' Roses-Don't Cry");
         musicList.add("Alan Walker-Faded");
-        musicList.add(name);
         musicList.add("Martin Garrix&David Guetta&Jamie Scott&Romy Dya-So Far Away");
         musicList.add("Olly Murs-That Girl");
         musicList.add("Tysm-Normal No More(Explicit)");
+
         //Set play source
-        mediaPlayerUtil.setPlayMusicList(musicList);
-        mediaPlayerUtil.setPlayingPosition(1);
+        Intent intent = getIntent();
+        int position = intent.getIntExtra("position", -1);
+
+
+        if(position==1){
+            mediaPlayerUtil.setPlayMusicList(musicList);
+            mediaPlayerUtil.setPlayingPosition(0);
+            name = musicList.get(0);
+            setMusicInfo(name);
+            mediaPlayerUtil.play(name);
+        }
+        else if(position==2){
+            mediaPlayerUtil.setPlayMusicList(musicList);
+            mediaPlayerUtil.setPlayingPosition(1);
+            name = musicList.get(1);
+            setMusicInfo(name);
+            mediaPlayerUtil.play(name);
+        }
+        else if(position==3){
+            mediaPlayerUtil.setPlayMusicList(musicList);
+            mediaPlayerUtil.setPlayingPosition(2);
+            name = musicList.get(2);
+            setMusicInfo(name);
+            mediaPlayerUtil.play(name);
+        }
+        else if(position==4){
+            mediaPlayerUtil.setPlayMusicList(musicList);
+            mediaPlayerUtil.setPlayingPosition(3);
+            name = musicList.get(3);
+            setMusicInfo(name);
+            mediaPlayerUtil.play(name);
+        }
+        else if(position==5){
+            mediaPlayerUtil.setPlayMusicList(musicList);
+            mediaPlayerUtil.setPlayingPosition(4);
+            name = musicList.get(4);
+            setMusicInfo(name);
+            mediaPlayerUtil.play(name);
+        }
+
         tvName.setText(name);
         ivLast.setOnClickListener(this);
         ivPlay.setOnClickListener(this);
