@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -28,6 +29,8 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private AppCompatImageView ivNext;
     private AppCompatImageView ivReplay;
     private ProgressBar pbProgress;
+    private String name = "Guns N' Roses-Don't Cry";
+    private List<String> musicList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +45,24 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         ivNext = findViewById(R.id.ivNext);
         ivReplay = findViewById(R.id.ivReplay);
         pbProgress = findViewById(R.id.pbProgress);
-        //Prepare music list data
-        List<String> musicList = new ArrayList<>();
-        String name = "Guns N' Roses-Don't Cry";
 
+        //create buttons
+        Button one = (Button) findViewById(R.id.song1);
+        one.setOnClickListener(this); // calling onClick() method
+
+        Button two = (Button) findViewById(R.id.song2);
+        two.setOnClickListener(this); // calling onClick() method
+
+        Button three = (Button) findViewById(R.id.song3);
+        three.setOnClickListener(this); // calling onClick() method
+
+        Button four = (Button) findViewById(R.id.song4);
+        four.setOnClickListener(this); // calling onClick() method
+
+        Button five = (Button) findViewById(R.id.song5);
+        five.setOnClickListener(this); // calling onClick() method
+
+        //Prepare music list data
         musicList.add("Guns N' Roses-Don't Cry");
         musicList.add("Alan Walker-Faded");
         musicList.add("Martin Garrix&David Guetta&Jamie Scott&Romy Dya-So Far Away");
@@ -213,6 +230,41 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         MediaPlayerUtil mediaPlayerUtil = MediaPlayerUtil.getInstance();
         switch (view.getId()) {
+            case R.id.song1:
+                mediaPlayerUtil.setPlayMusicList(musicList);
+                mediaPlayerUtil.setPlayingPosition(0);
+                name = musicList.get(0);
+                setMusicInfo(name);
+                mediaPlayerUtil.play(name);
+                break;
+            case R.id.song2:
+                mediaPlayerUtil.setPlayMusicList(musicList);
+                mediaPlayerUtil.setPlayingPosition(1);
+                name = musicList.get(1);
+                setMusicInfo(name);
+                mediaPlayerUtil.play(name);
+                break;
+            case R.id.song3:
+                mediaPlayerUtil.setPlayMusicList(musicList);
+                mediaPlayerUtil.setPlayingPosition(2);
+                name = musicList.get(2);
+                setMusicInfo(name);
+                mediaPlayerUtil.play(name);
+                break;
+            case R.id.song4:
+                mediaPlayerUtil.setPlayMusicList(musicList);
+                mediaPlayerUtil.setPlayingPosition(3);
+                name = musicList.get(3);
+                setMusicInfo(name);
+                mediaPlayerUtil.play(name);
+                break;
+            case R.id.song5:
+                mediaPlayerUtil.setPlayMusicList(musicList);
+                mediaPlayerUtil.setPlayingPosition(4);
+                name = musicList.get(4);
+                setMusicInfo(name);
+                mediaPlayerUtil.play(name);
+                break;
             case R.id.ivLast:
                 //Click on the previous song
                 mediaPlayerUtil.playLast();
