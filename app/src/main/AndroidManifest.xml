@@ -42,6 +42,7 @@
                 android:value=".presentation.RegisterActivity" />
         </activity>
         <activity android:name=".presentation.PlayActivity" />
+        <activity android:name=".presentation.LibraryActivity" />
     </application>
 
 </manifest>
