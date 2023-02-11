@@ -114,7 +114,7 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
     @Override
     public boolean play() {
         if (mPlayMusicList.size() > 0 && mPlayingPosition >= 0) {
-            //暂停状态下，开始播放
+            //play music at pause status
             if (isPaused) {
                 mPlayer.start();
                 notifyPlay(mPlayMusicList.get(mPlayingPosition));
