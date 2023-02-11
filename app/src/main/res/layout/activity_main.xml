@@ -58,14 +58,16 @@
                 android:paddingRight="10dp">
 
                 <Button
+                    android:id="@+id/song1"
                     android:layout_width="180dp"
                     android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
+                    android:backgroundTint="@color/gray"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Title"
+                    android:text="@string/song1"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/black" />
 
@@ -74,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="@string/Artist"
+                    android:text="@string/artist1"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -87,14 +89,16 @@
                 android:paddingRight="10dp">
 
                 <Button
+                    android:id="@+id/song2"
                     android:layout_width="180dp"
                     android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
+                    android:backgroundTint="@color/gray"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Title"
+                    android:text="@string/song2"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/black" />
 
@@ -102,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="@string/Artist"
+                    android:text="@string/artist2"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -115,6 +119,7 @@
                 android:paddingRight="10dp">
 
                 <Button
+                    android:id="@+id/song3"
                     android:layout_width="180dp"
                     android:layout_height="180dp"
                     android:backgroundTint="@color/gray" />
@@ -122,7 +127,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Title"
+                    android:text="@string/song3"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/black" />
 
@@ -130,7 +135,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="@string/Artist"
+                    android:text="@string/artist3"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -143,6 +148,7 @@
                 android:paddingRight="10dp">
 
                 <Button
+                    android:id="@+id/song4"
                     android:layout_width="180dp"
                     android:layout_height="180dp"
                     android:backgroundTint="@color/gray" />
@@ -150,7 +156,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/Title"
+                    android:text="@string/song4"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textColor="@color/black" />
 
@@ -158,7 +164,37 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="@string/Artist"
+                    android:text="@string/artist4"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingRight="10dp">
+
+                <Button
+                    android:id="@+id/song5"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:backgroundTint="@color/gray" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/song5"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/artist5"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -202,7 +238,8 @@
                 <Button
                     android:layout_width="180dp"
                     android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
+                    android:backgroundTint="@color/gray"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -222,7 +259,8 @@
                 <Button
                     android:layout_width="180dp"
                     android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
+                    android:backgroundTint="@color/gray"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -311,7 +349,8 @@
                 <Button
                     android:layout_width="180dp"
                     android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
+                    android:backgroundTint="@color/gray"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -339,7 +378,8 @@
                 <Button
                     android:layout_width="180dp"
                     android:layout_height="180dp"
-                    android:backgroundTint="@color/gray" />
+                    android:backgroundTint="@color/gray"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <TextView
                     android:layout_width="match_parent"
