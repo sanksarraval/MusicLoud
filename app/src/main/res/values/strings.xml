@@ -11,8 +11,8 @@
     <string name="full_name">Full Name</string>
     <string name="password_txt">Password</string>
     <string name="register_btn_txt">Register</string>
-    <string name="title_activity_login">musicloud: Login</string>
-    <string name="title_activity_register">musicloud: Login</string>
+    <string name="title_activity_login">MusicLoud</string>
+    <string name="title_activity_register">MusicLoud</string>
     <string name="Library">Library</string>
     <string name="Songs">Songs</string>
     <string name="Title">Title</string>
@@ -20,4 +20,25 @@
     <string name="Playlists">Playlists</string>
     <string name="RecommendedSongs">Recommended Songs</string>
 
+
+
+    <string name="song1">Don\'t Cry</string>
+    <string name="artist1">Guns N\' Roses</string>
+    <string name="album1">na</string>
+
+    <string name="song2">Faded</string>
+    <string name="artist2">Alan Walker</string>
+    <string name="album2">na</string>
+
+    <string name="song3">So Far Away</string>
+    <string name="artist3">Martin Garrix, David Guetta, Jamie Scott and Romy Dya</string>
+    <string name="album3">na</string>
+
+    <string name="song4">That Girl</string>
+    <string name="artist4">Olly Murs</string>
+    <string name="album4">na</string>
+
+    <string name="song5">Normal No More(Explicit)</string>
+    <string name="artist5">Tysm</string>
+    <string name="album5">na</string>
 </resources>

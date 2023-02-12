@@ -1,5 +1,7 @@
 package com.example.musicloud.objects;
 
+import androidx.annotation.NonNull;
+
 import java.io.*;
 
 public class Song {
@@ -20,6 +22,29 @@ public class Song {
         this.songName = songName;
         this.artist = artist;
         this.albumName = albumName;
+    }
+
+    //added isEqual to compare with some other song's data
+    public boolean isEqual(String songName, String artistName, String albumName){
+        return (this.songName.equals(songName)
+                &&  this.artist.equals(artistName) && this.albumName.equals(albumName));
+    }
+
+    //method to compare with other song's name
+    public int compareTo(Song other){
+        return songName.compareTo(other.songName);
+    }
+
+
+    //toString to get song summary
+    @NonNull
+    public String toString(){
+        return "Song Name:"+songName + " ArtistName:" +artist + " AlbumName:"+albumName;
+    }
+
+    //getter for song name
+    public String getSongName(){
+        return songName;
     }
 
 }
