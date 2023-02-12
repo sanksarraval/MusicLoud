@@ -71,46 +71,13 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         //Set play source
         Intent intent = getIntent();
-        int position = intent.getIntExtra("position", -1);
+        int position = intent.getIntExtra("position", 0);
 
+        mediaPlayerUtil.setPlayMusicList(musicList);
+        mediaPlayerUtil.setPlayingPosition(position);
+        name = musicList.get(position);
+        setMusicInfo(name);
 
-        if(position==1){
-            mediaPlayerUtil.setPlayMusicList(musicList);
-            mediaPlayerUtil.setPlayingPosition(0);
-            name = musicList.get(0);
-            setMusicInfo(name);
-            mediaPlayerUtil.play(name);
-        }
-        else if(position==2){
-            mediaPlayerUtil.setPlayMusicList(musicList);
-            mediaPlayerUtil.setPlayingPosition(1);
-            name = musicList.get(1);
-            setMusicInfo(name);
-            mediaPlayerUtil.play(name);
-        }
-        else if(position==3){
-            mediaPlayerUtil.setPlayMusicList(musicList);
-            mediaPlayerUtil.setPlayingPosition(2);
-            name = musicList.get(2);
-            setMusicInfo(name);
-            mediaPlayerUtil.play(name);
-        }
-        else if(position==4){
-            mediaPlayerUtil.setPlayMusicList(musicList);
-            mediaPlayerUtil.setPlayingPosition(3);
-            name = musicList.get(3);
-            setMusicInfo(name);
-            mediaPlayerUtil.play(name);
-        }
-        else if(position==5){
-            mediaPlayerUtil.setPlayMusicList(musicList);
-            mediaPlayerUtil.setPlayingPosition(4);
-            name = musicList.get(4);
-            setMusicInfo(name);
-            mediaPlayerUtil.play(name);
-        }
-
-        tvName.setText(name);
         ivLast.setOnClickListener(this);
         ivPlay.setOnClickListener(this);
         ivNext.setOnClickListener(this);
@@ -231,39 +198,24 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         MediaPlayerUtil mediaPlayerUtil = MediaPlayerUtil.getInstance();
         switch (view.getId()) {
             case R.id.song1:
-                mediaPlayerUtil.setPlayMusicList(musicList);
                 mediaPlayerUtil.setPlayingPosition(0);
-                name = musicList.get(0);
-                setMusicInfo(name);
-                mediaPlayerUtil.play(name);
+                mediaPlayerUtil.play(musicList.get(0));
                 break;
             case R.id.song2:
-                mediaPlayerUtil.setPlayMusicList(musicList);
                 mediaPlayerUtil.setPlayingPosition(1);
-                name = musicList.get(1);
-                setMusicInfo(name);
-                mediaPlayerUtil.play(name);
+                mediaPlayerUtil.play(musicList.get(1));
                 break;
             case R.id.song3:
-                mediaPlayerUtil.setPlayMusicList(musicList);
                 mediaPlayerUtil.setPlayingPosition(2);
-                name = musicList.get(2);
-                setMusicInfo(name);
-                mediaPlayerUtil.play(name);
+                mediaPlayerUtil.play(musicList.get(2));
                 break;
             case R.id.song4:
-                mediaPlayerUtil.setPlayMusicList(musicList);
                 mediaPlayerUtil.setPlayingPosition(3);
-                name = musicList.get(3);
-                setMusicInfo(name);
-                mediaPlayerUtil.play(name);
+                mediaPlayerUtil.play(musicList.get(3));
                 break;
             case R.id.song5:
-                mediaPlayerUtil.setPlayMusicList(musicList);
                 mediaPlayerUtil.setPlayingPosition(4);
-                name = musicList.get(4);
-                setMusicInfo(name);
-                mediaPlayerUtil.play(name);
+                mediaPlayerUtil.play(musicList.get(4));
                 break;
             case R.id.ivLast:
                 //Click on the previous song
