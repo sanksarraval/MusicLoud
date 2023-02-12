@@ -1,4 +1,4 @@
-package com.example.musicloud;
+package com.example.musicloud.application;
 
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
