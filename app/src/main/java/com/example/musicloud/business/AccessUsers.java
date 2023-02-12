@@ -59,6 +59,9 @@ public class AccessUsers {
             userManagement.addAccount(newUser);
          }
      }
+    /*
+
+    Implemented but not used in the UI
 
      public void updateUserName(User user, String userName)
      {
@@ -69,5 +72,7 @@ public class AccessUsers {
      {
          userManagement.updatePassword(user,pass);
      }
+
+     */
 
 }

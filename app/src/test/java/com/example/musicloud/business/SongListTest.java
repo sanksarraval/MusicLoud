@@ -1,4 +1,4 @@
-package com.example.musicloud;
+package com.example.musicloud.business;
 
 import static org.junit.Assert.*;
 

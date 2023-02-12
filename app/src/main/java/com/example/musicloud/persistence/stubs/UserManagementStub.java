@@ -24,12 +24,6 @@ public class UserManagementStub implements UserManagement {
         userList.add(newUser4);
     }
 
-
-    @Override
-    public List<User> getAllUsers() {
-        return userList;
-    }
-
     public User getUser(String userID)
     {
         int found = -1;
@@ -46,7 +40,7 @@ public class UserManagementStub implements UserManagement {
 
         if(found == -1)
         {
-            System.out.println("User not found");
+            //System.out.println("User not found");
             return null;
         }
         else
@@ -55,6 +49,10 @@ public class UserManagementStub implements UserManagement {
         }
     }
 
+    @Override
+    public List<User> getAllUsers() {
+        return userList;
+    }
 
     public boolean verifyUser( String userID , String password )
     {
@@ -73,11 +71,17 @@ public class UserManagementStub implements UserManagement {
 
     public User addAccount(User newUser)
     {
-        if(newUser != null) {
+        User addedUser = null;
+        if(getUser(newUser.getUserID()) == null) {
             userList.add(newUser);
+            addedUser = newUser;
         }
-        return newUser;
+        return addedUser;
     }
+    /*
+
+    Implemented but not used in the UI
+
     public void deleteAccount(User newUser)
     {
         int userNumber = userList.indexOf(newUser);
@@ -98,6 +102,7 @@ public class UserManagementStub implements UserManagement {
     {
         int userNumber = userList.indexOf(currentUser);
         currentUser.setUserName(newName);
-        //userList.set(userNumber,currentUser);
+        userList.set(userNumber,currentUser);
     }
+     */
 }
