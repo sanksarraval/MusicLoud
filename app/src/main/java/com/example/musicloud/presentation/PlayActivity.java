@@ -14,7 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import com.example.musicloud.MediaPlayerUtil;
+import com.example.musicloud.application.MediaPlayerUtil;
 import com.example.musicloud.R;
 import com.example.musicloud.persistence.IPlayStateCallback;
 

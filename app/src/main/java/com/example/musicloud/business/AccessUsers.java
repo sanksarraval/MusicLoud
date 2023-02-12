@@ -1,7 +1,7 @@
 package com.example.musicloud.business;
 
 import com.example.musicloud.objects.User;
-import com.example.musicloud.objects.application.Services;
+import com.example.musicloud.application.Services;
 import com.example.musicloud.persistence.UserManagement;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.musicloud;
+package com.example.musicloud.application;
 
 import android.app.Application;
 
