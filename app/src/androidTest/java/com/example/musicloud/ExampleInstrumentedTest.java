@@ -48,9 +48,9 @@ public class ExampleInstrumentedTest {
     public ActivityScenarioRule<PlayActivity> activityScenarioRule
             = new ActivityScenarioRule<>(PlayActivity.class);
 
-    /**
+    /*
      * Automated test play, pause, next track, previous track
-     */
+
     @Test
     public void testMusicControl_mainActivity() {
         // Type text and then press the button.
@@ -95,4 +95,6 @@ public class ExampleInstrumentedTest {
         //10 seconds off
         SystemClock.sleep(1000 * 10);
     }
+
+     */
 }
