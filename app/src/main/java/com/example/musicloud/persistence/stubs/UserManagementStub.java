@@ -17,9 +17,11 @@ public class UserManagementStub implements UserManagement {
         User newUser1 = new User("ravals1", "Sanskar Raval", "Sanskar123");
         User newUser2 = new User("chauhana","Aakash Chaohan","Aakash123");
         User newUser3 = new User("seraspij","Jacob Seraspi","Jacob123");
+        User newUser4 = new User ("admin", "admin", "admin");
         userList.add(newUser1);
         userList.add(newUser2);
         userList.add(newUser3);
+        userList.add(newUser4);
     }
 
 
