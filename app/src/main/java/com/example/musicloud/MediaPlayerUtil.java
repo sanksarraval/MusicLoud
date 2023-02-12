@@ -5,8 +5,8 @@ import android.media.MediaPlayer;
 import android.os.Handler;
 import android.text.TextUtils;
 
-import com.example.musicloud.presentation.IPlayControlCallback;
-import com.example.musicloud.presentation.IPlayStateCallback;
+import com.example.musicloud.persistence.IPlayControlCallback;
+import com.example.musicloud.persistence.IPlayStateCallback;
 
 import java.io.IOException;
 import java.util.ArrayList;

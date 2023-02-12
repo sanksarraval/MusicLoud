@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-import com.example.musicloud.presentation.IPlayStateCallback;
+import com.example.musicloud.persistence.IPlayStateCallback;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
