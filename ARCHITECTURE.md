@@ -1,8 +1,11 @@
 # Architecture
 ## Overview
+### three tiered architecture:
 
+we have untilized a multi-tiered system to develop our application. This includes three main tiers: persistance, business, and presentation. The communication between these packages is strict in order to maintian the stucture of our code. 
 [![](https://mermaid.ink/img/pako:eNpNj7EOwjAMRH8l8gw_kKEDYkWqxOrFalyI1DgQOwOq-u-kRRXd7Hvnk2-GIQcGD8rvyjLwNdKjUELpCyuLkcUs5667VI3Cqt6h7HOTj64jco25notGtTV2ZYd1w_9IOEHikiiG9smM4hyCPTkxQjuEwCPVyRBQlmalavn-kQG8lconqK9Atj8OfqRJm8ohWi63X7ut5PIFeqZTbw?type=png)](https://mermaid.live/edit#pako:eNpNj7EOwjAMRH8l8gw_kKEDYkWqxOrFalyI1DgQOwOq-u-kRRXd7Hvnk2-GIQcGD8rvyjLwNdKjUELpCyuLkcUs5667VI3Cqt6h7HOTj64jco25notGtTV2ZYd1w_9IOEHikiiG9smM4hyCPTkxQjuEwCPVyRBQlmalavn-kQG8lconqK9Atj8OfqRJm8ohWi63X7ut5PIFeqZTbw)
 
 
 # Diagram
+
 [![](https://mermaid.ink/img/pako:eNqFkbFuwzAMRH-F0Jz8gIYMRdcAAbpqISTaIWBTqUilKIL8e2kngTu1GyHd3SOOt5BroRCD0mcnyfTOODack5waKYmhcZX94fDWlYVUI3SlBrkRGilgzrWLJXn9g2vhRE1ZbcmLoHhlGUHo66WGQoY86X8QNKP5YgpTHYHlTwhhy2dfaKjtYWbxcV6TnbNpV-8GulLjgd24mDaCi37vtgCkKOQqAz9Twy7M5DMXr--WBCAFO9NMKUQfCw3YJ0shyd2l2K1-fEsO0VqnXeiX4gU-2w5xwEn9lQpbbcfHSdbL3H8A1meYwA?type=png)](https://mermaid.live/edit#pako:eNqFkbFuwzAMRH-F0Jz8gIYMRdcAAbpqISTaIWBTqUilKIL8e2kngTu1GyHd3SOOt5BroRCD0mcnyfTOODack5waKYmhcZX94fDWlYVUI3SlBrkRGilgzrWLJXn9g2vhRE1ZbcmLoHhlGUHo66WGQoY86X8QNKP5YgpTHYHlTwhhy2dfaKjtYWbxcV6TnbNpV-8GulLjgd24mDaCi37vtgCkKOQqAz9Twy7M5DMXr--WBCAFO9NMKUQfCw3YJ0shyd2l2K1-fEsO0VqnXeiX4gU-2w5xwEn9lQpbbcfHSdbL3H8A1meYwA)
