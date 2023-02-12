@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.musicloud">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name=".MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,33 +14,12 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".presentation.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".presentation.LoginActivity" />
-
         </activity>
-        <activity
-            android:name=".presentation.RegisterActivity"
-            android:label="@string/title_activity_register"
-            android:exported="true">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".presentation.RegisterActivity" />
-        </activity>
-        <activity android:name=".presentation.PlayActivity" />
-        <activity android:name=".presentation.LibraryActivity" />
     </application>
 
 </manifest>
