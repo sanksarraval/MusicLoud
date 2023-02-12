@@ -108,10 +108,10 @@ public class ExampleUnitTest {
     }
 
     /**
-     * 准备完成通知所有的注册监听
+     *  ready to notificate to all registered listeners
      *
-     * @param callbackList 监听者
-     * @param name         歌曲名称
+     * @param callbackList listeners
+     * @param name         music name
      */
     private void notifyPlayPrepare(List<IPlayStateCallback> callbackList, String name) {
         for (int i = 0; i < callbackList.size(); i++) {
