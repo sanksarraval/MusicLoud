@@ -1,4 +1,4 @@
-package com.example.musicloud.objects.application;
+package com.example.musicloud.application;
 
 import com.example.musicloud.persistence.UserManagement;
 import com.example.musicloud.persistence.stubs.UserManagementStub;

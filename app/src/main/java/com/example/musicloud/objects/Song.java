@@ -2,27 +2,27 @@ package com.example.musicloud.objects;
 
 import androidx.annotation.NonNull;
 
+import java.io.*;
+
 public class Song {
     private final String songName;
     private final String artist;
     private final String albumName;
-    private final String fileName;
+    public String getSongName;
 
     //private final File mp3;
     //private final File albumArt;
 
-    public Song(String songName, String artist, String fileName) {
+    public Song(String songName, String artist) {
         this.songName = songName;
         this.artist = artist;
-        this.fileName = fileName;
         albumName = "na"; //
     }
 
-    public Song (String songName, String artist, String albumName, String fileName) {
+    public Song (String songName, String artist, String albumName) {
         this.songName = songName;
         this.artist = artist;
         this.albumName = albumName;
-        this.fileName = fileName;
     }
 
     //added isEqual to compare with some other song's data

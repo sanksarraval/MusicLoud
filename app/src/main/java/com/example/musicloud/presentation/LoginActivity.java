@@ -71,7 +71,7 @@ public class LoginActivity extends Activity {
     }
     public void buttonLoginOnClick(View v)
     {
-        Intent loginIntent = new Intent(LoginActivity.this, LibraryActivity.class);
+        Intent loginIntent = new Intent(LoginActivity.this, PlayActivity.class);
         LoginActivity.this.startActivity(loginIntent);
     }
 }

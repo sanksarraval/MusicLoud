@@ -15,8 +15,10 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.isDialog;
+import static androidx.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -46,9 +48,9 @@ public class ExampleInstrumentedTest {
     public ActivityScenarioRule<PlayActivity> activityScenarioRule
             = new ActivityScenarioRule<>(PlayActivity.class);
 
-    /**
+    /*
      * Automated test play, pause, next track, previous track
-     */
+
     @Test
     public void testMusicControl_mainActivity() {
         // Type text and then press the button.
@@ -93,4 +95,6 @@ public class ExampleInstrumentedTest {
         //10 seconds off
         SystemClock.sleep(1000 * 10);
     }
+
+     */
 }

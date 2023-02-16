@@ -1,4 +1,4 @@
-package com.example.musicloud.application;
+package com.example.musicloud.presentation;
 
 
 import android.app.Activity;
@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.musicloud.R;
-import com.example.musicloud.presentation.LoginActivity;
 
 
 public class MainActivity extends Activity {
