@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".presentation.MainActivity">
+    android:background="#800080"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/tvName"
