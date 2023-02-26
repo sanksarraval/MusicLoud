@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.musicloud'
+    namespace 'com.srsys.musicloud'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.musicloud"
+        applicationId "com.srsys.musicloud"
         minSdk 23
         targetSdk 33
         versionCode 1
