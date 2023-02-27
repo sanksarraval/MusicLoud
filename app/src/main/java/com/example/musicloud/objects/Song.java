@@ -8,6 +8,7 @@ public class Song {
     private final String songName;
     private final String artist;
     private final String albumName;
+    private boolean liked;
 
     //private final File mp3;
     //private final File albumArt;
@@ -16,6 +17,7 @@ public class Song {
         this.songName = songName;
         this.artist = artist;
         albumName = "na"; //
+        liked = false;
     }
 
     public Song (String songName, String artist, String albumName) {
@@ -45,6 +47,17 @@ public class Song {
     //getter for song name
     public String getSongName(){
         return songName;
+    }
+    public boolean isLiked(){
+        return liked;
+    }
+
+    public void likeSong(){
+        liked = true;
+    }
+
+    public void unlikeSong(){
+        liked = false;
     }
 
 }

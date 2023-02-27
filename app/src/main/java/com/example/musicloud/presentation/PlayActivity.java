@@ -28,6 +28,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private AppCompatImageView ivPlay;
     private AppCompatImageView ivNext;
     private AppCompatImageView ivReplay;
+    private AppCompatImageView ivLike;
     private ProgressBar pbProgress;
     private String name = "Guns N' Roses-Don't Cry";
     private List<String> musicList = new ArrayList<>();
@@ -252,6 +253,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                     mediaPlayerUtil.play();
                 }
                 break;
+            case R.id.ivLike:
+                //Hit Like
+                //if()
             default:
         }
     }

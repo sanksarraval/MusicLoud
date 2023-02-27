@@ -12,6 +12,8 @@ import java.util.List;
 public class SongPersistenceStub implements SongPersistence {
     //list of all songs in users library
     private List<Song> songs;
+    //list of all liked songs
+    private List<Song> likedSongs;
 
     public SongPersistenceStub(){
         this.songs = new ArrayList<>();
@@ -24,6 +26,7 @@ public class SongPersistenceStub implements SongPersistence {
 
     @Override
     public List<Song> getAllSongs() {
+
         return Collections.unmodifiableList(songs);
     }
 
@@ -88,4 +91,28 @@ public class SongPersistenceStub implements SongPersistence {
         ans.append("This is the summary of the songs object\nNumber of Songs:").append(songs.size());
         return ans.toString();
     }
+
+    @Override
+    public void likeSong(Song currentSong){
+        currentSong.likeSong();
+        likedSongs.add(currentSong);
+    }
+
+    @Override
+    public void unlikeSong(Song currentSong){
+        currentSong.unlikeSong();
+        int index;
+
+        index = likedSongs.indexOf(currentSong);
+        if (index >= 0)
+        {
+            likedSongs.remove(index);
+        }
+    }
+
+    @Override
+    public List<Song> getLikedSongs() {
+        return Collections.unmodifiableList(likedSongs);
+    }
+
 }

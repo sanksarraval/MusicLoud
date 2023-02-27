@@ -20,4 +20,8 @@ public interface SongPersistence {
     void deleteSong (Song currentSong);
 
     List<String> allSongNames();
+    void likeSong (Song currentSong);
+    void unlikeSong (Song currentSong);
+    List<Song> getLikedSongs();
+
 }
