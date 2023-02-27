@@ -10,6 +10,7 @@ import java.util.List;
 public class AccessSongs {
     private SongPersistence songPersistence;
     private List<Song> songs;
+    private List<String> songNames;
     private Song song;
     private int currentSong;
 
@@ -35,6 +36,11 @@ public class AccessSongs {
 
     public void deleteSong(Song currentSong){
         songPersistence.deleteSong(currentSong);
+    }
+
+    public List<String> getSongNames(){
+        songNames = songPersistence.allSongNames();
+        return Collections.unmodifiableList(songNames);
     }
     
 }

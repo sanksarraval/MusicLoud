@@ -8,7 +8,6 @@ public class Song {
     private final String songName;
     private final String artist;
     private final String albumName;
-    public String getSongName;
 
     //private final File mp3;
     //private final File albumArt;
