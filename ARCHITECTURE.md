@@ -9,10 +9,10 @@ we have untilized a multi-tiered system to develop our application. This include
 # Diagram
 
 ### Presentation
-Included in the presentation layer is LoginActivity, MainActivity, PlayActivity, and RegisterActivity. 
+Presentation builds the log-in interface using `LoginActivity`. For new users, the `RegisterActivity` is run in order to create new login credentials. `PlayActivity` is responsible for facilitating the interface to play each song. 
 
 ### Business
-Included in the Buisness layer is the AccessUsers class
+At the moment business handles user accounts and access within the `AccessUsers` class.
 
 ### Persistance
 Included in the persistance layer is UserManagement, UserManagementStub, IPlayStateCallback, IPlayControlCallback

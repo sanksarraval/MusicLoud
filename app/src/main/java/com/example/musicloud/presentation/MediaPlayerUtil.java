@@ -1,32 +1,35 @@
-package com.example.musicloud.presentation;
+package com.example.musicloud.application;
 
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.text.TextUtils;
 
-import com.example.musicloud.application.MyApp;
+import com.example.musicloud.business.AccessSongs;
+import com.example.musicloud.persistence.IPlayControlCallback;
+import com.example.musicloud.persistence.IPlayStateCallback;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/*
  * Player tools class
  *
  * @author Admin
  */
 public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaPlayer.OnErrorListener, MediaPlayer.OnPreparedListener, IPlayControlCallback {
 
-    /**
+    /*
      * Singleton object for music player
      */
     private static class SingletonHolder {
         private static final MediaPlayerUtil INSTANCE = new MediaPlayerUtil();
     }
 
+    private final AccessSongs accessSongs = new AccessSongs() ;
 
-    /**
+    /*
      * Obtain static class
      *
      * @return Class object
@@ -35,38 +38,40 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
         return SingletonHolder.INSTANCE;
     }
 
-    /**
+    /*
      * MediaPlayer
      */
     private MediaPlayer mPlayer;
 
-    /**
+    /*
      * The value is 1000 milliseconds by default
      */
     private long mProgressIntervalTime = 1000;
 
-    /**
+    /*
      * Pause or not
      */
     private boolean isPaused;
 
-    /**
+    /*
      * ，The list of music you want to play
      */
-    private final List<String> mPlayMusicList = new ArrayList<>();
+    //private final List<String> mPlayMusicList = new ArrayList<>();
+    private final List<String> mPlayMusicList = accessSongs.getSongNames();
 
-    /**
+
+    /*
      * The position that is playing music
      */
     private int mPlayingPosition = -1;
 
 
-    /**
+    /*
      * Listeners that need callback status
      */
     private final List<IPlayStateCallback> mPlayStateCallbackList = new ArrayList<>();
 
-    /**
+    /*
      * constructor
      */
     private MediaPlayerUtil() {
@@ -77,7 +82,7 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
         mPlayer.setOnPreparedListener(this);
     }
 
-    /**
+    /*
      * Set the playback list
      *
      * @param musicList music list
@@ -86,7 +91,7 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
         mPlayMusicList.addAll(musicList);
     }
 
-    /**
+    /*
      * Set the playback location
      *
      * @param playingPosition Play position
@@ -96,14 +101,15 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
     }
 
 
-    /**
+    /*
      * Gets the position being played
      *
      * @return The position that is playing
-     */
+
     public int getPlayingPosition() {
         return mPlayingPosition;
     }
+    */
 
     /**
      * play

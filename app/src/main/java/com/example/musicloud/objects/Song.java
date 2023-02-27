@@ -6,7 +6,6 @@ public class Song {
     private final String songName;
     private final String artist;
     private final String albumName;
-    public String getSongName;
 
     //private final File mp3;
     //private final File albumArt;
@@ -34,12 +33,6 @@ public class Song {
         return songName.compareTo(other.songName);
     }
 
-
-    //toString to get song summary
-    @NonNull
-    public String toString(){
-        return "Song Name:"+songName + " ArtistName:" +artist + " AlbumName:"+albumName;
-    }
 
     //getter for song name
     public String getSongName(){
