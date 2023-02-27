@@ -18,6 +18,7 @@ public class AccessSongs {
         songPersistence = Services.getSongPersistence();
         songs = null;
         song = null;
+        songNames = null;
         currentSong = 0;
     }
 
@@ -40,7 +41,7 @@ public class AccessSongs {
 
     public List<String> getSongNames(){
         songNames = songPersistence.allSongNames();
-        return Collections.unmodifiableList(songNames);
+        return songNames;
     }
     
 }

@@ -262,6 +262,4 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         //Cancel playback status listening
         MediaPlayerUtil.getInstance().unregisterCallback(this);
     }
-
-
 }
