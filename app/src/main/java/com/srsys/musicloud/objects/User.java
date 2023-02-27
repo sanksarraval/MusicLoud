@@ -1,5 +1,7 @@
 package com.srsys.musicloud.objects;
 
+import com.srsys.musicloud.business.ValidateException;
+
 import java.util.Objects;
 
 public class User {
@@ -30,9 +32,7 @@ public class User {
         this.userID = userID;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setPassword(String password){this.password = password;}
 
     public void setUserName(String userName) {
         this.userName = userName;

@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 
 import com.srsys.musicloud.R;
 import com.srsys.musicloud.business.AccessUsers;
+import com.srsys.musicloud.business.ValidationInput;
+import com.srsys.musicloud.business.ValidateException;
 import com.srsys.musicloud.objects.User;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -21,6 +23,7 @@ public class RegisterActivity extends Activity {
     private TextInputEditText userEditText;
     private TextInputEditText passwordEditText;
     private TextInputEditText fullNameEditText;
+    private boolean flag = false;
 
 
 
@@ -45,20 +48,13 @@ public class RegisterActivity extends Activity {
             String password = Objects.requireNonNull(passwordEditText.getText()).toString();
             String fullName = Objects.requireNonNull(fullNameEditText.getText()).toString();
             userID = userID.toLowerCase();
-            
-            
-            // Error checking for the input fields.
-            if(userID.isEmpty() || fullName.isEmpty() || password.isEmpty()) {
-                Toast.makeText(getApplicationContext(), "User ID, User name, and password cannot be empty", Toast.LENGTH_SHORT).show();
-                return;
-            // UserID and Password should not contain spaces and must match a regex expression.
-            } else if(userID.contains(" ") || password.contains(" ") || !userID.matches("^[a-zA-Z0-9]+$") || !password.matches("^[a-zA-Z0-9]+$")) {
-                Toast.makeText(getApplicationContext(), "User ID and password cannot contain spaces and must be alphanumeric", Toast.LENGTH_SHORT).show();
-                return;
-            // Password length should be greater than 2.
-            } else if(password.length() < 2) {
-                Toast.makeText(getApplicationContext(), "Password must be at least 2 characters long", Toast.LENGTH_SHORT).show();
-                return;
+
+            try{
+                ValidationInput.validateInput(userID, password, fullName);
+            }
+            catch(ValidateException e){
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                flag = true;
             }
 
             if(accessUsers.accountFound(userID))
@@ -70,7 +66,7 @@ public class RegisterActivity extends Activity {
                 String pass = already_user.getPassword();
                 System.out.println("UserID: " + user + "Password: " + pass);
             }
-            else
+            else if(!accessUsers.accountFound(userID) && !flag)
             {
                 User newUser = new User(userID,fullName,password);
                 accessUsers.addAccount(newUser);
