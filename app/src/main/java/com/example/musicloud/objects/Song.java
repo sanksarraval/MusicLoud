@@ -25,11 +25,6 @@ public class Song {
         this.albumName = albumName;
     }
 
-    //added isEqual to compare with some other song's data
-    public boolean isEqual(String songName, String artistName, String albumName){
-        return (this.songName.equals(songName)
-                &&  this.artist.equals(artistName) && this.albumName.equals(albumName));
-    }
 
     //method to compare with other song's name
     public int compareTo(Song other){
