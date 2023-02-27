@@ -1,10 +1,11 @@
-package com.srsys.musicloud.application;
+package com.srsys.musicloud.presentation;
 
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.text.TextUtils;
 
+import com.srsys.musicloud.application.MyApp;
 import com.srsys.musicloud.persistence.IPlayControlCallback;
 import com.srsys.musicloud.persistence.IPlayStateCallback;
 
