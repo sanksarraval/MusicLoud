@@ -8,16 +8,19 @@ import java.util.Objects;
 public class Playlist {
     private final String playlistName;
     private final String description;
-    private double playlistLength;
+    private double playlistLength; //playlist length in hours
     private List<Song> allSongs;
     //album art
 
+    //playlist constructor with name, description and list of songs
     public Playlist(String playlistName, String description, List<Song> songList) {
         this.playlistName = playlistName;
         this.description = description;
         this.playlistLength = -1;
         this.allSongs = songList;
     }
+
+    //playlist constructor with name, and list of songs
     public Playlist(String playlistName, List<Song> songList) {
         this.playlistName = playlistName;
         this.description = null;
@@ -25,19 +28,22 @@ public class Playlist {
         this.allSongs = songList;
     }
 
+    //getter for name of playlist
     public String getPlaylistName(){
         return playlistName;
     }
 
+    //getter for playlist description
     public String getDescription(){
         return description;
     }
 
-    //returns length of entire playlist in minutes
+    //returns length of entire playlist in hours
     public double getPlaylistLength(){
         return playlistLength;
     }
 
+    //getter for list of songs in playlist
     public List<Song> getSongList (){
         return allSongs;
     }
@@ -47,6 +53,7 @@ public class Playlist {
         return String.format("Playlist: %s %s %f", playlistName, description, playlistLength);
     }
 
+    //tests equality of current playlist with second. Uses playlist length and name.
     public boolean equals(Object other) {
         boolean equals = false;
         boolean equals1 = false;
