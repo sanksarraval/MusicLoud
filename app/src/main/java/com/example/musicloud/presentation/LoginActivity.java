@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.musicloud.R;
 import com.example.musicloud.business.AccessUsers;
+import com.example.musicloud.business.LoginManager;
 import com.example.musicloud.objects.User;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class LoginActivity extends Activity {
     Button loginBtn;
 
     private AccessUsers accessUsers;
-    private List<User> userList;
+    //private List<User> userList;
 
     String correct_username = "admin";
     String correct_password = "admin";
@@ -32,7 +33,7 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
         accessUsers = new AccessUsers();
-        userList = accessUsers.getAccounts();
+        //userList = accessUsers.getAccounts();
 
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.Password);
@@ -42,24 +43,22 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-
                 // Validating Inputs
                 String userID = usernameEditText.getText().toString();
                 String pass = passwordEditText.getText().toString();
-                if(accessUsers.verifyUser(userID,pass))
-                {
-                    User currUser = accessUsers.returnAccount(userID);
+
+                LoginManager loginManager = new LoginManager(accessUsers);
+
+                if (loginManager.login(userID, pass)) {
+                    User currUser = loginManager.getCurrentUser(userID);
                     Toast.makeText(LoginActivity.this, "Welcome!!", Toast.LENGTH_SHORT).show();
                     buttonLoginOnClick(view);
-                }
-                else if(TextUtils.isEmpty(usernameEditText.getText().toString())|| TextUtils.isEmpty(passwordEditText.getText().toString()))
-                {
+                } else if (TextUtils.isEmpty(userID) || TextUtils.isEmpty(pass)) {
                     Toast.makeText(LoginActivity.this,"Please input Username and password!", Toast.LENGTH_LONG).show();
-                }
-                else
-                {
+                } else {
                     Toast.makeText(LoginActivity.this, "Please register using the register Button!", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
     }
