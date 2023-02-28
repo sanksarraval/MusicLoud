@@ -9,7 +9,6 @@ import java.util.List;
 public class AccessUsers {
 
     private UserManagement userManagement;
-    private List<User> users;
 
     private User user;
 
@@ -18,7 +17,6 @@ public class AccessUsers {
     public AccessUsers()
     {
         userManagement = Services.getAccountManagement();
-        users = null;
         user = null;
         currUser = 0;
     }
