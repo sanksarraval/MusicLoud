@@ -34,7 +34,7 @@ public class RegisterActivity extends Activity {
 
         // Creating accessUser instance
         accessUsers = new AccessUsers();
-        accessUsers.getAccounts();
+        //accessUsers.getAccounts();
         
         // Taking the input form the text fields.
         userEditText = findViewById(R.id.user_name_edit_text);

@@ -1,7 +1,9 @@
 package com.example.musicloud.presentation;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,7 +18,10 @@ import com.example.musicloud.business.AccessUsers;
 import com.example.musicloud.business.LoginManager;
 import com.example.musicloud.objects.User;
 
-import java.util.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class LoginActivity extends Activity {
     private EditText usernameEditText, passwordEditText;
@@ -31,6 +36,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //copyDatabaseToDevice();
 
         accessUsers = new AccessUsers();
         //userList = accessUsers.getAccounts();
@@ -73,4 +79,5 @@ public class LoginActivity extends Activity {
         Intent loginIntent = new Intent(LoginActivity.this, PlayActivity.class);
         LoginActivity.this.startActivity(loginIntent);
     }
+
 }

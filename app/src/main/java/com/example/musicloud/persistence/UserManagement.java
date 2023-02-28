@@ -14,14 +14,4 @@ public interface UserManagement {
 
     User addAccount(User newUser);
 
-
-    /*
-
-    Implemented but not used in the UI
-
-    void deleteAccount(User newUser);
-
-    void updatePassword(User account, String newPassword);
-    void updateUserName(User account, String newUserID);
-    */
 }
