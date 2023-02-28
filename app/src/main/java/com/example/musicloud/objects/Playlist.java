@@ -2,6 +2,7 @@ package com.example.musicloud.objects;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ public class Playlist {
     private final String playlistName;
     private final String description;
     private double playlistLength; //playlist length in hours
-    private List<Song> allSongs;
+    private ArrayList<Song> allSongs;
     //album art
 
     //playlist constructor with name, description and list of songs
@@ -17,7 +18,7 @@ public class Playlist {
         this.playlistName = playlistName;
         this.description = description;
         this.playlistLength = -1;
-        this.allSongs = songList;
+        this.allSongs = (ArrayList<Song>) songList;
     }
 
     //playlist constructor with name, and list of songs
@@ -25,7 +26,7 @@ public class Playlist {
         this.playlistName = playlistName;
         this.description = null;
         this.playlistLength = -1;
-        this.allSongs = songList;
+        this.allSongs = (ArrayList<Song>) songList;
     }
 
     //getter for name of playlist
