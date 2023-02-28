@@ -2,6 +2,7 @@ package com.example.musicloud.application;
 
 import com.example.musicloud.persistence.SongPersistence;
 import com.example.musicloud.persistence.UserManagement;
+import com.example.musicloud.persistence.hsqldb.UserManagementHSQLDB;
 import com.example.musicloud.persistence.stubs.SongPersistenceStub;
 import com.example.musicloud.persistence.stubs.UserManagementStub;
 
@@ -14,8 +15,8 @@ public class Services {
     {
         if (accountManagement == null)
         {
-            accountManagement = new UserManagementStub();
-            //accountManagement = new UserManagementHSQLDB("SC");
+            //accountManagement = new UserManagementStub();
+            accountManagement = new UserManagementHSQLDB(MyApp.getDBPathName());
         }
         return accountManagement;
     }
