@@ -17,19 +17,46 @@ public class UserManagementHSQLDB implements UserManagement {
 
     public UserManagementHSQLDB(String dbPath) {
         this.dbPath = dbPath;
+        try{
+            createTable();
+            insertDummyData();
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+        }
     }
     private Connection connection() throws SQLException {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+    }
+    private void createTable() throws SQLException {
+        final Connection conn = connection();
+        String query = "CREATE TABLE IF NOT EXISTS Users (UserID VARCHAR(50) PRIMARY KEY, UserName VARCHAR(50), Password VARCHAR(50))";
+        Statement stmt = conn.createStatement();
+        stmt.executeUpdate(query);
+        stmt.close();
+    }
+    private void insertDummyData() throws SQLException {
+        final Connection conn = connection();
+        String query1 = "INSERT INTO Users VALUES('ravals1', 'Sanskar Raval', 'Sanskar123')";
+        String query2 = "INSERT INTO Users VALUES('chauhana', 'Aakash Chaohan', 'Aakash123')";
+        String query3 = "INSERT INTO Users VALUES('seraspij', 'Jacob Seraspi', 'Jacob123')";
+        String query4 = "INSERT INTO Users VALUES('admin', 'admin', 'admin')";
+        Statement stmt = conn.createStatement();
+        stmt.executeUpdate(query1);
+        stmt.executeUpdate(query2);
+        stmt.executeUpdate(query3);
+        stmt.executeUpdate(query4);
+        stmt.close();
     }
 
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        try (Connection conn = connection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM USERS")) {
+        try (final Connection conn = connection();
+             final Statement stmt = conn.createStatement();
+             final ResultSet rs = stmt.executeQuery("SELECT * FROM USERS")) {
             while (rs.next()) {
-                User user = new User(rs.getString("userId"), rs.getString("password"), rs.getString("userName"));
+                User user = new User(rs.getString("userID"), rs.getString("password"), rs.getString("userName"));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -40,15 +67,15 @@ public class UserManagementHSQLDB implements UserManagement {
 
     @Override
     public User getUser(String userID) {
-        try (Connection conn = connection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM USERS WHERE userID = ?")) {
+        try (final Connection conn = connection();
+             final PreparedStatement stmt = conn.prepareStatement("SELECT * FROM USERS WHERE userID = ?")) {
             stmt.setString(1, userID);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new User(rs.getString("userID"), rs.getString("password"), rs.getString("userName"));
                 }
             }
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -56,31 +83,33 @@ public class UserManagementHSQLDB implements UserManagement {
 
     @Override
     public boolean verifyUser(String userID, String password) {
-        try (Connection conn = connection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM USERS WHERE userID = ? AND password = ?")) {
+        boolean flag = false;
+        try (final Connection conn = connection();
+             final PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM USERS WHERE userID = ? AND password = ?")) {
             stmt.setString(1, userID);
             stmt.setString(2, password);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt(1) == 1;
+                    //flag = true;
                 }
             }
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return flag;
     }
 
     @Override
     public User addAccount(User newUser) {
-        try (Connection conn = connection();
-             PreparedStatement stmt = conn.prepareStatement("INSERT INTO USERS (userID, password, userName) VALUES (?, ?, ?)")) {
+        try (final Connection conn = connection();
+             final PreparedStatement stmt = conn.prepareStatement("INSERT INTO USERS VALUES (?, ?, ?)")) {
             stmt.setString(1, newUser.getUserID());
             stmt.setString(2, newUser.getPassword());
             stmt.setString(3, newUser.getUserName());
             stmt.executeUpdate();
             return newUser;
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             e.printStackTrace();
         }
         return null;

@@ -57,8 +57,10 @@ public class RegisterActivity extends Activity {
             String fullName = Objects.requireNonNull(fullNameEditText.getText()).toString();
             userID = userID.toLowerCase();
 
+            ValidationInput vi = new ValidationInput();
+
             try{
-                ValidationInput.validateInput(userID, password, fullName);
+                vi.validateInput(userID, password, fullName);
             }
             catch(ValidateException e){
                 Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();

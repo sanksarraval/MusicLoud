@@ -1,7 +1,7 @@
 package com.example.musicloud.business;
 
 public class ValidationInput {
-    public static void validateInput(String userID, String password, String fullName) throws ValidateException {
+    public void validateInput(String userID, String password, String fullName) throws ValidateException {
         // UserID and Password should not contain spaces and must match a regex expression.
         if (userID.contains(" ") || password.contains(" ") || !userID.matches("^[a-zA-Z0-9]+$") || !password.matches("^[a-zA-Z0-9]+$")) {
             throw new ValidateException("User ID and password cannot contain spaces and must be alphanumeric");

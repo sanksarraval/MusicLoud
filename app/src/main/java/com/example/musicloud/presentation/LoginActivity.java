@@ -23,13 +23,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class LoginActivity extends Activity {
     private EditText usernameEditText, passwordEditText;
     Button loginBtn;
 
     private AccessUsers accessUsers;
-    //private List<User> userList;
+    private List<User> userList;
 
     String correct_username = "admin";
     String correct_password = "admin";
@@ -40,7 +41,7 @@ public class LoginActivity extends Activity {
         copyDatabaseToDevice();
 
         accessUsers = new AccessUsers();
-        //userList = accessUsers.getAccounts();
+        userList = accessUsers.getAccounts();
 
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.Password);
