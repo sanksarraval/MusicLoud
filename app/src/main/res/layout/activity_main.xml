@@ -57,6 +57,7 @@
                 <!-- using linear layout to store multiple view
                      inside a Horizontal Scroll View -->
                 <LinearLayout
+                    android:id="@+id/song"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -64,37 +65,36 @@
 
                     <!-- multiple button views to show a
                           scrollable horizontal list -->
-                    <LinearLayout
-                        android:id="@+id/song"
+                    <!-- <LinearLayout
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingRight="10dp">
 
                         <Button
-                            android:id="@+id/song1"
+                            android:id="@+id/song_button"
                             android:layout_width="180dp"
                             android:layout_height="180dp"
-                            android:backgroundTint="@color/gray"
-                            tools:ignore="SpeakableTextPresentCheck" />
+                            android:backgroundTint="@color/gray" />
 
                         <TextView
+                            android:id="@+id/song_name_textview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/song1"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:textColor="@color/black" />
 
                         <TextView
-                            android:id="@+id/artist"
+                            android:id="@+id/artist_textview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="10dp"
-                            android:text="@string/artist1"
                             android:textColor="@color/black"
                             android:textSize="12sp" />
 
-                    </LinearLayout>
+                    </LinearLayout> -->
+
 
                 </LinearLayout>
 

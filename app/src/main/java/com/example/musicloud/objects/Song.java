@@ -42,6 +42,8 @@ public class Song {
     public String getSongName(){
         return songName;
     }
+
+    public String getArtist() { return artist; }
     public boolean isLiked(){
         return liked;
     }
