@@ -10,23 +10,20 @@ public class Playlist {
     private final String playlistName;
     private final String description;
     private double playlistLength; //playlist length in hours
-    private ArrayList<Song> allSongs;
     //album art
 
     //playlist constructor with name, description and list of songs
-    public Playlist(String playlistName, String description, List<Song> songList) {
+    public Playlist(String playlistName, String description) {
         this.playlistName = playlistName;
         this.description = description;
         this.playlistLength = -1;
-        this.allSongs = (ArrayList<Song>) songList;
     }
 
     //playlist constructor with name, and list of songs
-    public Playlist(String playlistName, List<Song> songList) {
+    public Playlist(String playlistName) {
         this.playlistName = playlistName;
         this.description = null;
         this.playlistLength = -1;
-        this.allSongs = (ArrayList<Song>) songList;
     }
 
     //getter for name of playlist
@@ -45,9 +42,6 @@ public class Playlist {
     }
 
     //getter for list of songs in playlist
-    public List<Song> getSongList (){
-        return allSongs;
-    }
 
     @NonNull
     public String toString(){

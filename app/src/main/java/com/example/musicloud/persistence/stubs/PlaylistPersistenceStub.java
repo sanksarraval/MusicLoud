@@ -14,11 +14,7 @@ public class PlaylistPersistenceStub implements PlaylistPersistence {
     public PlaylistPersistenceStub(){
         this.playlists = new ArrayList<>();
 
-        List<Song> songs = new ArrayList<>();
-        songs.add(new Song("Not Enough To Give", "Ketsa", "Ketsa - Not Enough To Give"));
-        songs.add(new Song("Rain Man", "Ketsa", "Ketsa - Rain Man"));
-
-        playlists.add(new Playlist("name", "description", songs));
+        playlists.add(new Playlist("name", "description"));
 
     }
     @Override

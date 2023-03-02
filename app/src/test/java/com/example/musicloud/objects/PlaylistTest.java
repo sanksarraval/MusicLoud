@@ -11,16 +11,12 @@ public class PlaylistTest {
     @Test
     public void testPlaylist1(){
         Playlist playlist;
-        List<Song> songs = new ArrayList<>();
-        songs.add(new Song("Not Enough To Give", "Ketsa", "Ketsa - Not Enough To Give"));
-        songs.add(new Song("Rain Man", "Ketsa", "Ketsa - Rain Man"));
         System.out.println("\n Starting testPlaylist");
 
-        playlist = new Playlist("name", "description", songs);
+        playlist = new Playlist("name", "description");
         assertNotNull(playlist);
         assertEquals("name", playlist.getPlaylistName());
         assertEquals("description", playlist.getDescription());
-        assertEquals(songs, playlist.getSongList());
 
         System.out.println("Finished testPlaylist");
     }
