@@ -18,10 +18,10 @@ public class SongPersistenceStub implements SongPersistence {
     public SongPersistenceStub(){
         this.songs = new ArrayList<>();
 
-        songs.add(new Song("Faded", "Alan Walker"));
-        songs.add(new Song("Don't Cry", "Guns N' Roses"));
-        songs.add(new Song("That Girl", "Olly Murs"));
-        songs.add(new Song("Normal No More", "Tysm"));
+        songs.add(new Song("Not Enough To Give", "Ketsa", "Ketsa - Not Enough To Give"));
+        songs.add(new Song("Rain Man", "Ketsa", "Ketsa - Rain Man"));
+        songs.add(new Song("Above the Clouds", "Scott Holmes Music", "Scott Holmes Music - Above the Clouds.mp3"));
+        songs.add(new Song("Stereohada", "Nightfall", "Stereohada - Nightfall.mp3"));
     }
 
     @Override

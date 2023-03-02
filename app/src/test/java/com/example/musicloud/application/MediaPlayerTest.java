@@ -1,4 +1,4 @@
-package com.example.musicloud;
+package com.example.musicloud.application;
 
 import android.media.MediaPlayer;
 
@@ -18,7 +18,7 @@ import com.example.musicloud.persistence.IPlayStateCallback;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class MediaPlayerTest {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);

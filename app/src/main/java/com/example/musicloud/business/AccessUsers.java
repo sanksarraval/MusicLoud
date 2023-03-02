@@ -1,7 +1,7 @@
 package com.example.musicloud.business;
 
 import com.example.musicloud.objects.User;
-import com.example.musicloud.objects.application.Services;
+import com.example.musicloud.application.Services;
 import com.example.musicloud.persistence.UserManagement;
 
 import java.util.List;
@@ -59,6 +59,9 @@ public class AccessUsers {
             userManagement.addAccount(newUser);
          }
      }
+    /*
+
+    Implemented but not used in the UI
 
      public void updateUserName(User user, String userName)
      {
@@ -69,5 +72,7 @@ public class AccessUsers {
      {
          userManagement.updatePassword(user,pass);
      }
+
+     */
 
 }

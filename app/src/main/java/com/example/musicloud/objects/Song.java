@@ -38,12 +38,6 @@ public class Song {
     }
 
 
-    //toString to get song summary
-    @NonNull
-    public String toString(){
-        return "Song Name:"+songName + " ArtistName:" +artist + " AlbumName:"+albumName;
-    }
-
     //getter for song name
     public String getSongName(){
         return songName;
