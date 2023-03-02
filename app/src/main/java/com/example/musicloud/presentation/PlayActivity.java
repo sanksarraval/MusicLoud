@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import com.example.musicloud.MediaPlayerUtil;
 import com.example.musicloud.R;
 import com.example.musicloud.persistence.IPlayStateCallback;
+import com.example.musicloud.business.AccessSongs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +49,45 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         ivReplay = findViewById(R.id.ivReplay);
         pbProgress = findViewById(R.id.pbProgress);
 
-        //create buttons
+
+        //Loop
+        LinearLayout songLayout = findViewById(R.id.song);
+
+        for (int i = 0; i < songList.size(); i++) {
+            Song song = songList.get(i);
+
+            LinearLayout layout = new LinearLayout(this);
+            layout.setId(i);
+            layout.setOrientation(LinearLayout.VERTICAL);
+            layout.setPaddingRight(10);
+
+            Button button = new Button(this);
+            button.setId(View.generateViewId());
+            button.setLayoutParams(new LinearLayout.LayoutParams(180, 180));
+            button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
+            layout.addView(button);
+
+            TextView songNameTextView = new TextView(this);
+            songNameTextView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            songNameTextView.setText(song.getName());
+            songNameTextView.setTextAppearance(android.R.style.TextAppearance_Small);
+            songNameTextView.setTextColor(getResources().getColor(R.color.black));
+            layout.addView(songNameTextView);
+
+            TextView artistTextView = new TextView(this);
+            artistTextView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            artistTextView.setText(song.getArtist());
+            artistTextView.setTextColor(getResources().getColor(R.color.black));
+            artistTextView.setTextSize(12);
+            artistTextView.setPaddingBottom(10);
+            layout.addView(artistTextView);
+
+            songLayout.addView(layout);
+        }
+
+
+
+        /*//create buttons
         Button one = (Button) findViewById(R.id.song1);
         one.setOnClickListener(this); // calling onClick() method
 
@@ -62,6 +102,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         Button five = (Button) findViewById(R.id.song5);
         five.setOnClickListener(this); // calling onClick() method
+         */
 
         //Prepare music list data
         musicList.add("Guns N' Roses-Don't Cry");
