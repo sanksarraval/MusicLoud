@@ -2,10 +2,12 @@ package com.example.musicloud.presentation;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -14,11 +16,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import com.example.musicloud.application.MediaPlayerUtil;
 import com.example.musicloud.R;
-import com.example.musicloud.persistence.IPlayStateCallback;
+import com.example.musicloud.business.AccessSongs;
+import com.example.musicloud.objects.Song;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlayActivity extends AppCompatActivity implements View.OnClickListener, IPlayStateCallback {
@@ -28,9 +29,11 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private AppCompatImageView ivPlay;
     private AppCompatImageView ivNext;
     private AppCompatImageView ivReplay;
+    private AppCompatImageView ivLike;
     private ProgressBar pbProgress;
-    private String name = "Guns N' Roses-Don't Cry";
-    private List<String> musicList = new ArrayList<>();
+    private AccessSongs songs = new AccessSongs();
+    private List<Song> songList = songs.getSongs();
+    private List<String> musicList = songs.getSongNames();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +49,38 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         ivReplay = findViewById(R.id.ivReplay);
         pbProgress = findViewById(R.id.pbProgress);
 
-        //create buttons
+
+        //Loop
+        LinearLayout songLayout = findViewById(R.id.song);
+
+        for (int i = 0; i < songList.size(); i++) {
+            Song song = songList.get(i);
+            LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.song_item, null);
+            layout.setId(i);
+
+            Button button = layout.findViewById(R.id.song_button);
+            button.setId(View.generateViewId());
+            button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
+            int finalI = i;
+            button.setOnClickListener(view -> {
+                // get the position of the clicked song item
+                mediaPlayerUtil.setPlayingPosition(finalI);
+                mediaPlayerUtil.play(musicList.get(finalI));
+            });
+            TextView songNameTextView = layout.findViewById(R.id.song_name_textview);
+            songNameTextView.setText(song.getSongName());
+
+            TextView artistTextView = layout.findViewById(R.id.artist_textview);
+            artistTextView.setText(song.getArtist());
+
+            songLayout.addView(layout);
+        }
+
+
+
+
+
+        /*//create buttons
         Button one = (Button) findViewById(R.id.song1);
         one.setOnClickListener(this); // calling onClick() method
 
@@ -62,12 +96,13 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         Button five = (Button) findViewById(R.id.song5);
         five.setOnClickListener(this); // calling onClick() method
 
+
         //Prepare music list data
         musicList.add("Guns N' Roses-Don't Cry");
         musicList.add("Alan Walker-Faded");
         musicList.add("Martin Garrix&David Guetta&Jamie Scott&Romy Dya-So Far Away");
         musicList.add("Olly Murs-That Girl");
-        musicList.add("Tysm-Normal No More(Explicit)");
+        musicList.add("Tysm-Normal No More(Explicit)"); */
 
         //Set play source
         Intent intent = getIntent();
@@ -75,8 +110,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         mediaPlayerUtil.setPlayMusicList(musicList);
         mediaPlayerUtil.setPlayingPosition(position);
-        name = musicList.get(position);
-        setMusicInfo(name);
+        setMusicInfo(musicList.get(position));
 
         ivLast.setOnClickListener(this);
         ivPlay.setOnClickListener(this);
@@ -197,26 +231,6 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         MediaPlayerUtil mediaPlayerUtil = MediaPlayerUtil.getInstance();
         switch (view.getId()) {
-            case R.id.song1:
-                mediaPlayerUtil.setPlayingPosition(0);
-                mediaPlayerUtil.play(musicList.get(0));
-                break;
-            case R.id.song2:
-                mediaPlayerUtil.setPlayingPosition(1);
-                mediaPlayerUtil.play(musicList.get(1));
-                break;
-            case R.id.song3:
-                mediaPlayerUtil.setPlayingPosition(2);
-                mediaPlayerUtil.play(musicList.get(2));
-                break;
-            case R.id.song4:
-                mediaPlayerUtil.setPlayingPosition(3);
-                mediaPlayerUtil.play(musicList.get(3));
-                break;
-            case R.id.song5:
-                mediaPlayerUtil.setPlayingPosition(4);
-                mediaPlayerUtil.play(musicList.get(4));
-                break;
             case R.id.ivLast:
                 //Click on the previous song
                 mediaPlayerUtil.playLast();
@@ -252,6 +266,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                     mediaPlayerUtil.play();
                 }
                 break;
+            case R.id.ivLike:
+                //Hit Like
+                //if()
             default:
         }
     }
@@ -262,6 +279,4 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         //Cancel playback status listening
         MediaPlayerUtil.getInstance().unregisterCallback(this);
     }
-
-
 }

@@ -2,13 +2,12 @@ package com.example.musicloud.objects;
 
 import androidx.annotation.NonNull;
 
-import java.io.*;
-
 public class Song {
+    private int id;
     private final String songName;
     private final String artist;
     private final String albumName;
-    public String getSongName;
+    private boolean liked;
 
     //private final File mp3;
     //private final File albumArt;
@@ -16,13 +15,22 @@ public class Song {
     public Song(String songName, String artist) {
         this.songName = songName;
         this.artist = artist;
-        albumName = "na"; //
+        albumName = "na";
+        liked = false;
     }
 
     public Song (String songName, String artist, String albumName) {
         this.songName = songName;
         this.artist = artist;
         this.albumName = albumName;
+    }
+
+    public Song(int id, String songName, String artist, String albumName, boolean liked) {
+        this.id = id;
+        this.songName = songName;
+        this.artist = artist;
+        this.albumName = albumName;
+        this.liked = liked;
     }
 
     //added isEqual to compare with some other song's data
@@ -36,16 +44,43 @@ public class Song {
         return songName.compareTo(other.songName);
     }
 
-
-    //toString to get song summary
-    @NonNull
-    public String toString(){
-        return "Song Name:"+songName + " ArtistName:" +artist + " AlbumName:"+albumName;
+    public int getId() {
+        return id;
     }
 
-    //getter for song name
-    public String getSongName(){
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getSongName() {
         return songName;
     }
 
+    public String getArtist() {
+        return artist;
+    }
+
+    public String getAlbumName() {
+        return albumName;
+    }
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Song{" +
+                "id=" + id +
+                ", songName='" + songName + '\'' +
+                ", artist='" + artist + '\'' +
+                ", albumName='" + albumName + '\'' +
+                ", liked=" + liked +
+                '}';
+    }
 }
