@@ -12,9 +12,11 @@ public class AccessPlaylistTest {
         System.out.println ("\n Starting testAccessPlaylist");
 
         accessPlaylist = new AccessPlaylist();
-        playlist = new Playlist("good playlist", "this is a good playlist");
+        playlist = new Playlist("okay playlist", "this is not a great playlist");
         assertNotNull(accessPlaylist);
         assertEquals(playlist, accessPlaylist.insertPlaylist(playlist));
         System.out.println(accessPlaylist.getPlaylists());
+
+        System.out.println("Finished testAccessPlaylist");
     }
 }

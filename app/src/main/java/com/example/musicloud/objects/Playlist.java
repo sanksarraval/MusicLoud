@@ -16,14 +16,12 @@ public class Playlist {
     public Playlist(String playlistName, String description) {
         this.playlistName = playlistName;
         this.description = description;
-        this.playlistLength = -1;
     }
 
     //playlist constructor with name, and list of songs
     public Playlist(String playlistName) {
         this.playlistName = playlistName;
         this.description = null;
-        this.playlistLength = -1;
     }
 
     //getter for name of playlist
@@ -45,7 +43,7 @@ public class Playlist {
 
     @NonNull
     public String toString(){
-        return String.format("Playlist: %s %s %f", playlistName, description, playlistLength);
+        return String.format("\nPlaylist: \n name: %s \n description: %s", playlistName, description);
     }
 
     //tests equality of current playlist with second. Uses playlist length and name.

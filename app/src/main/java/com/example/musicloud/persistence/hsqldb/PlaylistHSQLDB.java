@@ -30,7 +30,7 @@ public class PlaylistHSQLDB implements PlaylistPersistence {
     }
     private void createTable() throws SQLException {
         final Connection conn = connection();
-        String query = "CREATE TABLE IF NOT EXISTS Playlists (Name VARCHAR(100) PRIMARY KEY, Description VARCHAR(500))";
+        String query = "CREATE TABLE IF NOT EXISTS Playlists (playlistName VARCHAR(100) PRIMARY KEY, Description VARCHAR(500))";
         Statement stmt = conn.createStatement();
         stmt.executeUpdate(query);
         stmt.close();
@@ -53,7 +53,7 @@ public class PlaylistHSQLDB implements PlaylistPersistence {
              final Statement stmt = conn.createStatement();
              final ResultSet rs = stmt.executeQuery("SELECT * FROM PLAYLISTS")) {
             while (rs.next()) {
-                Playlist playlist = new Playlist(rs.getString("playlistName"), rs.getString("description"));
+                Playlist playlist = new Playlist(rs.getString("playlistName"), rs.getString("Description"));
                 playlists.add(playlist);
             }
         } catch (SQLException e) {
