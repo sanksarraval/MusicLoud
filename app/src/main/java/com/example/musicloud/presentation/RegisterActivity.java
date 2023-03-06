@@ -1,7 +1,9 @@
 package com.example.musicloud.presentation;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
@@ -9,10 +11,17 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.example.musicloud.R;
+import com.example.musicloud.application.MyApp;
 import com.example.musicloud.business.AccessUsers;
+import com.example.musicloud.business.ValidationInput;
+import com.example.musicloud.business.ValidateException;
 import com.example.musicloud.objects.User;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Objects;
 
 public class RegisterActivity extends Activity {
@@ -21,6 +30,7 @@ public class RegisterActivity extends Activity {
     private TextInputEditText userEditText;
     private TextInputEditText passwordEditText;
     private TextInputEditText fullNameEditText;
+    private boolean flag = false;
 
 
 
@@ -28,10 +38,11 @@ public class RegisterActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        copyDatabaseToDevice();
 
         // Creating accessUser instance
         accessUsers = new AccessUsers();
-        accessUsers.getAccounts();
+        //accessUsers.getAccounts();
         
         // Taking the input form the text fields.
         userEditText = findViewById(R.id.user_name_edit_text);
@@ -45,20 +56,15 @@ public class RegisterActivity extends Activity {
             String password = Objects.requireNonNull(passwordEditText.getText()).toString();
             String fullName = Objects.requireNonNull(fullNameEditText.getText()).toString();
             userID = userID.toLowerCase();
-            
-            
-            // Error checking for the input fields.
-            if(userID.isEmpty() || fullName.isEmpty() || password.isEmpty()) {
-                Toast.makeText(getApplicationContext(), "User ID, User name, and password cannot be empty", Toast.LENGTH_SHORT).show();
-                return;
-            // UserID and Password should not contain spaces and must match a regex expression.
-            } else if(userID.contains(" ") || password.contains(" ") || !userID.matches("^[a-zA-Z0-9]+$") || !password.matches("^[a-zA-Z0-9]+$")) {
-                Toast.makeText(getApplicationContext(), "User ID and password cannot contain spaces and must be alphanumeric", Toast.LENGTH_SHORT).show();
-                return;
-            // Password length should be greater than 2.
-            } else if(password.length() < 2) {
-                Toast.makeText(getApplicationContext(), "Password must be at least 2 characters long", Toast.LENGTH_SHORT).show();
-                return;
+
+            ValidationInput vi = new ValidationInput();
+
+            try{
+                vi.validateInput(userID, password, fullName);
+            }
+            catch(ValidateException e){
+                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                flag = true;
             }
 
             if(accessUsers.accountFound(userID))
@@ -70,7 +76,7 @@ public class RegisterActivity extends Activity {
                 String pass = already_user.getPassword();
                 System.out.println("UserID: " + user + "Password: " + pass);
             }
-            else
+            else if(!accessUsers.accountFound(userID) && !flag)
             {
                 User newUser = new User(userID,fullName,password);
                 accessUsers.addAccount(newUser);
@@ -80,5 +86,57 @@ public class RegisterActivity extends Activity {
 
             }
         });
+    }
+
+    private void copyDatabaseToDevice() {
+        final String DB_PATH = "db";
+
+        String[] assetNames;
+        Context context = getApplicationContext();
+        File dataDirectory = context.getDir(DB_PATH, Context.MODE_PRIVATE);
+        AssetManager assetManager = getAssets();
+
+        try {
+
+            assetNames = assetManager.list(DB_PATH);
+            for (int i = 0; i < assetNames.length; i++) {
+                assetNames[i] = DB_PATH + "/" + assetNames[i];
+            }
+
+            copyAssetsToDirectory(assetNames, dataDirectory);
+
+            MyApp.setDBPathName(dataDirectory.toString() + "/" + MyApp.getDBPathName());
+
+        } catch (final IOException ioe) {
+            Messages.warning(this, "Unable to access application data: " + ioe.getMessage());
+        }
+    }
+
+    public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
+        AssetManager assetManager = getAssets();
+
+        for (String asset : assets) {
+            String[] components = asset.split("/");
+            String copyPath = directory.toString() + "/" + components[components.length - 1];
+
+            char[] buffer = new char[1024];
+            int count;
+
+            File outFile = new File(copyPath);
+
+            if (!outFile.exists()) {
+                InputStreamReader in = new InputStreamReader(assetManager.open(asset));
+                FileWriter out = new FileWriter(outFile);
+
+                count = in.read(buffer);
+                while (count != -1) {
+                    out.write(buffer, 0, count);
+                    count = in.read(buffer);
+                }
+
+                out.close();
+                in.close();
+            }
+        }
     }
 }

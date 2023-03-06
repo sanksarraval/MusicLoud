@@ -14,9 +14,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import com.example.musicloud.application.MediaPlayerUtil;
 import com.example.musicloud.R;
-import com.example.musicloud.persistence.IPlayStateCallback;
+import com.example.musicloud.business.AccessSongs;
+import com.example.musicloud.presentation.MediaPlayerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private AppCompatImageView ivReplay;
     private ProgressBar pbProgress;
     private String name = "Guns N' Roses-Don't Cry";
+    //private AccessSongs accessSongs = new AccessSongs();
     private List<String> musicList = new ArrayList<>();
+    //private List<String> musicList = accessSongs.getSongNames();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +65,17 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         five.setOnClickListener(this); // calling onClick() method
 
         //Prepare music list data
+
         musicList.add("Guns N' Roses-Don't Cry");
         musicList.add("Alan Walker-Faded");
         musicList.add("Martin Garrix&David Guetta&Jamie Scott&Romy Dya-So Far Away");
         musicList.add("Olly Murs-That Girl");
-        musicList.add("Tysm-Normal No More(Explicit)");
+        musicList.add("Ketsa - Not Enough To Give");
+        musicList.add("Ketsa - Rain Man");
+        musicList.add("Scott Holmes Music - Above the Clouds");
+        musicList.add("Stereohada - Nightfall");
+
+
 
         //Set play source
         Intent intent = getIntent();
@@ -214,8 +222,8 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                 mediaPlayerUtil.play(musicList.get(3));
                 break;
             case R.id.song5:
-                mediaPlayerUtil.setPlayingPosition(4);
-                mediaPlayerUtil.play(musicList.get(4));
+                mediaPlayerUtil.setPlayingPosition(5);
+                mediaPlayerUtil.play(musicList.get(5));
                 break;
             case R.id.ivLast:
                 //Click on the previous song
