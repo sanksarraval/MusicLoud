@@ -6,7 +6,7 @@ we have untilized a multi-tiered system to develop our application. This include
 [![](https://mermaid.ink/img/pako:eNpNj7EOwjAMRH8l8gw_kKEDYkWqxOrFalyI1DgQOwOq-u-kRRXd7Hvnk2-GIQcGD8rvyjLwNdKjUELpCyuLkcUs5667VI3Cqt6h7HOTj64jco25notGtTV2ZYd1w_9IOEHikiiG9smM4hyCPTkxQjuEwCPVyRBQlmalavn-kQG8lconqK9Atj8OfqRJm8ohWi63X7ut5PIFeqZTbw?type=png)](https://mermaid.live/edit#pako:eNpNj7EOwjAMRH8l8gw_kKEDYkWqxOrFalyI1DgQOwOq-u-kRRXd7Hvnk2-GIQcGD8rvyjLwNdKjUELpCyuLkcUs5667VI3Cqt6h7HOTj64jco25notGtTV2ZYd1w_9IOEHikiiG9smM4hyCPTkxQjuEwCPVyRBQlmalavn-kQG8lconqK9Atj8OfqRJm8ohWi63X7ut5PIFeqZTbw)
 
 
-# Diagram
+## Diagram
 
 ### Presentation
 Presentation builds the log-in interface using `LoginActivity`. For new users, the `RegisterActivity` is run in order to create new login credentials. `PlayActivity` is responsible for facilitating the interface to play each song. 
@@ -18,3 +18,8 @@ At the moment business handles user accounts and access within the `AccessUsers`
 Included in the persistance layer is UserManagement, UserManagementStub, IPlayStateCallback, IPlayControlCallback
 
 [![](https://mermaid.ink/img/pako:eNqFkbFuwzAMRH-F0Jz8gIYMRdcAAbpqISTaIWBTqUilKIL8e2kngTu1GyHd3SOOt5BroRCD0mcnyfTOODack5waKYmhcZX94fDWlYVUI3SlBrkRGilgzrWLJXn9g2vhRE1ZbcmLoHhlGUHo66WGQoY86X8QNKP5YgpTHYHlTwhhy2dfaKjtYWbxcV6TnbNpV-8GulLjgd24mDaCi37vtgCkKOQqAz9Twy7M5DMXr--WBCAFO9NMKUQfCw3YJ0shyd2l2K1-fEsO0VqnXeiX4gU-2w5xwEn9lQpbbcfHSdbL3H8A1meYwA?type=png)](https://mermaid.live/edit#pako:eNqFkbFuwzAMRH-F0Jz8gIYMRdcAAbpqISTaIWBTqUilKIL8e2kngTu1GyHd3SOOt5BroRCD0mcnyfTOODack5waKYmhcZX94fDWlYVUI3SlBrkRGilgzrWLJXn9g2vhRE1ZbcmLoHhlGUHo66WGQoY86X8QNKP5YgpTHYHlTwhhy2dfaKjtYWbxcV6TnbNpV-8GulLjgd24mDaCi37vtgCkKOQqAz9Twy7M5DMXr--WBCAFO9NMKUQfCw3YJ0shyd2l2K1-fEsO0VqnXeiX4gU-2w5xwEn9lQpbbcfHSdbL3H8A1meYwA)
+
+## Branching Strategy
+We've been using Modified GitHub Flow branching strategy because it allows us to work on seperate features and user stories in seperate branches. At the end of the iteration, we merge respective branches into the main branch which is then ready for release.
+
+

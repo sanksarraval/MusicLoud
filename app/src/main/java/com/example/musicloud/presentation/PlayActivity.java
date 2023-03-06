@@ -16,13 +16,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import com.example.musicloud.application.MediaPlayerUtil;
 import com.example.musicloud.R;
-import com.example.musicloud.persistence.IPlayStateCallback;
 import com.example.musicloud.business.AccessSongs;
 import com.example.musicloud.objects.Song;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlayActivity extends AppCompatActivity implements View.OnClickListener, IPlayStateCallback {
@@ -34,7 +31,6 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private AppCompatImageView ivReplay;
     private AppCompatImageView ivLike;
     private ProgressBar pbProgress;
-    private String name = "Guns N' Roses-Don't Cry";
     private AccessSongs songs = new AccessSongs();
     private List<Song> songList = songs.getSongs();
     private List<String> musicList = songs.getSongNames();
@@ -59,14 +55,18 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         for (int i = 0; i < songList.size(); i++) {
             Song song = songList.get(i);
-
             LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.song_item, null);
             layout.setId(i);
 
             Button button = layout.findViewById(R.id.song_button);
             button.setId(View.generateViewId());
             button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
-
+            int finalI = i;
+            button.setOnClickListener(view -> {
+                // get the position of the clicked song item
+                mediaPlayerUtil.setPlayingPosition(finalI);
+                mediaPlayerUtil.play(musicList.get(finalI));
+            });
             TextView songNameTextView = layout.findViewById(R.id.song_name_textview);
             songNameTextView.setText(song.getSongName());
 
@@ -110,8 +110,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         mediaPlayerUtil.setPlayMusicList(musicList);
         mediaPlayerUtil.setPlayingPosition(position);
-        name = musicList.get(position);
-        setMusicInfo(name);
+        setMusicInfo(musicList.get(position));
 
         ivLast.setOnClickListener(this);
         ivPlay.setOnClickListener(this);
@@ -231,12 +230,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         MediaPlayerUtil mediaPlayerUtil = MediaPlayerUtil.getInstance();
-        int position = (int) view.getTag(); // get the position of the clicked song item
         switch (view.getId()) {
-            case R.id.song_button:
-                mediaPlayerUtil.setPlayingPosition(position);
-                mediaPlayerUtil.play(musicList.get(position));
-                break;
             case R.id.ivLast:
                 //Click on the previous song
                 mediaPlayerUtil.playLast();
