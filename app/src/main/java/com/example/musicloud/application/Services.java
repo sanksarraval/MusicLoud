@@ -4,6 +4,7 @@ import com.example.musicloud.persistence.PlaylistPersistence;
 import com.example.musicloud.persistence.SPPersistence;
 import com.example.musicloud.persistence.SongPersistence;
 import com.example.musicloud.persistence.UserManagement;
+import com.example.musicloud.persistence.hsqldb.PlaylistHSQLDB;
 import com.example.musicloud.persistence.hsqldb.UserManagementHSQLDB;
 import com.example.musicloud.persistence.stubs.PlaylistPersistenceStub;
 import com.example.musicloud.persistence.stubs.SPPersistenceStub;
@@ -47,7 +48,8 @@ public class Services {
     {
         if (playlistPersistence == null)
         {
-            playlistPersistence = new PlaylistPersistenceStub();
+//            playlistPersistence = new PlaylistPersistenceStub();
+            playlistPersistence = new PlaylistHSQLDB(MyApp.getDBPathName());
         }
         return playlistPersistence;
     }
