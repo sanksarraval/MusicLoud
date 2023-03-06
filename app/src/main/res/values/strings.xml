@@ -20,7 +20,8 @@
     <string name="Playlists">Playlists</string>
     <string name="RecommendedSongs">Recommended Songs</string>
 
-
+    <string name="warning">Warning</string>
+    <string name="fatalError">Fatal error</string>
 
     <string name="song1">Don\'t Cry</string>
     <string name="artist1">Guns N\' Roses</string>
