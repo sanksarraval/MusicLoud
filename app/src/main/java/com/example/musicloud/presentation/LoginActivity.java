@@ -3,6 +3,7 @@ package com.example.musicloud.presentation;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -37,6 +38,8 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_login);
         copyDatabaseToDevice();
 
@@ -80,6 +83,7 @@ public class LoginActivity extends Activity {
     {
         Intent loginIntent = new Intent(LoginActivity.this, PlayActivity.class);
         LoginActivity.this.startActivity(loginIntent);
+        finish();
     }
 
     private void copyDatabaseToDevice() {
