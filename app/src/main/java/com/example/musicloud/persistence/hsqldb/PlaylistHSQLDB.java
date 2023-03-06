@@ -75,16 +75,6 @@ public class PlaylistHSQLDB implements PlaylistPersistence {
         }
         return currentPlaylist;
     }
-
-    @Override
-    public Playlist updatePlaylist(Playlist currentPlaylist) {
-        return null;
-    }
-
-    @Override
-    public void deletePlaylist(Playlist currentPlaylist) {
-
-    }
 }
 
 

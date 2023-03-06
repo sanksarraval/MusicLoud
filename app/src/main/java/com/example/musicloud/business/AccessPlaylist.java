@@ -28,11 +28,4 @@ public class AccessPlaylist {
     public Playlist insertPlaylist (Playlist currentPlaylist){
         return playlistPersistence.insertPlaylist(currentPlaylist);
     }
-    public Playlist updatePlaylist (Playlist currentPlaylist){
-        return playlistPersistence.updatePlaylist(currentPlaylist);
-    }
-    public void deletePlaylist(Playlist currentPlaylist){
-        playlistPersistence.deletePlaylist(currentPlaylist);
-    }
-
 }

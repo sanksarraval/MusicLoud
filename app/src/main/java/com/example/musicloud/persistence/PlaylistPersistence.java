@@ -9,7 +9,4 @@ public interface PlaylistPersistence {
 
     Playlist insertPlaylist (final Playlist currentPlaylist);
 
-    Playlist updatePlaylist(final Playlist currentPlaylist);
-
-    void deletePlaylist(final Playlist currentPlaylist);
 }

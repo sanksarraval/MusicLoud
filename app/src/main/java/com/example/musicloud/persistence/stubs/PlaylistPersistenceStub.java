@@ -27,25 +27,4 @@ public class PlaylistPersistenceStub implements PlaylistPersistence {
         playlists.add(currentPlaylist);
         return currentPlaylist;
     }
-
-    @Override
-    public Playlist updatePlaylist(Playlist currentPlaylist) {
-        int index;
-
-        index = playlists.indexOf(currentPlaylist);
-        if (index >= 0){
-            playlists.set(index,currentPlaylist);
-        }
-        return currentPlaylist;
-    }
-
-    @Override
-    public void deletePlaylist(Playlist currentPlaylist) {
-        int index;
-
-        index = playlists.indexOf(currentPlaylist);
-        if(index >= 0){
-            playlists.remove(index);
-        }
-    }
 }
