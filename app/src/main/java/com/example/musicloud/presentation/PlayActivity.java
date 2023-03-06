@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +35,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private AccessSongs songs = new AccessSongs();
     private List<Song> songList = songs.getSongs();
     private List<String> musicList = songs.getSongNames();
+    private Song currentSong; // declare a field to hold the current song object
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         ivNext = findViewById(R.id.ivNext);
         ivReplay = findViewById(R.id.ivReplay);
         pbProgress = findViewById(R.id.pbProgress);
+        ivLike = findViewById(R.id.ivLike);
 
 
         //Loop
@@ -64,8 +67,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             int finalI = i;
             button.setOnClickListener(view -> {
                 // get the position of the clicked song item
+                song.setCurrentSong();
                 mediaPlayerUtil.setPlayingPosition(finalI);
-                mediaPlayerUtil.play(musicList.get(finalI));
+                mediaPlayerUtil.play(songList.get(finalI).getSongName());
             });
             TextView songNameTextView = layout.findViewById(R.id.song_name_textview);
             songNameTextView.setText(song.getSongName());
@@ -116,7 +120,6 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         ivPlay.setOnClickListener(this);
         ivNext.setOnClickListener(this);
         ivReplay.setOnClickListener(this);
-
     }
 
     /**
@@ -223,6 +226,27 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private void setMusicInfo(String name) {
         tvName.setText(name);
         ivPlay.setImageResource(MediaPlayerUtil.getInstance().isPlaying() ? R.mipmap.pause : R.mipmap.play);
+
+        // find the current song object in the songList
+        for (Song song : songList) {
+            if (song.getSongName().equals(name)) {
+                currentSong = song;
+                System.out.println(currentSong.getSongName());
+                break;
+            }
+        }
+    }
+
+    private void setLikedInfo(@NonNull Song current){
+        boolean liked = songs.isLiked(current);
+        System.out.println(liked);
+        if(!liked){
+            songs.likeSong(current);
+            ivLike.setImageResource(R.mipmap.heart);
+        } else {
+            songs.unlikeSong(current);
+            ivLike.setImageResource(R.mipmap.openheart);
+        }
     }
 
 
@@ -233,6 +257,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.ivLast:
                 //Click on the previous song
+
                 mediaPlayerUtil.playLast();
                 break;
             case R.id.ivPlay:
@@ -266,13 +291,13 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                     mediaPlayerUtil.play();
                 }
                 break;
-            case R.id.ivLike:
-                //Hit Like
-                //if()
             default:
         }
     }
 
+    public void buttonLikeClick(View v){
+        setLikedInfo(currentSong);
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();

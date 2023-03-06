@@ -158,6 +158,11 @@ public class SongPersistenceHSQLDB implements SongPersistence {
     }
 
     @Override
+    public boolean isLiked(Song currentSong) {
+        return false;
+    }
+
+    @Override
     public List<Song> getLikedSongs() {
         return null;
     }

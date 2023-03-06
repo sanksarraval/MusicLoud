@@ -22,6 +22,9 @@ public interface SongPersistence {
     List<String> allSongNames();
     void likeSong (Song currentSong);
     void unlikeSong (Song currentSong);
+
+    boolean isLiked(Song currentSong);
+
     List<Song> getLikedSongs();
 
 }

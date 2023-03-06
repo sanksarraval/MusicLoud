@@ -1,5 +1,7 @@
 package com.example.musicloud.objects;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 public class Song {
@@ -9,6 +11,8 @@ public class Song {
     private final String albumName;
     private boolean liked;
 
+    private static Song currentSong;
+
     //private final File mp3;
     //private final File albumArt;
 
@@ -17,12 +21,14 @@ public class Song {
         this.artist = artist;
         albumName = "na";
         liked = false;
+        currentSong = null;
     }
 
     public Song (String songName, String artist, String albumName) {
         this.songName = songName;
         this.artist = artist;
         this.albumName = albumName;
+        currentSong = null;
     }
 
     public Song(int id, String songName, String artist, String albumName, boolean liked) {
@@ -31,6 +37,7 @@ public class Song {
         this.artist = artist;
         this.albumName = albumName;
         this.liked = liked;
+        currentSong = null;
     }
 
     //added isEqual to compare with some other song's data
@@ -64,14 +71,15 @@ public class Song {
         return albumName;
     }
 
-    public boolean isLiked() {
-        return liked;
+    public boolean isLiked() { return liked; }
+
+    public void setLiked() {
+        liked = !liked;
     }
 
-    public void setLiked(boolean liked) {
-        this.liked = liked;
+    public void setCurrentSong(){
+        currentSong = this;
     }
-
     @NonNull
     @Override
     public String toString() {
