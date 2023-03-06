@@ -30,9 +30,7 @@ public class User {
         this.userID = userID;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setPassword(String password){this.password = password;}
 
     public void setUserName(String userName) {
         this.userName = userName;
