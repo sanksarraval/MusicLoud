@@ -81,6 +81,6 @@ public class Song {
                 ", artist='" + artist + '\'' +
                 ", albumName='" + albumName + '\'' +
                 ", liked=" + liked +
-                '}';
+                '}' + "\n";
     }
 }

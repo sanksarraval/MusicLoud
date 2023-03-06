@@ -15,7 +15,6 @@ public class PlaylistPersistenceStub implements PlaylistPersistence {
         this.playlists = new ArrayList<>();
 
         playlists.add(new Playlist("name", "description"));
-
     }
     @Override
     public List<Playlist> getPlaylist() {
@@ -26,5 +25,26 @@ public class PlaylistPersistenceStub implements PlaylistPersistence {
     public Playlist insertPlaylist(Playlist currentPlaylist) {
         playlists.add(currentPlaylist);
         return currentPlaylist;
+    }
+
+    @Override
+    public Playlist updatePlaylist(Playlist currentPlaylist) {
+        int index;
+
+        index = playlists.indexOf(currentPlaylist);
+        if (index >= 0) {
+            playlists.set(index, currentPlaylist);
+        }
+        return currentPlaylist;
+    }
+
+    @Override
+    public void deletePlaylist(Playlist currentPlaylist) {
+        int index;
+
+        index = playlists.indexOf(currentPlaylist);
+            if (index >= 0) {
+                playlists.remove(index);
+            }
     }
 }

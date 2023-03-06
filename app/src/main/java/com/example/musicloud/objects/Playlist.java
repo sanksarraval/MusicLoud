@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Playlist {
+    private int id;
     private final String playlistName;
     private final String description;
     private double playlistLength; //playlist length in hours
@@ -23,6 +24,13 @@ public class Playlist {
         this.playlistName = playlistName;
         this.description = null;
     }
+
+    public Playlist(int id, String playlistName, String description) {
+        this.id = id;
+        this.playlistName = playlistName;
+        this.description = description;
+    }
+
 
     //getter for name of playlist
     public String getPlaylistName(){
@@ -41,10 +49,7 @@ public class Playlist {
 
     //getter for list of songs in playlist
 
-    @NonNull
-    public String toString(){
-        return String.format("\nPlaylist: \n name: %s \n description: %s", playlistName, description);
-    }
+
 
     //tests equality of current playlist with second. Uses playlist length and name.
     public boolean equals(Object other) {
@@ -57,5 +62,12 @@ public class Playlist {
             equals1 = Objects.equals(this.playlistName, otherPlaylist.getPlaylistName());
         }
         return equals&&equals1;
+    }
+    public int getId(){ return id;}
+    public void setId(int id){this.id = id;}
+
+    @NonNull
+    public String toString(){
+        return String.format("\nPlaylist: \n id: %d \n name: %s \n description: %s", id, playlistName, description);
     }
 }

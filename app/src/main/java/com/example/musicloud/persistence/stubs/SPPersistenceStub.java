@@ -41,7 +41,7 @@ public class SPPersistenceStub implements SPPersistence {
     }
 
     @Override
-    public List<SP> getPS(String playlistName) {
+    public List<SP> getPS (String playlistName) {
         List<SP> newSPs;
         SP ps;
         int counter;
