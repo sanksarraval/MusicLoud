@@ -34,14 +34,17 @@ public class MyApp extends Application {
         }
         dbName = name;
     }
+    /*
     public static String getDBPathName() {
         return dbName;
     }
 
+     */
 
-    private String dbName;
 
-    public String getDBPathName() {
+    //private String dbName;
+
+    public static String getDBPathName() {
         return dbName;
     }
 
