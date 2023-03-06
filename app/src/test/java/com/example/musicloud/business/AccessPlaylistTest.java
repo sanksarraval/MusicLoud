@@ -15,5 +15,6 @@ public class AccessPlaylistTest {
         playlist = new Playlist("good playlist", "this is a good playlist");
         assertNotNull(accessPlaylist);
         assertEquals(playlist, accessPlaylist.insertPlaylist(playlist));
+        System.out.println(accessPlaylist.getPlaylists());
     }
 }
