@@ -31,6 +31,12 @@ public class Playlist {
         this.description = description;
     }
 
+    public Playlist(int playlistId) {
+        this.id = playlistId;
+        this.playlistName = null;
+        this.description = null;
+    }
+
 
     //getter for name of playlist
     public String getPlaylistName(){

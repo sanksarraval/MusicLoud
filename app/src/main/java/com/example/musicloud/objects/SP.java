@@ -12,10 +12,11 @@ public class SP {
         this.playlist = playlist;
     }
 
+    public int getSongID (){return song.getId();}
     public String getSongName(){ return song.getSongName();}
 
     public String getPlaylistName(){ return playlist.getPlaylistName();}
-
+    public String getPlaylistId(){ return playlist.getPlaylistName();}
     @NonNull
     public String toString(){
         return String.format("SP: %s %s", song.getSongName(), playlist.getPlaylistName());
