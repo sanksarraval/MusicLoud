@@ -114,6 +114,24 @@ public class UserManagementHSQLDB implements UserManagement {
         }
         return null;
     }
+
+    public void cleanTable() {
+        try (final Connection conn = connection();
+             final Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate("DELETE FROM USERS");
+        } catch (final SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void dropTable() {
+        try (final Connection conn = connection();
+             final Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate("DROP TABLE IF EXISTS USERS");
+        } catch (final SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 

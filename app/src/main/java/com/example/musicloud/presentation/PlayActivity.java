@@ -76,34 +76,6 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             songLayout.addView(layout);
         }
 
-
-
-
-
-        /*//create buttons
-        Button one = (Button) findViewById(R.id.song1);
-        one.setOnClickListener(this); // calling onClick() method
-
-        Button two = (Button) findViewById(R.id.song2);
-        two.setOnClickListener(this); // calling onClick() method
-
-        Button three = (Button) findViewById(R.id.song3);
-        three.setOnClickListener(this); // calling onClick() method
-
-        Button four = (Button) findViewById(R.id.song4);
-        four.setOnClickListener(this); // calling onClick() method
-
-        Button five = (Button) findViewById(R.id.song5);
-        five.setOnClickListener(this); // calling onClick() method
-
-
-        //Prepare music list data
-        musicList.add("Guns N' Roses-Don't Cry");
-        musicList.add("Alan Walker-Faded");
-        musicList.add("Martin Garrix&David Guetta&Jamie Scott&Romy Dya-So Far Away");
-        musicList.add("Olly Murs-That Girl");
-        musicList.add("Tysm-Normal No More(Explicit)"); */
-
         //Set play source
         Intent intent = getIntent();
         int position = intent.getIntExtra("position", 0);
