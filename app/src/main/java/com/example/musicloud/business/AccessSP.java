@@ -20,6 +20,11 @@ public class AccessSP {
         currentPS = 0;
     }
 
+    public AccessSP (final SPPersistence spPersistence) {
+        this();
+        this.dataAccess = spPersistence;
+    }
+
     public SP getSP (String songName){
         if (elements == null) {
             elements = dataAccess.getSP(songName);

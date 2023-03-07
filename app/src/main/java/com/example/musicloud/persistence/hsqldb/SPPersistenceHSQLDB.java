@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class SPPersistenceHSQLDB implements SPPersistence {
     public List<SP> getSP(String songName) {
         final List<SP> songPlaylists = new ArrayList<>();
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM playlists, songsPlaylists WHERE Playlists.playlistId=songPlaylist.playlist_id AND song_id = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM playlist, songsPlaylists WHERE playlist.playlistId=songsPlaylists.playlist_id AND song_id = ?");
             st.setString(1, songName);
 
             final ResultSet rs = st.executeQuery();

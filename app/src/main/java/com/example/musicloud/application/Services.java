@@ -5,9 +5,12 @@ import com.example.musicloud.persistence.SPPersistence;
 import com.example.musicloud.persistence.SongPersistence;
 import com.example.musicloud.persistence.UserManagement;
 import com.example.musicloud.persistence.hsqldb.PlaylistPersistenceHSQLDB;
+import com.example.musicloud.persistence.hsqldb.SPPersistenceHSQLDB;
 import com.example.musicloud.persistence.hsqldb.SongPersistenceHSQLDB;
 import com.example.musicloud.persistence.hsqldb.UserManagementHSQLDB;
 import com.example.musicloud.persistence.stubs.SPPersistenceStub;
+
+import java.sql.SQLException;
 
 public class Services {
 
@@ -34,11 +37,11 @@ public class Services {
         }
         return songPersistence;
     }
-    public static synchronized SPPersistence getSpPersistence ()
-    {
+    public static synchronized SPPersistence getSpPersistence () {
         if (spPersistence == null)
         {
-            spPersistence = new SPPersistenceStub();
+            spPersistence = new SPPersistenceHSQLDB(MyApp.getDBPathName());
+//            spPersistence = new SPPersistenceStub();
         }
         return spPersistence;
     }
