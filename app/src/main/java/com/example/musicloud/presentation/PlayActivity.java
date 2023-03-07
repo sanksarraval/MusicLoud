@@ -2,10 +2,12 @@ package com.example.musicloud.presentation;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -16,9 +18,8 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import com.example.musicloud.R;
 import com.example.musicloud.business.AccessSongs;
-import com.example.musicloud.presentation.MediaPlayerUtil;
+import com.example.musicloud.objects.Song;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlayActivity extends AppCompatActivity implements View.OnClickListener, IPlayStateCallback {
@@ -28,11 +29,11 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private AppCompatImageView ivPlay;
     private AppCompatImageView ivNext;
     private AppCompatImageView ivReplay;
+    private AppCompatImageView ivLike;
     private ProgressBar pbProgress;
-    private String name = "Guns N' Roses-Don't Cry";
-    //private AccessSongs accessSongs = new AccessSongs();
-    private List<String> musicList = new ArrayList<>();
-    //private List<String> musicList = accessSongs.getSongNames();
+    private AccessSongs songs = new AccessSongs();
+    private List<Song> songList = songs.getSongs();
+    private List<String> musicList = songs.getSongNames();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,34 +49,32 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         ivReplay = findViewById(R.id.ivReplay);
         pbProgress = findViewById(R.id.pbProgress);
 
-        //create buttons
-        Button one = (Button) findViewById(R.id.song1);
-        one.setOnClickListener(this); // calling onClick() method
 
-        Button two = (Button) findViewById(R.id.song2);
-        two.setOnClickListener(this); // calling onClick() method
+        //Loop
+        LinearLayout songLayout = findViewById(R.id.song);
 
-        Button three = (Button) findViewById(R.id.song3);
-        three.setOnClickListener(this); // calling onClick() method
+        for (int i = 0; i < songList.size(); i++) {
+            Song song = songList.get(i);
+            LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.song_item, null);
+            layout.setId(i);
 
-        Button four = (Button) findViewById(R.id.song4);
-        four.setOnClickListener(this); // calling onClick() method
+            Button button = layout.findViewById(R.id.song_button);
+            button.setId(View.generateViewId());
+            button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
+            int finalI = i;
+            button.setOnClickListener(view -> {
+                // get the position of the clicked song item
+                mediaPlayerUtil.setPlayingPosition(finalI);
+                mediaPlayerUtil.play(musicList.get(finalI));
+            });
+            TextView songNameTextView = layout.findViewById(R.id.song_name_textview);
+            songNameTextView.setText(song.getSongName());
 
-        Button five = (Button) findViewById(R.id.song5);
-        five.setOnClickListener(this); // calling onClick() method
+            TextView artistTextView = layout.findViewById(R.id.artist_textview);
+            artistTextView.setText(song.getArtist());
 
-        //Prepare music list data
-
-        musicList.add("Guns N' Roses-Don't Cry");
-        musicList.add("Alan Walker-Faded");
-        musicList.add("Martin Garrix&David Guetta&Jamie Scott&Romy Dya-So Far Away");
-        musicList.add("Olly Murs-That Girl");
-        musicList.add("Ketsa - Not Enough To Give");
-        musicList.add("Ketsa - Rain Man");
-        musicList.add("Scott Holmes Music - Above the Clouds");
-        musicList.add("Stereohada - Nightfall");
-
-
+            songLayout.addView(layout);
+        }
 
         //Set play source
         Intent intent = getIntent();
@@ -83,8 +82,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         mediaPlayerUtil.setPlayMusicList(musicList);
         mediaPlayerUtil.setPlayingPosition(position);
-        name = musicList.get(position);
-        setMusicInfo(name);
+        setMusicInfo(musicList.get(position));
 
         ivLast.setOnClickListener(this);
         ivPlay.setOnClickListener(this);
@@ -93,6 +91,14 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    public void onBackPressed() {
+        // Navigate to the Home screen of your app
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
     /**
      * Switch to the previous song
      *
@@ -205,26 +211,6 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         MediaPlayerUtil mediaPlayerUtil = MediaPlayerUtil.getInstance();
         switch (view.getId()) {
-            case R.id.song1:
-                mediaPlayerUtil.setPlayingPosition(0);
-                mediaPlayerUtil.play(musicList.get(0));
-                break;
-            case R.id.song2:
-                mediaPlayerUtil.setPlayingPosition(1);
-                mediaPlayerUtil.play(musicList.get(1));
-                break;
-            case R.id.song3:
-                mediaPlayerUtil.setPlayingPosition(2);
-                mediaPlayerUtil.play(musicList.get(2));
-                break;
-            case R.id.song4:
-                mediaPlayerUtil.setPlayingPosition(3);
-                mediaPlayerUtil.play(musicList.get(3));
-                break;
-            case R.id.song5:
-                mediaPlayerUtil.setPlayingPosition(5);
-                mediaPlayerUtil.play(musicList.get(5));
-                break;
             case R.id.ivLast:
                 //Click on the previous song
                 mediaPlayerUtil.playLast();
@@ -260,6 +246,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                     mediaPlayerUtil.play();
                 }
                 break;
+            case R.id.ivLike:
+                //Hit Like
+                //if()
             default:
         }
     }

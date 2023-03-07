@@ -7,8 +7,6 @@ import android.text.TextUtils;
 
 import com.example.musicloud.application.MyApp;
 import com.example.musicloud.business.AccessSongs;
-import com.example.musicloud.presentation.IPlayControlCallback;
-import com.example.musicloud.presentation.IPlayStateCallback;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,8 +55,8 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
     /*
      * ，The list of music you want to play
      */
-    private final List<String> mPlayMusicList = new ArrayList<>();
-    //private final List<String> mPlayMusicList = accessSongs.getSongNames();
+    //private final List<String> mPlayMusicList = new ArrayList<>();
+    private final List<String> mPlayMusicList = accessSongs.getSongNames();
 
 
     /*
@@ -333,7 +331,7 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
     public void onCompletion(MediaPlayer mp) {
         if (mPlayMusicList.size() > 0 && mPlayingPosition >= 0) {
             notifyPlayComplete(mPlayMusicList.get(mPlayingPosition));
-            //下一曲到最后一个后，我们直接赋值到第一个
+
             mPlayingPosition = mPlayingPosition + 1 >= mPlayMusicList.size() ? 0 : mPlayingPosition + 1;
             play();
         }

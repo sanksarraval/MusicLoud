@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-//import androidx.annotation.Nullable;
 
 import com.example.musicloud.R;
 import com.example.musicloud.application.MyApp;
@@ -30,18 +29,17 @@ public class LoginActivity extends Activity {
     Button loginBtn;
 
     private AccessUsers accessUsers;
-    private List<User> userList;
 
-    String correct_username = "admin";
-    String correct_password = "admin";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_login);
         copyDatabaseToDevice();
 
         accessUsers = new AccessUsers();
-        userList = accessUsers.getAccounts();
+        List<User> userList = accessUsers.getAccounts();
 
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.Password);
@@ -58,7 +56,7 @@ public class LoginActivity extends Activity {
                 LoginManager loginManager = new LoginManager(accessUsers);
 
                 if (loginManager.login(userID, pass)) {
-                    User currUser = loginManager.getCurrentUser(userID);
+                    //User currUser = loginManager.getCurrentUser(userID);
                     Toast.makeText(LoginActivity.this, "Welcome!!", Toast.LENGTH_SHORT).show();
                     buttonLoginOnClick(view);
                 } else if (TextUtils.isEmpty(userID) || TextUtils.isEmpty(pass)) {
@@ -80,6 +78,7 @@ public class LoginActivity extends Activity {
     {
         Intent loginIntent = new Intent(LoginActivity.this, PlayActivity.class);
         LoginActivity.this.startActivity(loginIntent);
+        finish();
     }
 
     private void copyDatabaseToDevice() {
