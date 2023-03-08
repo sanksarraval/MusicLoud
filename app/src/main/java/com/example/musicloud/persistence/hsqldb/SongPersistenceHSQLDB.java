@@ -149,17 +149,39 @@ public class SongPersistenceHSQLDB implements SongPersistence {
 
     @Override
     public void likeSong(Song currentSong) {
-
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement(String.format("UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ?", TABLE_SONG, COLUMN_SONG_NAME, COLUMN_ARTIST, COLUMN_ALBUM_NAME, COLUMN_IS_LIKED));
+            st.setString(1, currentSong.getSongName());
+            st.setString(2, currentSong.getArtist());
+            st.setString(3, currentSong.getAlbumName());
+            currentSong.setLiked();
+            st.setInt(4, currentSong.isLiked() ? 1 : 0);
+            st.executeUpdate();
+            st.close();
+        } catch (final SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void unlikeSong(Song currentSong) {
-
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement(String.format("UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ?", TABLE_SONG, COLUMN_SONG_NAME, COLUMN_ARTIST, COLUMN_ALBUM_NAME, COLUMN_IS_LIKED));
+            st.setString(1, currentSong.getSongName());
+            st.setString(2, currentSong.getArtist());
+            st.setString(3, currentSong.getAlbumName());
+            currentSong.setLiked();
+            st.setInt(4, currentSong.isLiked() ? 1 : 0);
+            st.executeUpdate();
+            st.close();
+        } catch (final SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public boolean isLiked(Song currentSong) {
-        return false;
+        return currentSong.isLiked();
     }
 
     @Override

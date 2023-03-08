@@ -67,9 +67,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             int finalI = i;
             button.setOnClickListener(view -> {
                 // get the position of the clicked song item
-                song.setCurrentSong();
                 mediaPlayerUtil.setPlayingPosition(finalI);
                 mediaPlayerUtil.play(songList.get(finalI).getSongName());
+                setHeart(currentSong);
             });
             TextView songNameTextView = layout.findViewById(R.id.song_name_textview);
             songNameTextView.setText(song.getSongName());
@@ -79,34 +79,6 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
             songLayout.addView(layout);
         }
-
-
-
-
-
-        /*//create buttons
-        Button one = (Button) findViewById(R.id.song1);
-        one.setOnClickListener(this); // calling onClick() method
-
-        Button two = (Button) findViewById(R.id.song2);
-        two.setOnClickListener(this); // calling onClick() method
-
-        Button three = (Button) findViewById(R.id.song3);
-        three.setOnClickListener(this); // calling onClick() method
-
-        Button four = (Button) findViewById(R.id.song4);
-        four.setOnClickListener(this); // calling onClick() method
-
-        Button five = (Button) findViewById(R.id.song5);
-        five.setOnClickListener(this); // calling onClick() method
-
-
-        //Prepare music list data
-        musicList.add("Guns N' Roses-Don't Cry");
-        musicList.add("Alan Walker-Faded");
-        musicList.add("Martin Garrix&David Guetta&Jamie Scott&Romy Dya-So Far Away");
-        musicList.add("Olly Murs-That Girl");
-        musicList.add("Tysm-Normal No More(Explicit)"); */
 
         //Set play source
         Intent intent = getIntent();
@@ -239,16 +211,22 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setLikedInfo(@NonNull Song current){
         boolean liked = songs.isLiked(current);
-        System.out.println(liked);
         if(!liked){
             songs.likeSong(current);
-            ivLike.setImageResource(R.mipmap.heart);
         } else {
             songs.unlikeSong(current);
-            ivLike.setImageResource(R.mipmap.openheart);
         }
+        setHeart(current);
     }
 
+    private void setHeart(@NonNull Song current){
+        boolean liked = songs.isLiked(current);
+        if(!liked){
+            ivLike.setImageResource(R.mipmap.openheart);
+        } else {
+            ivLike.setImageResource(R.mipmap.heart);
+        }
+    }
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -257,8 +235,8 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.ivLast:
                 //Click on the previous song
-
                 mediaPlayerUtil.playLast();
+                setHeart(currentSong);
                 break;
             case R.id.ivPlay:
                 //Play or pause
@@ -271,6 +249,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.ivNext:
                 //Click on the next song
                 mediaPlayerUtil.playNext();
+                setHeart(currentSong);
                 break;
             case R.id.ivReplay:
                 //Hit replay
