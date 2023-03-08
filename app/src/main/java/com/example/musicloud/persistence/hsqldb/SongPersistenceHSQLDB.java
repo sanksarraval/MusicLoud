@@ -175,6 +175,7 @@ public class SongPersistenceHSQLDB implements SongPersistence {
         String sql = "UPDATE table_song SET is_liked = ? WHERE id = ?";
         try(final Connection c = connection()) {
             PreparedStatement stmt = c.prepareStatement(sql);
+            currentSong.setLiked();
             stmt.setBoolean(1, true);
             stmt.setInt(2, currentSong.getId());
             stmt.executeUpdate();
@@ -188,12 +189,18 @@ public class SongPersistenceHSQLDB implements SongPersistence {
         String sql = "UPDATE table_song SET is_liked = ? WHERE id = ?";
         try (final Connection c = connection()){
             PreparedStatement stmt = c.prepareStatement(sql);
+            currentSong.setLiked();
             stmt.setBoolean(1, false);
             stmt.setInt(2, currentSong.getId());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean isLiked(Song currentSong) {
+        return currentSong.isLiked();
     }
 
     @Override
