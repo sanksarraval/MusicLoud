@@ -4,6 +4,8 @@ import com.example.musicloud.application.MediaPlayerTest;
 import com.example.musicloud.business.SongListTest;
 import com.example.musicloud.objects.UserTest;
 import com.example.musicloud.persistence.UserManagementTest;
+import com.example.musicloud.persistence.HSQLDB.SongPersistenceHSQLDBTest;
+import com.example.musicloud.persistence.HSQLDB.UserManagementHSQLDBTest;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -13,7 +15,9 @@ import org.junit.runners.Suite;
         UserTest.class,
         MediaPlayerTest.class,
         SongListTest.class,
-        UserManagementTest.class
+        UserManagementTest.class,
+        SongPersistenceHSQLDBTest.class,
+        UserManagementHSQLDBTest.class
 })
 public class AllTests
 {
