@@ -77,12 +77,35 @@ public class SongPersistenceHSQLDB implements SongPersistence {
     }
 
     @Override
-    public Song getSong(int i) {
+    public Song getSong(int id) {
+        String sql = "SELECT * FROM table_song WHERE id = ?";
+        try (final Connection c = connection()) {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Song song = new Song(rs.getString("song_name"), rs.getString("artist"), rs.getString("album_name"));
+                song.setId(rs.getInt("id"));
+                return song;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public int getSize() {
+        String sql = "SELECT COUNT(*) FROM table_song";
+        try (final Connection c = connection()){
+            PreparedStatement stmt = c.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
@@ -149,43 +172,45 @@ public class SongPersistenceHSQLDB implements SongPersistence {
 
     @Override
     public void likeSong(Song currentSong) {
-        try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement(String.format("UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ?", TABLE_SONG, COLUMN_SONG_NAME, COLUMN_ARTIST, COLUMN_ALBUM_NAME, COLUMN_IS_LIKED));
-            st.setString(1, currentSong.getSongName());
-            st.setString(2, currentSong.getArtist());
-            st.setString(3, currentSong.getAlbumName());
-            currentSong.setLiked();
-            st.setInt(4, currentSong.isLiked() ? 1 : 0);
-            st.executeUpdate();
-            st.close();
-        } catch (final SQLException e) {
-            throw new RuntimeException(e);
+        String sql = "UPDATE table_song SET is_liked = ? WHERE id = ?";
+        try(final Connection c = connection()) {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setBoolean(1, true);
+            stmt.setInt(2, currentSong.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     public void unlikeSong(Song currentSong) {
-        try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement(String.format("UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ?", TABLE_SONG, COLUMN_SONG_NAME, COLUMN_ARTIST, COLUMN_ALBUM_NAME, COLUMN_IS_LIKED));
-            st.setString(1, currentSong.getSongName());
-            st.setString(2, currentSong.getArtist());
-            st.setString(3, currentSong.getAlbumName());
-            currentSong.setLiked();
-            st.setInt(4, currentSong.isLiked() ? 1 : 0);
-            st.executeUpdate();
-            st.close();
-        } catch (final SQLException e) {
-            throw new RuntimeException(e);
+        String sql = "UPDATE table_song SET is_liked = ? WHERE id = ?";
+        try (final Connection c = connection()){
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setBoolean(1, false);
+            stmt.setInt(2, currentSong.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
     @Override
-    public boolean isLiked(Song currentSong) {
-        return currentSong.isLiked();
-    }
-
-    @Override
     public List<Song> getLikedSongs() {
-        return null;
+        List<Song> likedSongs = new ArrayList<>();
+        String sql = "SELECT * FROM table_song WHERE is_liked = true ORDER BY artist, song_name";
+        try(final Connection c = connection()) {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Song song = new Song( rs.getString("song_name"), rs.getString("artist"),rs.getString("album_name"), rs.getBoolean("is_liked"));
+                song.setId(rs.getInt("id"));
+                likedSongs.add(song);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return likedSongs;
     }
 }
