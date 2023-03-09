@@ -7,12 +7,15 @@ import com.example.musicloud.objects.Song;
 
 import org.junit.Test;
 
+import java.util.List;
+
 public class SongListTest {
     
     @Test
     public void testDefaultVals()
     {
-        SongPersistenceStub songs = new SongPersistenceStub();
+        List<Song> likedSongs = null;
+        SongPersistenceStub songs = new SongPersistenceStub(null);
 
         // Asserting songNames created by constructor
         assertEquals(songs.getSong(0).getSongName().equals("Faded"), true);

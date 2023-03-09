@@ -25,24 +25,11 @@ public class MyApp extends Application {
     public static void setDBPathName(final String name) {
         try {
             Class.forName("org.hsqldb.jdbcDriver").newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         dbName = name;
     }
-    /*
-    public static String getDBPathName() {
-        return dbName;
-    }
-
-     */
-
-
-    //private String dbName;
 
     public static String getDBPathName() {
         return dbName;

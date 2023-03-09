@@ -78,9 +78,6 @@ public class UserManagementStub implements UserManagement {
         }
         return addedUser;
     }
-    /*
-
-    Implemented but not used in the UI
 
     public void deleteAccount(User newUser)
     {
@@ -90,7 +87,7 @@ public class UserManagementStub implements UserManagement {
             userList.remove(userNumber);
         }
     }
-
+  /*
     public void updatePassword(User currentUser, String newPass)
     {
         int userNumber = userList.indexOf(currentUser);

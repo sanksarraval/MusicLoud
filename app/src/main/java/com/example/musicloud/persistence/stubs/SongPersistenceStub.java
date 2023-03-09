@@ -11,11 +11,12 @@ import java.util.List;
 
 public class SongPersistenceStub implements SongPersistence {
     //list of all songs in users library
-    private List<Song> songs;
+    private final List<Song> songs;
     //list of all liked songs
-    private List<Song> likedSongs;
+    private final List<Song> likedSongs;
 
-    public SongPersistenceStub() {
+    public SongPersistenceStub(List<Song> likedSongs) {
+        this.likedSongs = likedSongs;
         this.songs = new ArrayList<>();
 
         songs.add(new Song("Not Enough To Give", "Ketsa", "Ketsa - Not Enough To Give"));

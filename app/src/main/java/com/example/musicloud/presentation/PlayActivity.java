@@ -26,15 +26,12 @@ import java.util.List;
 public class PlayActivity extends AppCompatActivity implements View.OnClickListener, IPlayStateCallback {
 
     private TextView tvName;
-    private AppCompatImageView ivLast;
     private AppCompatImageView ivPlay;
-    private AppCompatImageView ivNext;
-    private AppCompatImageView ivReplay;
     private AppCompatImageView ivLike;
     private ProgressBar pbProgress;
-    private AccessSongs songs = new AccessSongs();
-    private List<Song> songList = songs.getSongs();
-    private List<String> musicList = songs.getSongNames();
+    private final AccessSongs songs = new AccessSongs();
+    private final List<Song> songList = songs.getSongs();
+    private final List<String> musicList = songs.getSongNames();
     private Song currentSong; // declare a field to hold the current song object
 
     @Override
@@ -45,10 +42,10 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         //Register for playback status listening
         mediaPlayerUtil.registerCallback(this);
         tvName = findViewById(R.id.tvName);
-        ivLast = findViewById(R.id.ivLast);
+        AppCompatImageView ivLast = findViewById(R.id.ivLast);
         ivPlay = findViewById(R.id.ivPlay);
-        ivNext = findViewById(R.id.ivNext);
-        ivReplay = findViewById(R.id.ivReplay);
+        AppCompatImageView ivNext = findViewById(R.id.ivNext);
+        AppCompatImageView ivReplay = findViewById(R.id.ivReplay);
         pbProgress = findViewById(R.id.pbProgress);
         ivLike = findViewById(R.id.ivLike);
 
@@ -58,7 +55,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         for (int i = 0; i < songList.size(); i++) {
             Song song = songList.get(i);
-            LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.song_item, null);
+            @SuppressLint("InflateParams") LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.song_item, null);
             layout.setId(i);
 
             Button button = layout.findViewById(R.id.song_button);
@@ -158,9 +155,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
      * Play failure
      *
      * @param name      Music name
-     * @param what
-     * @param extra
-     * @param exception
+     * @param what      What failed
+     * @param extra     Extra Info
+     * @param exception Which Exception
      */
     @Override
     public void onFailed(@Nullable String name, int what, int extra, Exception exception) {
@@ -172,7 +169,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
      * Play schedule
      *
      * @param name     Music name
-     * @param progress 进度
+     * @param progress progress rate
      */
     @Override
     public void onProgress(@Nullable String name, int progress) {

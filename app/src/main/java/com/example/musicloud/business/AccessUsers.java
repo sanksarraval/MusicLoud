@@ -8,17 +8,13 @@ import java.util.List;
 
 public class AccessUsers {
 
-    private UserManagement userManagement;
-
-    private User user;
-
-    private int currUser;
+    private final UserManagement userManagement;
 
     public AccessUsers()
     {
         userManagement = Services.getAccountManagement();
-        user = null;
-        currUser = 0;
+        User user = null;
+        int currUser = 0;
     }
     public List<User> getAccounts()
     {
@@ -32,12 +28,7 @@ public class AccessUsers {
 
      public boolean accountFound(String userID)
      {
-         boolean found = false;
-         if(userManagement.getUser(userID) != null)
-         {
-             found = true;
-         }
-         return found;
+         return userManagement.getUser(userID) != null;
      }
 
      public User returnAccount(String userID)
@@ -57,20 +48,4 @@ public class AccessUsers {
             userManagement.addAccount(newUser);
          }
      }
-    /*
-
-    Implemented but not used in the UI
-
-     public void updateUserName(User user, String userName)
-     {
-         userManagement.updateUserName(user,userName);
-     }
-
-     public void updatePassword(User user, String pass)
-     {
-         userManagement.updatePassword(user,pass);
-     }
-
-     */
-
 }

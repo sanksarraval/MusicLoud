@@ -16,13 +16,13 @@ import com.example.musicloud.R;
 import com.example.musicloud.application.MyApp;
 import com.example.musicloud.business.AccessUsers;
 import com.example.musicloud.business.LoginManager;
-import com.example.musicloud.objects.User;
+
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
+
 
 public class LoginActivity extends Activity {
     private EditText usernameEditText, passwordEditText;
@@ -39,7 +39,7 @@ public class LoginActivity extends Activity {
         copyDatabaseToDevice();
 
         accessUsers = new AccessUsers();
-        List<User> userList = accessUsers.getAccounts();
+        accessUsers.getAccounts();
 
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.Password);

@@ -343,7 +343,6 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
      * @param mp    MediaPlayer
      * @param what  what the Message is
      * @param extra extra of Message
-     * @return
      */
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
