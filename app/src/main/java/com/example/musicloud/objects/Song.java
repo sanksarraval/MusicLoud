@@ -9,6 +9,8 @@ public class Song {
     private final String albumName;
     private boolean liked;
 
+    //private final File mp3;
+    //private final File albumArt;
 
     public Song(String songName, String artist) {
         this.songName = songName;
@@ -38,12 +40,15 @@ public class Song {
         this.liked = liked;
     }
 
-    public Song(int newID) {
-        this.id = newID;
-        this.songName = null;
-        this.artist = null;
-        this.albumName = null;
-        this.liked = false;
+    //added isEqual to compare with some other song's data
+    public boolean isEqual(String songName, String artistName, String albumName){
+        return (this.songName.equals(songName)
+                &&  this.artist.equals(artistName) && this.albumName.equals(albumName));
+    }
+
+    //method to compare with other song's name
+    public int compareTo(Song other){
+        return songName.compareTo(other.songName);
     }
 
     public int getId() {
@@ -83,6 +88,6 @@ public class Song {
                 ", artist='" + artist + '\'' +
                 ", albumName='" + albumName + '\'' +
                 ", liked=" + liked +
-                '}' + "\n";
+                '}';
     }
 }
