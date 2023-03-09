@@ -23,6 +23,13 @@ public class Song {
         this.albumName = albumName;
     }
 
+    public Song (String songName, String artist, String albumName, boolean liked) {
+        this.songName = songName;
+        this.artist = artist;
+        this.albumName = albumName;
+        this.liked = liked;
+    }
+
     public Song(int id, String songName, String artist, String albumName, boolean liked) {
         this.id = id;
         this.songName = songName;
