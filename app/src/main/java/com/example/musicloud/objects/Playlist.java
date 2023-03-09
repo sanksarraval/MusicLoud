@@ -8,10 +8,8 @@ import java.util.Objects;
 
 public class Playlist {
     private int id;
-    private final String playlistName;
-    private final String description;
-    private double playlistLength; //playlist length in hours
-    //album art
+    private String playlistName;
+    private String description;
 
     //playlist constructor with name, description and list of songs
     public Playlist(String playlistName, String description) {
@@ -37,25 +35,22 @@ public class Playlist {
         this.description = null;
     }
 
-
     //getter for name of playlist
     public String getPlaylistName(){
         return playlistName;
     }
 
+    public void setPlaylistName(String newName){
+        this.playlistName = newName;
+    }
     //getter for playlist description
     public String getDescription(){
         return description;
     }
 
-    //returns length of entire playlist in hours
-    public double getPlaylistLength(){
-        return playlistLength;
+    public void setDescription (String newDescription){
+        this.description = newDescription;
     }
-
-    //getter for list of songs in playlist
-
-
 
     //tests equality of current playlist with second. Uses playlist length and name.
     public boolean equals(Object other) {
@@ -64,10 +59,9 @@ public class Playlist {
 
         if(other instanceof Playlist){
             final Playlist otherPlaylist = (Playlist) other;
-            equals = Objects.equals(this.playlistLength, otherPlaylist.getPlaylistLength());
-            equals1 = Objects.equals(this.playlistName, otherPlaylist.getPlaylistName());
+            equals = Objects.equals(this.id, otherPlaylist.getId());
         }
-        return equals&&equals1;
+        return equals;
     }
     public int getId(){ return id;}
     public void setId(int id){this.id = id;}
