@@ -13,7 +13,7 @@ public class PlaylistTest {
     public void setUp() {
 
         playlist = new Playlist("playlist name","this is the description of playlist");
-        playlist1 = new Playlist(101,"playlist1 name","this is the description of playlist1");
+        playlist1 = new Playlist("playlist1 name");
         playlist2 = new Playlist(102,"playlist2 name","this is the description of playlist2");
         playlist3 = new Playlist(103);
 
@@ -34,6 +34,7 @@ public class PlaylistTest {
         assertEquals("playlist name", playlist.getPlaylistName());
         assertEquals("playlist1 name", playlist1.getPlaylistName());
         assertEquals("playlist2 name", playlist2.getPlaylistName());
+        System.out.println("*********** Testing playlist with no name ***********");
         assertNull(playlist3.getPlaylistName());
         System.out.println("*********** Finished testGetPlaylistName ***********");
 
@@ -55,7 +56,7 @@ public class PlaylistTest {
         System.out.println("\n*********** Starting testGetPlaylistIDReturnsCorrectPlaylistID ***********");
 
         assertEquals(0, playlist.getId());
-        assertEquals(101, playlist1.getId());
+        assertEquals(0, playlist1.getId());
         assertEquals(102, playlist2.getId());
         assertEquals(103, playlist3.getId());
 
@@ -70,8 +71,9 @@ public class PlaylistTest {
         System.out.println("\n*********** Starting testGetPlaylistDescription ***********");
 
         assertEquals("this is the description of playlist", playlist.getDescription());
-        assertEquals("this is the description of playlist1", playlist1.getDescription());
         assertEquals("this is the description of playlist2", playlist2.getDescription());
+        System.out.println("*********** Testing playlist with no Description ***********");
+        assertNull(playlist1.getDescription());
         assertNull(playlist3.getDescription());
         System.out.println("*********** Finished testGetPlaylistDescription ***********");
     }
@@ -144,8 +146,8 @@ public class PlaylistTest {
     {
         System.out.println("\n*********** Starting testPlaylistToString ***********");
 
-        String expected = "Playlist{id ='101' playlistName='playlist1 name' description='this is the description of playlist1' }";
-        assertEquals(expected, playlist1.toString());
+        String expected = "Playlist{id ='102' playlistName='playlist2 name' description='this is the description of playlist2' }";
+        assertEquals(expected, playlist2.toString());
 
         expected = "Playlist{id ='103' }";
         assertEquals(expected, playlist3.toString());
