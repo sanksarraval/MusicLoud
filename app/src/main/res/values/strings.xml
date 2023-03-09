@@ -42,4 +42,5 @@
     <string name="song5">Normal No More(Explicit)</string>
     <string name="artist5">Tysm</string>
     <string name="album5">na</string>
+    <string name="LikedSongs">Liked Songs</string>
 </resources>

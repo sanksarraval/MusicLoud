@@ -83,10 +83,12 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         //Set play source
         Intent intent = getIntent();
         int position = intent.getIntExtra("position", 0);
-
         mediaPlayerUtil.setPlayMusicList(musicList);
         mediaPlayerUtil.setPlayingPosition(position);
         setMusicInfo(musicList.get(position));
+        currentSong = songList.get(position);
+        setHeart(currentSong);
+
 
         ivLast.setOnClickListener(this);
         ivPlay.setOnClickListener(this);
@@ -211,7 +213,6 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         for (Song song : songList) {
             if (song.getSongName().equals(name)) {
                 currentSong = song;
-                System.out.println(currentSong.getSongName());
                 break;
             }
         }
@@ -225,6 +226,10 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             songs.unlikeSong(current);
         }
         setHeart(current);
+        List<Song> likedSongs = songs.getLikedSongs();
+        for(int i = 0; i < likedSongs.size(); i++){
+            System.out.println(likedSongs.get(i));
+        }
     }
 
     private void setHeart(@NonNull Song current){

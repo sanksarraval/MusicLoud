@@ -38,9 +38,11 @@ public class AccessSongs {
     public void deleteSong(Song currentSong){
         songPersistence.deleteSong(currentSong);
     }
-    public void likeSong(Song currentSong) { songPersistence.likeSong(currentSong);}
-    public void unlikeSong(Song currentSong) { songPersistence.unlikeSong(currentSong);}
+    public void likeSong(Song currentSong) { songPersistence.likeSong(currentSong); }
+    public void unlikeSong(Song currentSong) { songPersistence.unlikeSong(currentSong); }
     public boolean isLiked(Song currentSong) { return songPersistence.isLiked(currentSong); }
+
+    public List<Song> getLikedSongs() { return songPersistence.getLikedSongs(); }
 
     public List<String> getSongNames(){
         songNames = songPersistence.allSongNames();

@@ -23,6 +23,7 @@ public class SongPersistenceHSQLDB implements SongPersistence {
 
     private final String dbPath;
 
+
     public SongPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
         try {
