@@ -68,6 +68,19 @@ public class Playlist {
 
     @NonNull
     public String toString(){
-        return String.format("\nPlaylist: \n id: %d \n name: %s \n description: %s", id, playlistName, description);
+        StringBuilder s = new StringBuilder("Playlist{");
+        if (id>0){
+            s.append("id ='").append(id).append("' ");
+        }
+        if (playlistName != null){
+            s.append("playlistName='").append(playlistName).append("' ");
+        }
+        if (description != null){
+            s.append("description='").append(description).append("' ");
+        }
+        s.append("}");
+
+        return s.toString();
+//        return String.format("\nPlaylist: \n id: %d \n name: %s \n description: %s", id, playlistName, description);
     }
 }
