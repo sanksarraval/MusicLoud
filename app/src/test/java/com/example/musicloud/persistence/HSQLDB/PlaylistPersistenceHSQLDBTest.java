@@ -1,4 +1,4 @@
-package com.example.musicloud.persistence;
+package com.example.musicloud.persistence.HSQLDB;
 
 import static org.junit.Assert.*;
 
