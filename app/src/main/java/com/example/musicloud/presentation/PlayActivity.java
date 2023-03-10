@@ -97,10 +97,10 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         //Set play source
         Intent intent = getIntent();
-        int position = intent.getIntExtra("position", 0);
+        currentPos = mediaPlayerUtil.getPlayingPosition();
+        int position = intent.getIntExtra("position", currentPos);
         mediaPlayerUtil.setPlayMusicList(musicList);
         mediaPlayerUtil.setPlayingPosition(position);
-        currentPos = position;
         setMusicInfo(musicList.get(position));
         currentSong = songList.get(position);
         setHeart(currentSong);
