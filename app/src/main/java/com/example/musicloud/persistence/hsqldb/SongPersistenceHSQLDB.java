@@ -15,13 +15,15 @@ import java.util.List;
 public class SongPersistenceHSQLDB implements SongPersistence {
 
     private final String TABLE_SONG = "table_song";
-    private final String COLUMN_ID = "song_id";
+    private final String COLUMN_ID = "id";
+
     private final String COLUMN_SONG_NAME = "song_name";
     private final String COLUMN_ARTIST = "artist";
     private final String COLUMN_ALBUM_NAME = "album_name";
     private final String COLUMN_IS_LIKED = "is_liked";
 
     private final String dbPath;
+
 
     public SongPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
@@ -33,15 +35,10 @@ public class SongPersistenceHSQLDB implements SongPersistence {
             final ResultSet rs = st.executeQuery(String.format("SELECT * FROM %s", TABLE_SONG));
             if (!rs.next()) {
                 String sqlStartStr = String.format("%s(%s, %s, %s, %s)", TABLE_SONG, COLUMN_SONG_NAME, COLUMN_ARTIST, COLUMN_ALBUM_NAME, COLUMN_IS_LIKED);
-                st.executeUpdate(String.format("INSERT INTO %s VALUES ('Faded', 'Alan Walker', 'Alan Walker-Faded', 0);", sqlStartStr));
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Rain Man', 'Ketsa', 'Ketsa - Rain Man', 0);", sqlStartStr));
-                st.executeUpdate(String.format("INSERT INTO %s VALUES ('Don''t Cry', 'Guns N'' Roses', 'Guns N'' Roses-Don''t Cry', 0);", sqlStartStr));
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Not Enough To Give', 'Ketsa', 'Ketsa - Not Enough To Give', 0);", sqlStartStr));
-                st.executeUpdate(String.format("INSERT INTO %s VALUES ('So Far Away', 'Martin Garrix&David Guetta&Jamie Scott&Romy Dya', 'Martin Garrix&David Guetta&Jamie Scott&Romy Dya-So Far Away', 0);", sqlStartStr));
-                st.executeUpdate(String.format("INSERT INTO %s VALUES ('That Girl', 'Olly Murs', 'Olly Murs-That Girl', 0);", sqlStartStr));
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Above the Clouds', 'Scott Holmes Music', 'Scott Holmes Music - Above the Clouds', 0);", sqlStartStr));
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Nightfall', 'Stereohada', 'Stereohada - Nightfall', 0);", sqlStartStr));
-                st.executeUpdate(String.format("INSERT INTO %s VALUES ('Normal No More(Explicit)', 'Tysm', 'Tysm-Normal No More(Explicit)', 0);", sqlStartStr));
             }
             rs.close();
             st.close();
@@ -77,12 +74,35 @@ public class SongPersistenceHSQLDB implements SongPersistence {
     }
 
     @Override
-    public Song getSong(int i) {
+    public Song getSong(int id) {
+        String sql = "SELECT * FROM table_song WHERE id = ?";
+        try (final Connection c = connection()) {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Song song = new Song(rs.getString("song_name"), rs.getString("artist"), rs.getString("album_name"));
+                song.setId(rs.getInt("id"));
+                return song;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     @Override
     public int getSize() {
+        String sql = "SELECT COUNT(*) FROM table_song";
+        try (final Connection c = connection()){
+            PreparedStatement stmt = c.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
@@ -149,16 +169,52 @@ public class SongPersistenceHSQLDB implements SongPersistence {
 
     @Override
     public void likeSong(Song currentSong) {
-
+        String sql = "UPDATE table_song SET is_liked = ? WHERE id = ?";
+        try(final Connection c = connection()) {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            currentSong.setLiked();
+            stmt.setBoolean(1, true);
+            stmt.setInt(2, currentSong.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void unlikeSong(Song currentSong) {
+        String sql = "UPDATE table_song SET is_liked = ? WHERE id = ?";
+        try (final Connection c = connection()){
+            PreparedStatement stmt = c.prepareStatement(sql);
+            currentSong.setLiked();
+            stmt.setBoolean(1, false);
+            stmt.setInt(2, currentSong.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @Override
+    public boolean isLiked(Song currentSong) {
+        return currentSong.isLiked();
     }
 
     @Override
     public List<Song> getLikedSongs() {
-        return null;
+        List<Song> likedSongs = new ArrayList<>();
+        String sql = "SELECT * FROM table_song WHERE is_liked = true ORDER BY artist, song_name";
+        try(final Connection c = connection()) {
+            PreparedStatement stmt = c.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Song song = new Song( rs.getString("song_name"), rs.getString("artist"),rs.getString("album_name"), rs.getBoolean("is_liked"));
+                song.setId(rs.getInt("id"));
+                likedSongs.add(song);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return likedSongs;
     }
 }

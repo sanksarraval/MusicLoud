@@ -10,20 +10,19 @@ import java.util.List;
 public class AccessPlaylist {
     private PlaylistPersistence playlistPersistence;
     private List<Playlist> playlists;
-    private Playlist playlist;
-    private int currentPlaylist;
 
+    //constructor creates instance of AccessPlaylist
     public AccessPlaylist(){
         playlistPersistence = Services.getPlaylistPersistence();
         playlists = null;
-        playlist = null;
-        currentPlaylist = 0;
     }
 
+    //getPlaylists method returns list of all playlists
     public List<Playlist> getPlaylists(){
         playlists = playlistPersistence.getPlaylist();
         return Collections.unmodifiableList(playlists);
     }
+
 
     public Playlist insertPlaylist (Playlist currentPlaylist){
         return playlistPersistence.insertPlaylist(currentPlaylist);

@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,15 +32,13 @@ import java.util.List;
 public class PlayActivity extends AppCompatActivity implements View.OnClickListener, IPlayStateCallback {
 
     private TextView tvName;
-    private AppCompatImageView ivLast;
     private AppCompatImageView ivPlay;
-    private AppCompatImageView ivNext;
-    private AppCompatImageView ivReplay;
     private AppCompatImageView ivLike;
     private ProgressBar pbProgress;
-    private AccessSongs songs = new AccessSongs();
-    private List<Song> songList = songs.getSongs();
-    private List<String> musicList = songs.getSongNames();
+    private final AccessSongs songs = new AccessSongs();
+    private final List<Song> songList = songs.getSongs();
+    private final List<String> musicList = songs.getSongNames();
+    private Song currentSong; // declare a field to hold the current song object
 
     private List<Playlist> allPlaylist = new AccessPlaylist().getPlaylists();
 
@@ -51,11 +50,12 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         //Register for playback status listening
         mediaPlayerUtil.registerCallback(this);
         tvName = findViewById(R.id.tvName);
-        ivLast = findViewById(R.id.ivLast);
+        AppCompatImageView ivLast = findViewById(R.id.ivLast);
         ivPlay = findViewById(R.id.ivPlay);
-        ivNext = findViewById(R.id.ivNext);
-        ivReplay = findViewById(R.id.ivReplay);
+        AppCompatImageView ivNext = findViewById(R.id.ivNext);
+        AppCompatImageView ivReplay = findViewById(R.id.ivReplay);
         pbProgress = findViewById(R.id.pbProgress);
+        ivLike = findViewById(R.id.ivLike);
 
 
         //Loop
@@ -63,7 +63,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         for (int i = 0; i < songList.size(); i++) {
             Song song = songList.get(i);
-            LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.song_item, null);
+            @SuppressLint("InflateParams") LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.song_item, null);
             layout.setId(i);
 
             Button button = layout.findViewById(R.id.song_button);
@@ -73,7 +73,8 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             button.setOnClickListener(view -> {
                 // get the position of the clicked song item
                 mediaPlayerUtil.setPlayingPosition(finalI);
-                mediaPlayerUtil.play(musicList.get(finalI));
+                mediaPlayerUtil.play(songList.get(finalI).getSongName());
+                setHeart(currentSong);
             });
             TextView songNameTextView = layout.findViewById(R.id.song_name_textview);
             songNameTextView.setText(song.getSongName());
@@ -112,16 +113,17 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         //Set play source
         Intent intent = getIntent();
         int position = intent.getIntExtra("position", 0);
-
         mediaPlayerUtil.setPlayMusicList(musicList);
         mediaPlayerUtil.setPlayingPosition(position);
         setMusicInfo(musicList.get(position));
+        currentSong = songList.get(position);
+        setHeart(currentSong);
+
 
         ivLast.setOnClickListener(this);
         ivPlay.setOnClickListener(this);
         ivNext.setOnClickListener(this);
         ivReplay.setOnClickListener(this);
-
     }
 
     @Override
@@ -186,9 +188,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
      * Play failure
      *
      * @param name      Music name
-     * @param what
-     * @param extra
-     * @param exception
+     * @param what      What failed
+     * @param extra     Extra Info
+     * @param exception Which Exception
      */
     @Override
     public void onFailed(@Nullable String name, int what, int extra, Exception exception) {
@@ -200,7 +202,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
      * Play schedule
      *
      * @param name     Music name
-     * @param progress 进度
+     * @param progress progress rate
      */
     @Override
     public void onProgress(@Nullable String name, int progress) {
@@ -236,8 +238,38 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private void setMusicInfo(String name) {
         tvName.setText(name);
         ivPlay.setImageResource(MediaPlayerUtil.getInstance().isPlaying() ? R.mipmap.pause : R.mipmap.play);
+
+        // find the current song object in the songList
+        for (Song song : songList) {
+            if (song.getSongName().equals(name)) {
+                currentSong = song;
+                break;
+            }
+        }
     }
 
+    private void setLikedInfo(@NonNull Song current){
+        boolean liked = songs.isLiked(current);
+        if(!liked){
+            songs.likeSong(current);
+        } else {
+            songs.unlikeSong(current);
+        }
+        setHeart(current);
+        List<Song> likedSongs = songs.getLikedSongs();
+        for(int i = 0; i < likedSongs.size(); i++){
+            System.out.println(likedSongs.get(i));
+        }
+    }
+
+    private void setHeart(@NonNull Song current){
+        boolean liked = songs.isLiked(current);
+        if(!liked){
+            ivLike.setImageResource(R.mipmap.openheart);
+        } else {
+            ivLike.setImageResource(R.mipmap.heart);
+        }
+    }
 
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -247,6 +279,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.ivLast:
                 //Click on the previous song
                 mediaPlayerUtil.playLast();
+                setHeart(currentSong);
                 break;
             case R.id.ivPlay:
                 //Play or pause
@@ -259,6 +292,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.ivNext:
                 //Click on the next song
                 mediaPlayerUtil.playNext();
+                setHeart(currentSong);
                 break;
             case R.id.ivReplay:
                 //Hit replay
@@ -279,13 +313,13 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                     mediaPlayerUtil.play();
                 }
                 break;
-            case R.id.ivLike:
-                //Hit Like
-                //if()
             default:
         }
     }
 
+    public void buttonLikeClick(View v){
+        setLikedInfo(currentSong);
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();

@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Connection;
 import java.sql.Statement;
 
 public class SongPersistenceHSQLDBTest {
@@ -23,6 +24,7 @@ public class SongPersistenceHSQLDBTest {
     private final String COLUMN_IS_LIKED = "is_liked";
 
     private Connection c;
+
 
     @Before
     public void setUp() {
@@ -129,6 +131,11 @@ public class SongPersistenceHSQLDBTest {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    public void likeSong(){
+
     }
 
 }
