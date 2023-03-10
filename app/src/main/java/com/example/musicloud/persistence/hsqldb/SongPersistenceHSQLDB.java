@@ -37,7 +37,6 @@ public class SongPersistenceHSQLDB implements SongPersistence {
                 String sqlStartStr = String.format("%s(%s, %s, %s, %s)", TABLE_SONG, COLUMN_SONG_NAME, COLUMN_ARTIST, COLUMN_ALBUM_NAME, COLUMN_IS_LIKED);
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Rain Man', 'Ketsa', 'Ketsa - Rain Man', 0);", sqlStartStr));
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Not Enough To Give', 'Ketsa', 'Ketsa - Not Enough To Give', 0);", sqlStartStr));
-                st.executeUpdate(String.format("INSERT INTO %s VALUES ('Above the Clouds', 'Scott Holmes Music', 'Scott Holmes Music - Above the Clouds', 0);", sqlStartStr));
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Nightfall', 'Stereohada', 'Stereohada - Nightfall', 0);", sqlStartStr));
             }
             rs.close();
@@ -223,12 +222,12 @@ public class SongPersistenceHSQLDB implements SongPersistence {
      */
     @Override
     public void unlikeSong(Song currentSong) {
-        String sql = "UPDATE table_song SET is_liked = ? WHERE id = ?";
+        String sql = "UPDATE table_song SET is_liked = ? WHERE song_name = ?";
         try (final Connection c = connection()){
             PreparedStatement stmt = c.prepareStatement(sql);
             currentSong.setLiked();
             stmt.setBoolean(1, false);
-            stmt.setInt(2, currentSong.getId());
+            stmt.setString(2, currentSong.getSongName());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

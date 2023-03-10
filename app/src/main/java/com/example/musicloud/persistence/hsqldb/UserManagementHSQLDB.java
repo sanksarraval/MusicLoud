@@ -116,6 +116,7 @@ public class UserManagementHSQLDB implements UserManagement {
                     return rs.getInt(1) == 1;
                 }
             }
+
         } catch (final SQLException e) {
             e.printStackTrace();
         }
