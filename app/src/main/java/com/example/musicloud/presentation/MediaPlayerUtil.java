@@ -107,7 +107,9 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
      */
 
     public int getPlayingPosition() {
-        return mPlayingPosition;
+        int pos = mPlayingPosition%accessSongs.getSongs().size();
+        System.out.println(pos);
+        return pos;
     }
 
 
