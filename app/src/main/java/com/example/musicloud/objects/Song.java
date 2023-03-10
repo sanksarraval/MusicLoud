@@ -1,7 +1,5 @@
 package com.example.musicloud.objects;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 public class Song {
@@ -11,24 +9,17 @@ public class Song {
     private final String albumName;
     private boolean liked;
 
-    private static Song currentSong;
-
-    //private final File mp3;
-    //private final File albumArt;
-
     public Song(String songName, String artist) {
         this.songName = songName;
         this.artist = artist;
         albumName = "na";
         liked = false;
-        currentSong = null;
     }
 
     public Song (String songName, String artist, String albumName) {
         this.songName = songName;
         this.artist = artist;
         this.albumName = albumName;
-        currentSong = null;
     }
 
     public Song (String songName, String artist, String albumName, boolean liked) {
@@ -44,18 +35,13 @@ public class Song {
         this.artist = artist;
         this.albumName = albumName;
         this.liked = liked;
-        currentSong = null;
     }
 
-    //added isEqual to compare with some other song's data
-    public boolean isEqual(String songName, String artistName, String albumName){
-        return (this.songName.equals(songName)
-                &&  this.artist.equals(artistName) && this.albumName.equals(albumName));
-    }
-
-    //method to compare with other song's name
-    public int compareTo(Song other){
-        return songName.compareTo(other.songName);
+    public Song(int id) {
+        this.id = id;
+        this.songName = null;
+        this.artist = null;
+        this.albumName = "na";
     }
 
     public int getId() {
@@ -78,24 +64,32 @@ public class Song {
         return albumName;
     }
 
-    public boolean isLiked() { return liked; }
+    public boolean isLiked() {
+        return liked;
+    }
 
     public void setLiked() {
-        liked = !liked;
+        this.liked = !liked;
     }
 
-    public void setCurrentSong(){
-        currentSong = this;
-    }
     @NonNull
     @Override
     public String toString() {
-        return "Song{" +
-                "id=" + id +
-                ", songName='" + songName + '\'' +
-                ", artist='" + artist + '\'' +
-                ", albumName='" + albumName + '\'' +
-                ", liked=" + liked +
-                '}';
+        StringBuilder s = new StringBuilder("Song{");
+        if (id>0){
+            s.append("id ='").append(id).append("', ");
+        }
+        if (songName != null){
+            s.append("songName='").append(songName).append("', ");
+        }
+        if (artist != null){
+            s.append("artist='").append(artist).append("', ");
+        }
+        if (albumName != null){
+            s.append("album name='").append(albumName).append("', ");
+        }
+        s.append("liked='").append(liked).append("'}");
+
+        return s.toString();
     }
 }

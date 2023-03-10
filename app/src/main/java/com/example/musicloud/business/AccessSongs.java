@@ -8,16 +8,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class AccessSongs {
-    private SongPersistence songPersistence;
+    private final SongPersistence songPersistence;
     private List<Song> songs;
     private List<String> songNames;
-    private Song song;
     private int currentSong;
 
     public AccessSongs(){
         songPersistence = Services.getSongPersistence();
         songs = null;
-        song = null;
         songNames = null;
         currentSong = 0;
     }

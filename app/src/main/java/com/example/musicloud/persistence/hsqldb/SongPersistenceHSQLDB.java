@@ -35,15 +35,10 @@ public class SongPersistenceHSQLDB implements SongPersistence {
             final ResultSet rs = st.executeQuery(String.format("SELECT * FROM %s", TABLE_SONG));
             if (!rs.next()) {
                 String sqlStartStr = String.format("%s(%s, %s, %s, %s)", TABLE_SONG, COLUMN_SONG_NAME, COLUMN_ARTIST, COLUMN_ALBUM_NAME, COLUMN_IS_LIKED);
-                st.executeUpdate(String.format("INSERT INTO %s VALUES ('Faded', 'Alan Walker', 'Alan Walker-Faded', 0);", sqlStartStr));
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Rain Man', 'Ketsa', 'Ketsa - Rain Man', 0);", sqlStartStr));
-                st.executeUpdate(String.format("INSERT INTO %s VALUES ('Don''t Cry', 'Guns N'' Roses', 'Guns N'' Roses-Don''t Cry', 0);", sqlStartStr));
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Not Enough To Give', 'Ketsa', 'Ketsa - Not Enough To Give', 0);", sqlStartStr));
-                st.executeUpdate(String.format("INSERT INTO %s VALUES ('So Far Away', 'Martin Garrix&David Guetta&Jamie Scott&Romy Dya', 'Martin Garrix&David Guetta&Jamie Scott&Romy Dya-So Far Away', 0);", sqlStartStr));
-                st.executeUpdate(String.format("INSERT INTO %s VALUES ('That Girl', 'Olly Murs', 'Olly Murs-That Girl', 0);", sqlStartStr));
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Above the Clouds', 'Scott Holmes Music', 'Scott Holmes Music - Above the Clouds', 0);", sqlStartStr));
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Nightfall', 'Stereohada', 'Stereohada - Nightfall', 0);", sqlStartStr));
-                st.executeUpdate(String.format("INSERT INTO %s VALUES ('Normal No More(Explicit)', 'Tysm', 'Tysm-Normal No More(Explicit)', 0);", sqlStartStr));
             }
             rs.close();
             st.close();

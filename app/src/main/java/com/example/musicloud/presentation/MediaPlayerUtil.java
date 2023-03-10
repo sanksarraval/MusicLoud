@@ -70,7 +70,7 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
      */
     private final List<IPlayStateCallback> mPlayStateCallbackList = new ArrayList<>();
 
-    /*
+    /**
      * constructor
      */
     private MediaPlayerUtil() {
@@ -81,7 +81,7 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
         mPlayer.setOnPreparedListener(this);
     }
 
-    /*
+    /**
      * Set the playback list
      *
      * @param musicList music list
