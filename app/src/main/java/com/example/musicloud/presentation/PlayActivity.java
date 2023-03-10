@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -17,7 +18,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.example.musicloud.R;
+import com.example.musicloud.application.Services;
+import com.example.musicloud.business.AccessPlaylist;
+import com.example.musicloud.business.AccessSP;
 import com.example.musicloud.business.AccessSongs;
+import com.example.musicloud.objects.Playlist;
+import com.example.musicloud.objects.SP;
 import com.example.musicloud.objects.Song;
 
 import java.util.List;
@@ -34,6 +40,8 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private AccessSongs songs = new AccessSongs();
     private List<Song> songList = songs.getSongs();
     private List<String> musicList = songs.getSongNames();
+
+    private List<Playlist> allPlaylist = new AccessPlaylist().getPlaylists();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +82,31 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             artistTextView.setText(song.getArtist());
 
             songLayout.addView(layout);
+        }
+
+
+        LinearLayout playlistLayout = findViewById(R.id.playlist);
+        for (int i = 0; i < allPlaylist.size(); i++) {
+
+            if(allPlaylist.get(i) != null){
+                LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.playlist_item, null);
+                layout.setId(i);
+//
+                Button button = layout.findViewById(R.id.playlist_button);
+                button.setId(View.generateViewId());
+                button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
+                int finalI = i;
+
+                button.setOnClickListener(view -> {
+//                // get the position of the clicked playlist and
+//                // send to the other activity using intent
+                });
+//
+                button.setText(allPlaylist.get(i).getPlaylistName());
+                playlistLayout.addView(layout);
+
+            }
+//
         }
 
         //Set play source

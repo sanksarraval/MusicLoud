@@ -25,19 +25,20 @@ public class Song {
         this.albumName = albumName;
     }
 
-    public Song (String songName, String artist, String albumName, boolean liked) {
-        this.songName = songName;
-        this.artist = artist;
-        this.albumName = albumName;
-        this.liked = liked;
-    }
-
     public Song(int id, String songName, String artist, String albumName, boolean liked) {
         this.id = id;
         this.songName = songName;
         this.artist = artist;
         this.albumName = albumName;
         this.liked = liked;
+    }
+
+    public Song(int newID) {
+        this.id = newID;
+        this.songName = null;
+        this.artist = null;
+        this.albumName = null;
+        this.liked = false;
     }
 
     //added isEqual to compare with some other song's data
@@ -88,6 +89,6 @@ public class Song {
                 ", artist='" + artist + '\'' +
                 ", albumName='" + albumName + '\'' +
                 ", liked=" + liked +
-                '}';
+                '}' + "\n";
     }
 }
