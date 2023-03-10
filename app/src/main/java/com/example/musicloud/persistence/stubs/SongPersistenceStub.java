@@ -93,17 +93,22 @@ public class SongPersistenceStub implements SongPersistence {
 
     @Override
     public void likeSong(Song currentSong) {
-        currentSong.setLiked(true);
+        currentSong.setLiked();
         likedSongs.add(currentSong);
     }
 
     @Override
     public void unlikeSong(Song currentSong) {
-        currentSong.setLiked(false);
+        currentSong.setLiked();
         int index = likedSongs.indexOf(currentSong);
         if (index >= 0) {
             likedSongs.remove(index);
         }
+    }
+
+    @Override
+    public boolean isLiked(Song currentSong) {
+        return currentSong.isLiked();
     }
 
     @Override

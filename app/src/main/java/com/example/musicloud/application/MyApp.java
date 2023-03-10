@@ -1,6 +1,7 @@
 package com.example.musicloud.application;
 
 import android.app.Application;
+import android.content.Context;
 
 /**
  * @author Admin
@@ -33,6 +34,16 @@ public class MyApp extends Application {
         }
         dbName = name;
     }
+    /*
+    public static String getDBPathName() {
+        return dbName;
+    }
+
+     */
+
+
+    //private String dbName;
+
     public static String getDBPathName() {
         return dbName;
     }
@@ -42,5 +53,13 @@ public class MyApp extends Application {
         super.onCreate();
         //Initialize the life cycle
         mApp = this;
+        try {
+            Class.forName("org.hsqldb.jdbcDriver").newInstance();
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        dbName = getApplicationContext().getDir("db", Context.MODE_PRIVATE).getAbsolutePath() + "/SC";
+        System.out.println(dbName);
     }
+
 }

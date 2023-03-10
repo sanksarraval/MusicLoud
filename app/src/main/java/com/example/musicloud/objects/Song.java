@@ -9,9 +9,6 @@ public class Song {
     private final String albumName;
     private boolean liked;
 
-    //private final File mp3;
-    //private final File albumArt;
-
     public Song(String songName, String artist) {
         this.songName = songName;
         this.artist = artist;
@@ -25,6 +22,13 @@ public class Song {
         this.albumName = albumName;
     }
 
+    public Song (String songName, String artist, String albumName, boolean liked) {
+        this.songName = songName;
+        this.artist = artist;
+        this.albumName = albumName;
+        this.liked = liked;
+    }
+
     public Song(int id, String songName, String artist, String albumName, boolean liked) {
         this.id = id;
         this.songName = songName;
@@ -33,23 +37,11 @@ public class Song {
         this.liked = liked;
     }
 
-    public Song(int newID) {
-        this.id = newID;
+    public Song(int id) {
+        this.id = id;
         this.songName = null;
         this.artist = null;
-        this.albumName = null;
-        this.liked = false;
-    }
-
-    //added isEqual to compare with some other song's data
-    public boolean isEqual(String songName, String artistName, String albumName){
-        return (this.songName.equals(songName)
-                &&  this.artist.equals(artistName) && this.albumName.equals(albumName));
-    }
-
-    //method to compare with other song's name
-    public int compareTo(Song other){
-        return songName.compareTo(other.songName);
+        this.albumName = "na";
     }
 
     public int getId() {
@@ -76,19 +68,28 @@ public class Song {
         return liked;
     }
 
-    public void setLiked(boolean liked) {
-        this.liked = liked;
+    public void setLiked() {
+        this.liked = !liked;
     }
 
     @NonNull
     @Override
     public String toString() {
-        return "Song{" +
-                "id=" + id +
-                ", songName='" + songName + '\'' +
-                ", artist='" + artist + '\'' +
-                ", albumName='" + albumName + '\'' +
-                ", liked=" + liked +
-                '}' + "\n";
+        StringBuilder s = new StringBuilder("Song{");
+        if (id>0){
+            s.append("id ='").append(id).append("', ");
+        }
+        if (songName != null){
+            s.append("songName='").append(songName).append("', ");
+        }
+        if (artist != null){
+            s.append("artist='").append(artist).append("', ");
+        }
+        if (albumName != null){
+            s.append("album name='").append(albumName).append("', ");
+        }
+        s.append("liked='").append(liked).append("'}");
+
+        return s.toString();
     }
 }

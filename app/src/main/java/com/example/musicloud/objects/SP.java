@@ -16,9 +16,9 @@ public class SP {
     public String getSongName(){ return song.getSongName();}
 
     public String getPlaylistName(){ return playlist.getPlaylistName();}
-    public String getPlaylistId(){ return playlist.getPlaylistName();}
+    public int getPlaylistId(){ return playlist.getId();}
     @NonNull
     public String toString(){
-        return String.format("SP: %s %s", song.getSongName(), playlist.getPlaylistName());
+        return String.format("SP: \nSong: %s\nPlaylist: %s", song.getSongName(), playlist.getPlaylistName());
     }
 }
