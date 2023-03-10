@@ -16,7 +16,6 @@ public class SongPersistenceHSQLDB implements SongPersistence {
 
     private final String TABLE_SONG = "table_song";
     private final String COLUMN_ID = "id";
-
     private final String COLUMN_SONG_NAME = "song_name";
     private final String COLUMN_ARTIST = "artist";
     private final String COLUMN_ALBUM_NAME = "album_name";
