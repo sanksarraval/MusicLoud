@@ -11,7 +11,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Connection;
 import java.sql.Statement;
 
 public class SongPersistenceHSQLDBTest {
@@ -63,7 +62,7 @@ public class SongPersistenceHSQLDBTest {
         if (rs.next()) {
             id = rs.getInt(COLUMN_ID);
             Song song = new Song(id, rs.getString(COLUMN_SONG_NAME), rs.getString(COLUMN_ARTIST), rs.getString(COLUMN_ALBUM_NAME), rs.getInt(COLUMN_IS_LIKED) == 1);
-            System.out.println("song==" + song.toString());
+            System.out.println("song==" + song);
         }
         rs.close();
         stQuery.close();
@@ -77,7 +76,7 @@ public class SongPersistenceHSQLDBTest {
             final ResultSet rs = st.executeQuery(String.format("SELECT * FROM %s", TABLE_SONG));
             while (rs.next()) {
                 Song song = new Song(rs.getInt(COLUMN_ID), rs.getString(COLUMN_SONG_NAME), rs.getString(COLUMN_ARTIST), rs.getString(COLUMN_ALBUM_NAME), rs.getInt(COLUMN_IS_LIKED) == 1);
-                System.out.println("song==" + song.toString());
+                System.out.println("song==" + song);
             }
             rs.close();
             st.close();
