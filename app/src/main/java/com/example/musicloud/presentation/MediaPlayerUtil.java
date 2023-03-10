@@ -100,15 +100,16 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
     }
 
 
-    /*
+    /**
      * Gets the position being played
      *
      * @return The position that is playing
+     */
 
     public int getPlayingPosition() {
         return mPlayingPosition;
     }
-    */
+
 
     /**
      * play

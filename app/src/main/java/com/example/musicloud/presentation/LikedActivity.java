@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ import com.example.musicloud.objects.Song;
 
 import java.util.List;
 
-public class PlayActivity extends AppCompatActivity implements View.OnClickListener, IPlayStateCallback {
+public class LikedActivity extends AppCompatActivity implements View.OnClickListener, IPlayStateCallback{
 
     private TextView tvName;
     private AppCompatImageView ivLast;
@@ -40,14 +41,14 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private List<Song> likedSongs = songs.getLikedSongs();
 
     /**
-     * Initializes the main page
+     * Creates the likes songs interface and keeps the state of the mediaplayer
      *
      * @param savedInstanceState
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_like);
         MediaPlayerUtil mediaPlayerUtil = MediaPlayerUtil.getInstance();
         //Register for playback status listening
         mediaPlayerUtil.registerCallback(this);
@@ -59,41 +60,52 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         pbProgress = findViewById(R.id.pbProgress);
         ivLike = findViewById(R.id.ivLike);
 
+        //Loop for songs
+        LinearLayout songLayout = findViewById(R.id.songs_liked);
 
-        //Loop
-        LinearLayout songLayout = findViewById(R.id.song);
-
-        for (int i = 0; i < songList.size(); i++) {
-            Song song = songList.get(i);
-            LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.song_item, null);
+        for (int i = 0; i < likedSongs.size(); i++) {
+            Song song = likedSongs.get(i);
+            int index = findPos(song); // get the index of the current song in likedSongs
+            FrameLayout layout = (FrameLayout) getLayoutInflater().inflate(R.layout.liked_item, null);
             layout.setId(i);
 
-            Button button = layout.findViewById(R.id.song_button);
-            button.setId(View.generateViewId());
-            button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
-            int finalI = i;
-            button.setOnClickListener(view -> {
+            layout.setOnClickListener(view -> {
                 // get the position of the clicked song item
-                currentPos = finalI;
-                mediaPlayerUtil.setPlayingPosition(finalI);
-                mediaPlayerUtil.play(songList.get(finalI).getSongName());
+                currentPos = index; // use the index to set the current position
+                mediaPlayerUtil.setPlayingPosition(index);
+                mediaPlayerUtil.play(songList.get(index).getSongName());
                 setHeart(currentSong);
+
+                // add click animation
+                view.animate()
+                        .scaleX(0.9f)
+                        .scaleY(0.9f)
+                        .setDuration(100)
+                        .withEndAction(() -> view.animate()
+                                .scaleX(1f)
+                                .scaleY(1f)
+                                .setDuration(100)
+                                .start())
+                        .start();
             });
-            TextView songNameTextView = layout.findViewById(R.id.song_name_textview);
+
+            TextView songNameTextView = layout.findViewById(R.id.song_name_textview2);
             songNameTextView.setText(song.getSongName());
 
-            TextView artistTextView = layout.findViewById(R.id.artist_textview);
+            TextView artistTextView = layout.findViewById(R.id.artist_textview2);
             artistTextView.setText(song.getArtist());
 
             songLayout.addView(layout);
         }
 
+
+
         //Set play source
         Intent intent = getIntent();
-        int position = intent.getIntExtra("position", 0);
+        currentPos = mediaPlayerUtil.getPlayingPosition();
+        int position = intent.getIntExtra("position", currentPos);
         mediaPlayerUtil.setPlayMusicList(musicList);
         mediaPlayerUtil.setPlayingPosition(position);
-        currentPos = position;
         setMusicInfo(musicList.get(position));
         currentSong = songList.get(position);
         setHeart(currentSong);
@@ -106,15 +118,28 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * What happens when back is pressed on the phone
+     * finds the position of the song in the songList
+     *
+     * @param current
+     * @return position of song in list
+     */
+    public int findPos(Song current){
+        int pos = 0;
+        for(int i = 0; i < songList.size(); i++){
+            if(songList.get(i).getSongName().equals(current.getSongName())){
+                pos = i;
+            }
+        }
+        return pos;
+    }
+
+    /**
+     * goes back to main page when back button is pressed
      */
     @Override
     public void onBackPressed() {
         // Navigate to the Home screen of your app
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_HOME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        super.onBackPressed();
     }
     /**
      * Switch to the previous song
@@ -217,7 +242,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @param name music name
      */
-    public void setMusicInfo(String name) {
+    protected void setMusicInfo(String name) {
         tvName.setText(name);
         ivPlay.setImageResource(MediaPlayerUtil.getInstance().isPlaying() ? R.mipmap.pause : R.mipmap.play);
 
@@ -231,11 +256,11 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Likes and unlikes the song
+     * likes the song in the database
      *
      * @param current
      */
-    public void setLikedInfo(@NonNull Song current){
+    protected void setLikedInfo(@NonNull Song current){
         boolean liked = songs.isLiked(current);
         if(!liked){
             songs.likeSong(current);
@@ -250,11 +275,11 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Sets the image for the heart of the song
+     * sets the image according to the song if it's liked or not
      *
      * @param current
      */
-    public void setHeart(@NonNull Song current){
+    protected void setHeart(@NonNull Song current){
         boolean liked = songs.isLiked(current);
         if(!liked){
             ivLike.setImageResource(R.mipmap.openheart);
@@ -264,7 +289,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * What happens when certain buttons are pressed
+     * what happens when buttons are clicked
      *
      * @param view
      */
@@ -296,7 +321,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.ivReplay:
                 //Hit replay
                 if (mediaPlayerUtil.isPlaying()) {
-                    AlertDialog alertDialog = new AlertDialog.Builder(PlayActivity.this)
+                    AlertDialog alertDialog = new AlertDialog.Builder(LikedActivity.this)
                             .setTitle("Reminder")
                             .setMessage(getResources().getString(R.string.str_replay_msg))
                             .setPositiveButton("Sure", (dialog, which) -> {
@@ -317,8 +342,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * What happens when the heart button is pressed
-     *
+     * likes/unlikes the song when like button is clicked
      * @param v
      */
     public void buttonLikeClick(View v){
@@ -326,7 +350,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Resets media player when app is closed
+     * resets media player when app is closed
      */
     @Override
     public void onDestroy() {
@@ -335,12 +359,4 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         MediaPlayerUtil.getInstance().unregisterCallback(this);
     }
 
-    /**
-     * Goes from main UI to Liked Songs UI
-     * @param v
-     */
-    public void likedButtonClick(View v) {
-        Intent intent = new Intent(PlayActivity.this, LikedActivity.class);
-        PlayActivity.this.startActivity(intent);
-    }
 }
