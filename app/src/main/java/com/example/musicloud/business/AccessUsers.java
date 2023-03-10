@@ -16,6 +16,12 @@ public class AccessUsers {
         User user = null;
         int currUser = 0;
     }
+    public AccessUsers(UserManagement UM)
+    {
+        userManagement = UM;
+        User user = null;
+        int currUser = 0;
+    }
     public List<User> getAccounts()
     {
         return userManagement.getAllUsers();
