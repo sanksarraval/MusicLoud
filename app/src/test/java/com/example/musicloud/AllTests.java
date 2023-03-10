@@ -5,6 +5,7 @@ import com.example.musicloud.business.AccessPlaylistTest;
 import com.example.musicloud.business.AccessSPTest;
 import com.example.musicloud.business.AccessSongs;
 import com.example.musicloud.business.AccessSongsTest;
+import com.example.musicloud.business.AccessUsersTest;
 import com.example.musicloud.objects.PlaylistTest;
 import com.example.musicloud.objects.SPTest;
 import com.example.musicloud.objects.UserTest;
@@ -27,6 +28,7 @@ import org.junit.runners.Suite;
         AccessPlaylistTest.class,
         AccessSongsTest.class,
         AccessSPTest.class,
+        AccessUsersTest.class,
         PlaylistTest.class,
         SPTest.class
 })
