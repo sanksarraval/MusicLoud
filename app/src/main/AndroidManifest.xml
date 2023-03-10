@@ -4,7 +4,7 @@
     package="com.example.musicloud">
 
     <application
-        android:name=".application.MyApp"
+        android:name="com.example.musicloud.application.MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,12 +14,7 @@
         android:theme="@style/Theme.MusicLoud"
         tools:targetApi="31">
         <activity
-            android:name="com.example.musicloud.presentation.MainActivity"
-            android:exported="true">
-
-        </activity>
-        <activity
-            android:name=".presentation.LoginActivity"
+            android:name="com.example.musicloud.presentation.LoginActivity"
             android:label="@string/title_activity_login"
             android:exported="true">
             <intent-filter>
@@ -29,20 +24,20 @@
             </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".presentation.LoginActivity" />
+                android:value="com.example.musicloud.presentation.LoginActivity" />
 
         </activity>
         <activity
-            android:name=".presentation.RegisterActivity"
+            android:name="com.example.musicloud.presentation.RegisterActivity"
             android:label="@string/title_activity_register"
             android:exported="true">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".presentation.RegisterActivity" />
+                android:value="com.example.musicloud.presentation.RegisterActivity" />
         </activity>
-        <activity android:name=".presentation.PlayActivity" />
-        <activity android:name=".presentation.LibraryActivity" />
+        <activity android:name="com.example.musicloud.presentation.PlayActivity" />
+        <activity android:name="com.example.musicloud.presentation.LikedActivity" />
     </application>
 
 </manifest>

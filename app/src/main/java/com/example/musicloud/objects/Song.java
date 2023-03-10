@@ -2,50 +2,141 @@ package com.example.musicloud.objects;
 
 import androidx.annotation.NonNull;
 
-import java.io.*;
-
 public class Song {
+
+    private int id;
+
     private final String songName;
+
     private final String artist;
+
     private final String albumName;
-    public String getSongName;
 
-    //private final File mp3;
-    //private final File albumArt;
+    /**
+     * boolean indicating if song has been liked
+     */
+    private boolean liked;
 
+    /**
+     * constructor
+     */
     public Song(String songName, String artist) {
         this.songName = songName;
         this.artist = artist;
-        albumName = "na"; //
+        albumName = "na";
+        liked = false;
     }
 
+    /**
+     * constructor
+     */
     public Song (String songName, String artist, String albumName) {
         this.songName = songName;
         this.artist = artist;
         this.albumName = albumName;
     }
 
-    //added isEqual to compare with some other song's data
-    public boolean isEqual(String songName, String artistName, String albumName){
-        return (this.songName.equals(songName)
-                &&  this.artist.equals(artistName) && this.albumName.equals(albumName));
+    /**
+     * constructor
+     */
+    public Song (String songName, String artist, String albumName, boolean liked) {
+        this.songName = songName;
+        this.artist = artist;
+        this.albumName = albumName;
+        this.liked = liked;
     }
 
-    //method to compare with other song's name
-    public int compareTo(Song other){
-        return songName.compareTo(other.songName);
+    /**
+     * constructor
+     */
+    public Song(int id, String songName, String artist, String albumName, boolean liked) {
+        this.id = id;
+        this.songName = songName;
+        this.artist = artist;
+        this.albumName = albumName;
+        this.liked = liked;
     }
 
-
-    //toString to get song summary
-    @NonNull
-    public String toString(){
-        return "Song Name:"+songName + " ArtistName:" +artist + " AlbumName:"+albumName;
+    /**
+     * constructor
+     */
+    public Song(int id) {
+        this.id = id;
+        this.songName = null;
+        this.artist = null;
+        this.albumName = "na";
     }
 
-    //getter for song name
-    public String getSongName(){
+    /**
+     * @return id of song
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * sets id to int passed
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return song name
+     */
+    public String getSongName() {
         return songName;
     }
 
+    /**
+     * @return song's artist
+     */
+    public String getArtist() {
+        return artist;
+    }
+
+    /**
+     * @return album name
+     */
+    public String getAlbumName() {
+        return albumName;
+    }
+
+    /**
+     * @return whether song is liked or not
+     */
+    public boolean isLiked() {
+        return liked;
+    }
+
+    /**
+     * toggles liked boolean
+     */
+    public void setLiked() {
+        this.liked = !liked;
+    }
+
+    /**
+     * toString for Song object
+     */
+    @NonNull
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder("Song{");
+        if (id>0){
+            s.append("id ='").append(id).append("', ");
+        }
+        if (songName != null){
+            s.append("songName='").append(songName).append("', ");
+        }
+        if (artist != null){
+            s.append("artist='").append(artist).append("', ");
+        }
+        if (albumName != null){
+            s.append("album name='").append(albumName).append("', ");
+        }
+        s.append("liked='").append(liked).append("'}");
+
+        return s.toString();
+    }
 }

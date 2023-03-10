@@ -2,89 +2,117 @@ package com.example.musicloud.presentation;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import com.example.musicloud.application.MediaPlayerUtil;
 import com.example.musicloud.R;
-import com.example.musicloud.persistence.IPlayStateCallback;
+import com.example.musicloud.business.AccessSongs;
+import com.example.musicloud.objects.Song;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlayActivity extends AppCompatActivity implements View.OnClickListener, IPlayStateCallback {
 
     private TextView tvName;
-    private AppCompatImageView ivLast;
     private AppCompatImageView ivPlay;
-    private AppCompatImageView ivNext;
-    private AppCompatImageView ivReplay;
+    private AppCompatImageView ivLike;
     private ProgressBar pbProgress;
-    private String name = "Guns N' Roses-Don't Cry";
-    private List<String> musicList = new ArrayList<>();
+    private final AccessSongs songs = new AccessSongs();
+    private final List<Song> songList = songs.getSongs();
+    private final List<String> musicList = songs.getSongNames();
+    private Song currentSong; // declare a field to hold the current song object
+    private int currentPos;
+    private List<Song> likedSongs = songs.getLikedSongs();
 
+    /**
+     * Initializes the main page
+     *
+     * @param savedInstanceState
+     */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MediaPlayerUtil mediaPlayerUtil = MediaPlayerUtil.getInstance();
         //Register for playback status listening
         mediaPlayerUtil.registerCallback(this);
         tvName = findViewById(R.id.tvName);
-        ivLast = findViewById(R.id.ivLast);
+        AppCompatImageView ivLast = findViewById(R.id.ivLast);
         ivPlay = findViewById(R.id.ivPlay);
-        ivNext = findViewById(R.id.ivNext);
-        ivReplay = findViewById(R.id.ivReplay);
+        AppCompatImageView ivNext = findViewById(R.id.ivNext);
+        AppCompatImageView ivReplay = findViewById(R.id.ivReplay);
         pbProgress = findViewById(R.id.pbProgress);
+        ivLike = findViewById(R.id.ivLike);
 
-        //create buttons
-        Button one = (Button) findViewById(R.id.song1);
-        one.setOnClickListener(this); // calling onClick() method
 
-        Button two = (Button) findViewById(R.id.song2);
-        two.setOnClickListener(this); // calling onClick() method
+        //Loop
+        LinearLayout songLayout = findViewById(R.id.song);
 
-        Button three = (Button) findViewById(R.id.song3);
-        three.setOnClickListener(this); // calling onClick() method
+        for (int i = 0; i < songList.size(); i++) {
+            Song song = songList.get(i);
+            @SuppressLint("InflateParams") LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.song_item, null);
+            layout.setId(i);
 
-        Button four = (Button) findViewById(R.id.song4);
-        four.setOnClickListener(this); // calling onClick() method
+            Button button = layout.findViewById(R.id.song_button);
+            button.setId(View.generateViewId());
+            button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
+            int finalI = i;
+            button.setOnClickListener(view -> {
+                // get the position of the clicked song item
+                currentPos = finalI;
+                mediaPlayerUtil.setPlayingPosition(finalI);
+                mediaPlayerUtil.play(songList.get(finalI).getSongName());
+                setHeart(currentSong);
+            });
+            TextView songNameTextView = layout.findViewById(R.id.song_name_textview);
+            songNameTextView.setText(song.getSongName());
 
-        Button five = (Button) findViewById(R.id.song5);
-        five.setOnClickListener(this); // calling onClick() method
+            TextView artistTextView = layout.findViewById(R.id.artist_textview);
+            artistTextView.setText(song.getArtist());
 
-        //Prepare music list data
-        musicList.add("Guns N' Roses-Don't Cry");
-        musicList.add("Alan Walker-Faded");
-        musicList.add("Martin Garrix&David Guetta&Jamie Scott&Romy Dya-So Far Away");
-        musicList.add("Olly Murs-That Girl");
-        musicList.add("Tysm-Normal No More(Explicit)");
+            songLayout.addView(layout);
+        }
 
         //Set play source
         Intent intent = getIntent();
         int position = intent.getIntExtra("position", 0);
-
         mediaPlayerUtil.setPlayMusicList(musicList);
         mediaPlayerUtil.setPlayingPosition(position);
-        name = musicList.get(position);
-        setMusicInfo(name);
+        currentPos = position;
+        setMusicInfo(musicList.get(position));
+        currentSong = songList.get(position);
+        setHeart(currentSong);
+
 
         ivLast.setOnClickListener(this);
         ivPlay.setOnClickListener(this);
         ivNext.setOnClickListener(this);
         ivReplay.setOnClickListener(this);
-
     }
 
+    /**
+     * What happens when back is pressed on the phone
+     */
+    @Override
+    public void onBackPressed() {
+        // Navigate to the Home screen of your app
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
     /**
      * Switch to the previous song
      *
@@ -139,9 +167,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
      * Play failure
      *
      * @param name      Music name
-     * @param what
-     * @param extra
-     * @param exception
+     * @param what      What failed
+     * @param extra     Extra Info
+     * @param exception Which Exception
      */
     @Override
     public void onFailed(@Nullable String name, int what, int extra, Exception exception) {
@@ -153,7 +181,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
      * Play schedule
      *
      * @param name     Music name
-     * @param progress 进度
+     * @param progress progress rate
      */
     @Override
     public void onProgress(@Nullable String name, int progress) {
@@ -186,40 +214,67 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @param name music name
      */
-    private void setMusicInfo(String name) {
+    public void setMusicInfo(String name) {
         tvName.setText(name);
         ivPlay.setImageResource(MediaPlayerUtil.getInstance().isPlaying() ? R.mipmap.pause : R.mipmap.play);
+
+        // find the current song object in the songList
+        for (Song song : songList) {
+            if (song.getSongName().equals(name)) {
+                currentSong = song;
+                break;
+            }
+        }
     }
 
+    /**
+     * Likes and unlikes the song
+     *
+     * @param current
+     */
+    public void setLikedInfo(@NonNull Song current){
+        boolean liked = songs.isLiked(current);
+        if(!liked){
+            songs.likeSong(current);
+        } else {
+            songs.unlikeSong(current);
+        }
+        setHeart(current);
+        likedSongs = songs.getLikedSongs();
+        for(int i = 0; i < likedSongs.size(); i++){
+            System.out.println(likedSongs.get(i));
+        }
+    }
 
+    /**
+     * Sets the image for the heart of the song
+     *
+     * @param current
+     */
+    public void setHeart(@NonNull Song current){
+        boolean liked = songs.isLiked(current);
+        if(!liked){
+            ivLike.setImageResource(R.mipmap.openheart);
+        } else {
+            ivLike.setImageResource(R.mipmap.heart);
+        }
+    }
+
+    /**
+     * What happens when certain buttons are pressed
+     *
+     * @param view
+     */
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
         MediaPlayerUtil mediaPlayerUtil = MediaPlayerUtil.getInstance();
         switch (view.getId()) {
-            case R.id.song1:
-                mediaPlayerUtil.setPlayingPosition(0);
-                mediaPlayerUtil.play(musicList.get(0));
-                break;
-            case R.id.song2:
-                mediaPlayerUtil.setPlayingPosition(1);
-                mediaPlayerUtil.play(musicList.get(1));
-                break;
-            case R.id.song3:
-                mediaPlayerUtil.setPlayingPosition(2);
-                mediaPlayerUtil.play(musicList.get(2));
-                break;
-            case R.id.song4:
-                mediaPlayerUtil.setPlayingPosition(3);
-                mediaPlayerUtil.play(musicList.get(3));
-                break;
-            case R.id.song5:
-                mediaPlayerUtil.setPlayingPosition(4);
-                mediaPlayerUtil.play(musicList.get(4));
-                break;
             case R.id.ivLast:
                 //Click on the previous song
                 mediaPlayerUtil.playLast();
+                setHeart(currentSong);
+                currentPos--;
                 break;
             case R.id.ivPlay:
                 //Play or pause
@@ -232,6 +287,8 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.ivNext:
                 //Click on the next song
                 mediaPlayerUtil.playNext();
+                setHeart(currentSong);
+                currentPos++;
                 break;
             case R.id.ivReplay:
                 //Hit replay
@@ -256,6 +313,18 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * What happens when the heart button is pressed
+     *
+     * @param v
+     */
+    public void buttonLikeClick(View v){
+        setLikedInfo(currentSong);
+    }
+
+    /**
+     * Resets media player when app is closed
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -263,5 +332,12 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         MediaPlayerUtil.getInstance().unregisterCallback(this);
     }
 
-
+    /**
+     * Goes from main UI to Liked Songs UI
+     * @param v
+     */
+    public void likedButtonClick(View v) {
+        Intent intent = new Intent(PlayActivity.this, LikedActivity.class);
+        PlayActivity.this.startActivity(intent);
+    }
 }

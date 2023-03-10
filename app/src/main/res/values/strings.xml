@@ -20,7 +20,8 @@
     <string name="Playlists">Playlists</string>
     <string name="RecommendedSongs">Recommended Songs</string>
 
-
+    <string name="warning">Warning</string>
+    <string name="fatalError">Fatal error</string>
 
     <string name="song1">Don\'t Cry</string>
     <string name="artist1">Guns N\' Roses</string>
@@ -41,4 +42,6 @@
     <string name="song5">Normal No More(Explicit)</string>
     <string name="artist5">Tysm</string>
     <string name="album5">na</string>
+    <string name="LikedSongs">Liked Songs</string>
+    <string name="todo">TODO</string>
 </resources>
