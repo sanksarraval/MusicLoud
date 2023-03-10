@@ -9,7 +9,9 @@ import java.util.List;
 public class UserManagementStub implements UserManagement {
 
     public static LinkedList<User> userList;
-
+    /**
+     * UserManagementStub Constructor: Initializes the linked list and populates it with dummy data.
+     * */
     public UserManagementStub()
     {
         userList = new LinkedList<>();
@@ -23,7 +25,10 @@ public class UserManagementStub implements UserManagement {
         userList.add(newUser3);
         userList.add(newUser4);
     }
-
+    /**
+     * getUser: Returns user
+     * @return: User
+     * */
     public User getUser(String userID)
     {
         int found = -1;
@@ -48,7 +53,10 @@ public class UserManagementStub implements UserManagement {
             return userList.get( found );
         }
     }
-
+    /**
+     * getAllUsers: Returns a list of all users
+     * @return: List<User>
+     * */
     @Override
     public List<User> getAllUsers() {
         return userList;
@@ -68,7 +76,10 @@ public class UserManagementStub implements UserManagement {
         }
         return flag;
     }
-
+    /**
+     * addAccount: Adds an account into the database.
+     * @return: User
+     * */
     public User addAccount(User newUser)
     {
         User addedUser = null;
@@ -78,9 +89,6 @@ public class UserManagementStub implements UserManagement {
         }
         return addedUser;
     }
-    /*
-
-    Implemented but not used in the UI
 
     public void deleteAccount(User newUser)
     {
@@ -90,19 +98,4 @@ public class UserManagementStub implements UserManagement {
             userList.remove(userNumber);
         }
     }
-
-    public void updatePassword(User currentUser, String newPass)
-    {
-        int userNumber = userList.indexOf(currentUser);
-        currentUser.setPassword(newPass);
-        //userList.set(userNumber,currentUser);
-    }
-
-    public void updateUserName(User currentUser, String newName)
-    {
-        int userNumber = userList.indexOf(currentUser);
-        currentUser.setUserName(newName);
-        userList.set(userNumber,currentUser);
-    }
-     */
 }

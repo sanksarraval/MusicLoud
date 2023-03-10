@@ -13,8 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManagementHSQLDB implements UserManagement {
-    private final String dbPath;
 
+    private final String dbPath;
+    /**
+     * UserManagementHSQLDB Constructor
+     * @param dbPath: Inject the dbPath
+     * */
     public UserManagementHSQLDB(String dbPath) {
         this.dbPath = dbPath;
         try{
@@ -25,9 +29,14 @@ public class UserManagementHSQLDB implements UserManagement {
             e.printStackTrace();
         }
     }
+
     private Connection connection() throws SQLException {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
+    /**
+     * createTable: Creates a Table if not created already.
+     *
+     * */
     private void createTable() throws SQLException {
         final Connection conn = connection();
         String query = "CREATE TABLE IF NOT EXISTS Users (UserID VARCHAR(50) PRIMARY KEY, UserName VARCHAR(50), Password VARCHAR(50))";
@@ -35,6 +44,10 @@ public class UserManagementHSQLDB implements UserManagement {
         stmt.executeUpdate(query);
         stmt.close();
     }
+    /**
+     * insertDummyData: Inserting the Dummy Data
+     *
+     * */
     private void insertDummyData() throws SQLException {
         final Connection conn = connection();
         String query1 = "INSERT INTO Users VALUES('ravals1', 'Sanskar Raval', 'Sanskar123')";
@@ -49,6 +62,10 @@ public class UserManagementHSQLDB implements UserManagement {
         stmt.close();
     }
 
+    /**
+     * getAllUsers: Returns a list of all users
+     * @return: List<User>
+     * */
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
@@ -64,7 +81,10 @@ public class UserManagementHSQLDB implements UserManagement {
         }
         return users;
     }
-
+    /**
+     * getUser: Returns user
+     * @return: User
+     * */
     @Override
     public User getUser(String userID) {
         try (final Connection conn = connection();
@@ -80,7 +100,10 @@ public class UserManagementHSQLDB implements UserManagement {
         }
         return null;
     }
-
+    /**
+     * verifyUser: Verifies the user.
+     * @return: Boolean, true if the user is valid and already registered.
+     * */
     @Override
     public boolean verifyUser(String userID, String password) {
         boolean flag = false;
@@ -91,15 +114,18 @@ public class UserManagementHSQLDB implements UserManagement {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt(1) == 1;
-                    //flag = true;
                 }
             }
+
         } catch (final SQLException e) {
             e.printStackTrace();
         }
         return flag;
     }
-
+    /**
+     * addAccount: Adds an account into the database.
+     * @return: User
+     * */
     @Override
     public User addAccount(User newUser) {
         try (final Connection conn = connection();
@@ -114,7 +140,9 @@ public class UserManagementHSQLDB implements UserManagement {
         }
         return null;
     }
-
+    /**
+     * cleanTable: Cleans the database for Testing.
+     * */
     public void cleanTable() {
         try (final Connection conn = connection();
              final Statement stmt = conn.createStatement()) {
@@ -123,7 +151,9 @@ public class UserManagementHSQLDB implements UserManagement {
             e.printStackTrace();
         }
     }
-
+    /**
+     * dropTable: Drops the database for Testing.
+     * */
     public void dropTable() {
         try (final Connection conn = connection();
              final Statement stmt = conn.createStatement()) {
