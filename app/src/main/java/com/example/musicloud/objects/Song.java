@@ -3,12 +3,23 @@ package com.example.musicloud.objects;
 import androidx.annotation.NonNull;
 
 public class Song {
+
     private int id;
+
     private final String songName;
+
     private final String artist;
+
     private final String albumName;
+
+    /**
+     * boolean indicating if song has been liked
+     */
     private boolean liked;
 
+    /**
+     * constructor
+     */
     public Song(String songName, String artist) {
         this.songName = songName;
         this.artist = artist;
@@ -16,12 +27,18 @@ public class Song {
         liked = false;
     }
 
+    /**
+     * constructor
+     */
     public Song (String songName, String artist, String albumName) {
         this.songName = songName;
         this.artist = artist;
         this.albumName = albumName;
     }
 
+    /**
+     * constructor
+     */
     public Song (String songName, String artist, String albumName, boolean liked) {
         this.songName = songName;
         this.artist = artist;
@@ -29,6 +46,9 @@ public class Song {
         this.liked = liked;
     }
 
+    /**
+     * constructor
+     */
     public Song(int id, String songName, String artist, String albumName, boolean liked) {
         this.id = id;
         this.songName = songName;
@@ -37,6 +57,9 @@ public class Song {
         this.liked = liked;
     }
 
+    /**
+     * constructor
+     */
     public Song(int id) {
         this.id = id;
         this.songName = null;
@@ -44,34 +67,58 @@ public class Song {
         this.albumName = "na";
     }
 
+    /**
+     * @return id of song
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * sets id to int passed
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * @return song name
+     */
     public String getSongName() {
         return songName;
     }
 
+    /**
+     * @return song's artist
+     */
     public String getArtist() {
         return artist;
     }
 
+    /**
+     * @return album name
+     */
     public String getAlbumName() {
         return albumName;
     }
 
+    /**
+     * @return whether song is liked or not
+     */
     public boolean isLiked() {
         return liked;
     }
 
+    /**
+     * toggles liked boolean
+     */
     public void setLiked() {
         this.liked = !liked;
     }
 
+    /**
+     * toString for Song object
+     */
     @NonNull
     @Override
     public String toString() {

@@ -10,6 +10,10 @@ import java.util.List;
 
 public class SPPersistenceStub implements SPPersistence {
     private List<SP> sps;
+
+    /**
+     * constructor
+     */
     public SPPersistenceStub() {
         this.sps = new ArrayList<>();
         final Playlist playlist1 = new Playlist("playlist1", "description");
@@ -23,6 +27,10 @@ public class SPPersistenceStub implements SPPersistence {
         this.sps.add(new SP(song1, playlist2));
         this.sps.add(new SP(song2, playlist1));
     }
+
+    /**
+     * returns list of all SP objects with song name passed
+     */
     @Override
     public List<SP> getSP(String songName) {
         List<SP> newSPs;
@@ -40,6 +48,9 @@ public class SPPersistenceStub implements SPPersistence {
         return newSPs;
     }
 
+    /**
+     * returns list of all SP objects with playlist name passed
+     */
     @Override
     public List<SP> getPS (String playlistName) {
         List<SP> newSPs;

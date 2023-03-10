@@ -8,22 +8,38 @@ import java.util.Collections;
 import java.util.List;
 
 public class AccessPlaylist {
+    /**
+     * PlaylistPersistence instance
+     * */
     private PlaylistPersistence playlistPersistence;
+    /**
+     * list of all playlists
+     */
     private List<Playlist> playlists;
 
-    //constructor creates instance of AccessPlaylist
+    /**
+     * constructor
+     */
     public AccessPlaylist(){
         playlistPersistence = Services.getPlaylistPersistence();
         playlists = null;
     }
 
-    //getPlaylists method returns list of all playlists
+    /**
+     * getPlaylists
+     *
+     * @return list of all playlists
+     */
     public List<Playlist> getPlaylists(){
         playlists = playlistPersistence.getPlaylist();
         return Collections.unmodifiableList(playlists);
     }
 
-
+    /**
+     * insertPlaylist
+     * @param currentPlaylist playlist to be inserted
+     * @return the new playlist that was inserted
+     */
     public Playlist insertPlaylist (Playlist currentPlaylist){
         return playlistPersistence.insertPlaylist(currentPlaylist);
     }

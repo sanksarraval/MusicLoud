@@ -11,22 +11,36 @@ import java.util.List;
 
 public class PlaylistPersistenceStub implements PlaylistPersistence {
     private List<Playlist> playlists;
+
+    /**
+     * constructor
+     */
     public PlaylistPersistenceStub(){
         this.playlists = new ArrayList<>();
 
         playlists.add(new Playlist("name", "description"));
     }
+
+    /**
+     * @return list of all playlists
+     */
     @Override
     public List<Playlist> getPlaylist() {
         return Collections.unmodifiableList(playlists);
     }
 
+    /**
+     * inserts playlist into "database"
+     */
     @Override
     public Playlist insertPlaylist(Playlist currentPlaylist) {
         playlists.add(currentPlaylist);
         return currentPlaylist;
     }
 
+    /**
+     * updates playlist with one passed to method
+     */
     @Override
     public Playlist updatePlaylist(Playlist currentPlaylist) {
         int index;
@@ -38,6 +52,9 @@ public class PlaylistPersistenceStub implements PlaylistPersistence {
         return currentPlaylist;
     }
 
+    /**
+     * deletes playlist
+     */
     @Override
     public void deletePlaylist(Playlist currentPlaylist) {
         int index;
