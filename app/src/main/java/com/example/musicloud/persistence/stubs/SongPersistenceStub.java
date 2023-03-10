@@ -10,43 +10,58 @@ import java.util.Collections;
 import java.util.List;
 
 public class SongPersistenceStub implements SongPersistence {
-    //list of all songs in users library
     private final List<Song> songs;
-    //list of all liked songs
     private final List<Song> likedSongs;
 
+    /**
+     * constructor
+     */
     public SongPersistenceStub(List<Song> likedSongs) {
         this.likedSongs = likedSongs;
         this.songs = new ArrayList<>();
 
         songs.add(new Song("Not Enough To Give", "Ketsa", "Ketsa - Not Enough To Give"));
         songs.add(new Song("Rain Man", "Ketsa", "Ketsa - Rain Man"));
-        songs.add(new Song("Above the Clouds", "Scott Holmes Music", "Above the Clouds.mp3"));
         songs.add(new Song("Stereohada", "Nightfall", "Nightfall.mp3"));
     }
 
+    /**
+     * returns list all songs
+     */
     @Override
     public List<Song> getAllSongs() {
 
         return Collections.unmodifiableList(songs);
     }
 
+    /**
+     * @return song based on index
+     */
     @Override
     public Song getSong(int i) {
         return songs.get(i);
     }
 
+    /**
+     * @return size of song "database"
+     */
     @Override
     public int getSize() {
         return songs.size();
     }
 
+    /**
+     * inserts song into "database"
+     */
     @Override
     public Song insertSong(Song currentSong) {
         songs.add(currentSong);
         return currentSong;
     }
 
+    /**
+     * updates song with one passed to method
+     */
     @Override
     public Song updateSong(Song currentSong) {
         int index;
@@ -58,6 +73,9 @@ public class SongPersistenceStub implements SongPersistence {
         return currentSong;
     }
 
+    /**
+     * delete song
+     */
     @Override
     public void deleteSong(Song currentSong) {
         int index;
@@ -68,6 +86,9 @@ public class SongPersistenceStub implements SongPersistence {
         }
     }
 
+    /**
+     * returns list of all string names
+     */
     @Override
     public List<String> allSongNames() {
         ArrayList<String> songNames = new ArrayList<>();
@@ -80,6 +101,9 @@ public class SongPersistenceStub implements SongPersistence {
 
     private static final String TAG = "SongPersistenceStub";
 
+    /**
+     *to string for song "database"
+     */
     @NonNull
     public String toString() {
         StringBuilder ans = new StringBuilder();
@@ -92,12 +116,18 @@ public class SongPersistenceStub implements SongPersistence {
         return ans.toString();
     }
 
+    /**
+     * likes song in database
+     */
     @Override
     public void likeSong(Song currentSong) {
         currentSong.setLiked();
         likedSongs.add(currentSong);
     }
 
+    /**
+     * unlikes song in database
+     */
     @Override
     public void unlikeSong(Song currentSong) {
         currentSong.setLiked();
@@ -107,14 +137,21 @@ public class SongPersistenceStub implements SongPersistence {
         }
     }
 
+    /**
+     * @return whether song is liked or not
+     */
     @Override
     public boolean isLiked(Song currentSong) {
         return currentSong.isLiked();
     }
 
+    /**
+     * @return list of all songs that have been liked
+     */
     @Override
     public List<Song> getLikedSongs() {
         return Collections.unmodifiableList(likedSongs);
     }
+
 
 }

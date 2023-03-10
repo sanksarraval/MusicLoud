@@ -37,7 +37,6 @@ public class SongPersistenceHSQLDB implements SongPersistence {
                 String sqlStartStr = String.format("%s(%s, %s, %s, %s)", TABLE_SONG, COLUMN_SONG_NAME, COLUMN_ARTIST, COLUMN_ALBUM_NAME, COLUMN_IS_LIKED);
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Rain Man', 'Ketsa', 'Ketsa - Rain Man', 0);", sqlStartStr));
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Not Enough To Give', 'Ketsa', 'Ketsa - Not Enough To Give', 0);", sqlStartStr));
-                st.executeUpdate(String.format("INSERT INTO %s VALUES ('Above the Clouds', 'Scott Holmes Music', 'Scott Holmes Music - Above the Clouds', 0);", sqlStartStr));
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Nightfall', 'Stereohada', 'Stereohada - Nightfall', 0);", sqlStartStr));
             }
             rs.close();
@@ -73,6 +72,11 @@ public class SongPersistenceHSQLDB implements SongPersistence {
         return new Song(rs.getInt(COLUMN_ID), rs.getString(COLUMN_SONG_NAME), rs.getString(COLUMN_ARTIST), rs.getString(COLUMN_ALBUM_NAME), rs.getInt(COLUMN_IS_LIKED) == 1);
     }
 
+    /**
+     * gets the song based on its id
+     * @param id
+     * @return song
+     */
     @Override
     public Song getSong(int id) {
         String sql = "SELECT * FROM table_song WHERE id = ?";
@@ -91,6 +95,10 @@ public class SongPersistenceHSQLDB implements SongPersistence {
         return null;
     }
 
+    /**
+     * gets the size of the songlist
+     * @return
+     */
     @Override
     public int getSize() {
         String sql = "SELECT COUNT(*) FROM table_song";
@@ -106,6 +114,12 @@ public class SongPersistenceHSQLDB implements SongPersistence {
         return 0;
     }
 
+    /**
+     * inserts a new song in the database
+     *
+     * @param currentSong
+     * @return
+     */
     @Override
     public Song insertSong(Song currentSong) {
         try (final Connection c = connection()) {
@@ -122,6 +136,12 @@ public class SongPersistenceHSQLDB implements SongPersistence {
         }
     }
 
+    /**
+     * updates the song info in the database
+     *
+     * @param currentSong
+     * @return
+     */
     @Override
     public Song updateSong(Song currentSong) {
         try (final Connection c = connection()) {
@@ -138,6 +158,11 @@ public class SongPersistenceHSQLDB implements SongPersistence {
         }
     }
 
+    /**
+     * deletes a song in the database
+     *
+     * @param currentSong
+     */
     @Override
     public void deleteSong(Song currentSong) {
         try (final Connection c = connection()) {
@@ -150,6 +175,11 @@ public class SongPersistenceHSQLDB implements SongPersistence {
         }
     }
 
+    /**
+     * gets all the song names in the database
+     *
+     * @return song names
+     */
     @Override
     public List<String> allSongNames() {
         final List<String> songNameList = new ArrayList<>();
@@ -167,6 +197,10 @@ public class SongPersistenceHSQLDB implements SongPersistence {
         }
     }
 
+    /**
+     * likes the song in the database and sets boolean to true
+     * @param currentSong
+     */
     @Override
     public void likeSong(Song currentSong) {
         String sql = "UPDATE table_song SET is_liked = ? WHERE id = ?";
@@ -181,25 +215,41 @@ public class SongPersistenceHSQLDB implements SongPersistence {
         }
     }
 
+    /**
+     * unlikes the song in the database and sets the boolean to false
+     *
+     * @param currentSong
+     */
     @Override
     public void unlikeSong(Song currentSong) {
-        String sql = "UPDATE table_song SET is_liked = ? WHERE id = ?";
+        String sql = "UPDATE table_song SET is_liked = ? WHERE song_name = ?";
         try (final Connection c = connection()){
             PreparedStatement stmt = c.prepareStatement(sql);
             currentSong.setLiked();
             stmt.setBoolean(1, false);
-            stmt.setInt(2, currentSong.getId());
+            stmt.setString(2, currentSong.getSongName());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * checks if the song is liked or not in the database
+     *
+     * @param currentSong
+     * @return if it's liked or not
+     */
     @Override
     public boolean isLiked(Song currentSong) {
         return currentSong.isLiked();
     }
 
+    /**
+     * gets all the liked songs and returns a list of it
+     *
+     * @return all liked songs
+     */
     @Override
     public List<Song> getLikedSongs() {
         List<Song> likedSongs = new ArrayList<>();
@@ -217,4 +267,5 @@ public class SongPersistenceHSQLDB implements SongPersistence {
         }
         return likedSongs;
     }
+
 }

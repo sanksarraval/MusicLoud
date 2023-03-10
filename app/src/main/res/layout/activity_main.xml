@@ -53,6 +53,7 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="#3d036b"
                 android:scrollbars="none">
 
                 <!-- using linear layout to store multiple view
@@ -68,6 +69,19 @@
                 </LinearLayout>
 
             </HorizontalScrollView>
+
+            <!-- Liked Songs -->
+
+            <Button
+                android:id="@+id/random_button"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="0dp"
+                android:background="#3d036b"
+                android:backgroundTint="@color/gray"
+                android:onClick="likedButtonClick"
+                android:text="@string/LikedSongs" />
 
         </LinearLayout>
 

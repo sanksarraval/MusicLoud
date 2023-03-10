@@ -33,9 +33,16 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private final List<Song> songList = songs.getSongs();
     private final List<String> musicList = songs.getSongNames();
     private Song currentSong; // declare a field to hold the current song object
+    private int currentPos;
+    private List<Song> likedSongs = songs.getLikedSongs();
 
+    /**
+     * Initializes the main page
+     *
+     * @param savedInstanceState
+     */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MediaPlayerUtil mediaPlayerUtil = MediaPlayerUtil.getInstance();
@@ -64,6 +71,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             int finalI = i;
             button.setOnClickListener(view -> {
                 // get the position of the clicked song item
+                currentPos = finalI;
                 mediaPlayerUtil.setPlayingPosition(finalI);
                 mediaPlayerUtil.play(songList.get(finalI).getSongName());
                 setHeart(currentSong);
@@ -82,6 +90,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         int position = intent.getIntExtra("position", 0);
         mediaPlayerUtil.setPlayMusicList(musicList);
         mediaPlayerUtil.setPlayingPosition(position);
+        currentPos = position;
         setMusicInfo(musicList.get(position));
         currentSong = songList.get(position);
         setHeart(currentSong);
@@ -93,6 +102,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         ivReplay.setOnClickListener(this);
     }
 
+    /**
+     * What happens when back is pressed on the phone
+     */
     @Override
     public void onBackPressed() {
         // Navigate to the Home screen of your app
@@ -202,7 +214,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @param name music name
      */
-    private void setMusicInfo(String name) {
+    public void setMusicInfo(String name) {
         tvName.setText(name);
         ivPlay.setImageResource(MediaPlayerUtil.getInstance().isPlaying() ? R.mipmap.pause : R.mipmap.play);
 
@@ -215,7 +227,12 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void setLikedInfo(@NonNull Song current){
+    /**
+     * Likes and unlikes the song
+     *
+     * @param current
+     */
+    public void setLikedInfo(@NonNull Song current){
         boolean liked = songs.isLiked(current);
         if(!liked){
             songs.likeSong(current);
@@ -223,13 +240,18 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             songs.unlikeSong(current);
         }
         setHeart(current);
-        List<Song> likedSongs = songs.getLikedSongs();
+        likedSongs = songs.getLikedSongs();
         for(int i = 0; i < likedSongs.size(); i++){
             System.out.println(likedSongs.get(i));
         }
     }
 
-    private void setHeart(@NonNull Song current){
+    /**
+     * Sets the image for the heart of the song
+     *
+     * @param current
+     */
+    public void setHeart(@NonNull Song current){
         boolean liked = songs.isLiked(current);
         if(!liked){
             ivLike.setImageResource(R.mipmap.openheart);
@@ -238,6 +260,11 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * What happens when certain buttons are pressed
+     *
+     * @param view
+     */
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
@@ -247,6 +274,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                 //Click on the previous song
                 mediaPlayerUtil.playLast();
                 setHeart(currentSong);
+                currentPos--;
                 break;
             case R.id.ivPlay:
                 //Play or pause
@@ -260,6 +288,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                 //Click on the next song
                 mediaPlayerUtil.playNext();
                 setHeart(currentSong);
+                currentPos++;
                 break;
             case R.id.ivReplay:
                 //Hit replay
@@ -284,13 +313,31 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * What happens when the heart button is pressed
+     *
+     * @param v
+     */
     public void buttonLikeClick(View v){
         setLikedInfo(currentSong);
     }
+
+    /**
+     * Resets media player when app is closed
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
         //Cancel playback status listening
         MediaPlayerUtil.getInstance().unregisterCallback(this);
+    }
+
+    /**
+     * Goes from main UI to Liked Songs UI
+     * @param v
+     */
+    public void likedButtonClick(View v) {
+        Intent intent = new Intent(PlayActivity.this, LikedActivity.class);
+        PlayActivity.this.startActivity(intent);
     }
 }
