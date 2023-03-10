@@ -6,7 +6,7 @@ public class LoginManager {
     /**
      * AccessUsers instance
      * */
-    private AccessUsers accessUsers;
+    private final AccessUsers accessUsers;
 
     /**
      * LoginManager Constructor
