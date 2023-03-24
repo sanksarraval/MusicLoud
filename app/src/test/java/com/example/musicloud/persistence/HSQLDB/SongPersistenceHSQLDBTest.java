@@ -1,117 +1,195 @@
 package com.example.musicloud.persistence.HSQLDB;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.example.musicloud.objects.Song;
+import com.example.musicloud.persistence.hsqldb.SongPersistenceHSQLDB;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
+@RunWith(MockitoJUnitRunner.class)
 public class SongPersistenceHSQLDBTest {
 
-    private final String TABLE_SONG = "table_song";
-    private final String COLUMN_ID = "id";
-    private final String COLUMN_SONG_NAME = "song_name";
-    private final String COLUMN_ARTIST = "artist";
-    private final String COLUMN_ALBUM_NAME = "album_name";
-    private final String COLUMN_IS_LIKED = "is_liked";
-
-    private Connection c;
-
+    @Mock
+    private Connection mConnectionMock;
+    @Mock
+    private PreparedStatement mStatementMock;
+    @Mock
+    private ResultSet mResultSetMock;
+    private SongPersistenceHSQLDB mActualSongPersistenceHSQLDB;
 
     @Before
     public void setUp() {
+        /*
+         * The virtual database connection object and the PreparedStatement object are bound to the Mockito framework
+         * using the when() and thenReturn() methods
+         */
+        mActualSongPersistenceHSQLDB = new SongPersistenceHSQLDB("src/test/HSQLDB/app_db/SC");
+        // Assign a simulated connection to a db object
+        mActualSongPersistenceHSQLDB.setConnection(mConnectionMock);
+        // Returns the prepareStatement() method of the simulated object to the simulated PreparedStatement object
         try {
-            Class.forName("org.hsqldb.jdbcDriver").newInstance();
-            File dbFile = new File("src/test/java/com/example/musicloud/app_db/SC");
-            c = DriverManager.getConnection(String.format("jdbc:hsqldb:file:%s;shutdown=true", dbFile.getAbsolutePath()), "SA", "");
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-            e.printStackTrace();
+            when(mConnectionMock.prepareStatement(anyString())).thenReturn(mStatementMock);
+            when(mConnectionMock.prepareStatement(anyString(), anyInt())).thenReturn(mStatementMock);
+            when(mStatementMock.executeQuery()).thenReturn(mResultSetMock);
+            when(mStatementMock.getGeneratedKeys()).thenReturn(mResultSetMock);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
     }
 
-
     @Test
-    public void insertSong() {
+    public void testGetAllSongs() {
+        // Returns the prepareStatement() method of the simulated object to the simulated PreparedStatement object
+        Statement statementMock = mock(Statement.class);
         try {
-            final PreparedStatement st = c.prepareStatement(String.format("INSERT INTO %s(%s, %s, %s, %s)  VALUES(?, ?, ?, ?)", TABLE_SONG, COLUMN_SONG_NAME, COLUMN_ARTIST, COLUMN_ALBUM_NAME, COLUMN_IS_LIKED));
-            st.setString(1, "test");
-            st.setString(2, "test");
-            st.setString(3, "test");
-            st.setInt(4, 0);
-            st.executeUpdate();
-            st.close();
-            getLastSong();
+            when(mConnectionMock.createStatement()).thenReturn(statementMock);
+            when(statementMock.executeQuery(anyString())).thenReturn(mResultSetMock);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
 
-    private int getLastSong() throws SQLException {
-        int id = -1;
-        final Statement stQuery = c.createStatement();
-        final ResultSet rs = stQuery.executeQuery(String.format("SELECT * FROM %s order by id desc", TABLE_SONG));
-        if (rs.next()) {
-            id = rs.getInt(COLUMN_ID);
-            Song song = new Song(id, rs.getString(COLUMN_SONG_NAME), rs.getString(COLUMN_ARTIST), rs.getString(COLUMN_ALBUM_NAME), rs.getInt(COLUMN_IS_LIKED) == 1);
-            System.out.println("song==" + song);
+        //Simulate the expected  data
+        List<Song> songList = new ArrayList<>();
+        songList.add(new Song("Rain Man", "Ketsa", "Ketsa - Rain Man", false));
+        songList.add(new Song("Not Enough To Give", "Ketsa", "Ketsa - Not Enough To Give", false));
+        songList.add(new Song("Nightfall", "Stereohada", "Stereohada - Nightfall", false));
+        List<Integer> songIdList = new ArrayList<>();
+        List<String> songNameList = new ArrayList<>();
+        List<String> songArtistList = new ArrayList<>();
+        List<String> songAlbumNameList = new ArrayList<>();
+        List<Integer> songLikedList = new ArrayList<>();
+        for (int i = 100; i < 100 + songList.size(); i++) {
+            Song song = songList.get(i - 100);
+            songIdList.add(song.getId());
+            songNameList.add(song.getSongName());
+            songArtistList.add(song.getArtist());
+            songAlbumNameList.add(song.getAlbumName());
+            songLikedList.add(song.getId());
         }
-        rs.close();
-        stQuery.close();
-        return id;
-    }
 
-    @Test
-    public void getAllSong() {
         try {
-            final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery(String.format("SELECT * FROM %s", TABLE_SONG));
-            while (rs.next()) {
-                Song song = new Song(rs.getInt(COLUMN_ID), rs.getString(COLUMN_SONG_NAME), rs.getString(COLUMN_ARTIST), rs.getString(COLUMN_ALBUM_NAME), rs.getInt(COLUMN_IS_LIKED) == 1);
-                System.out.println("song==" + song);
+
+            int len = songList.size();
+
+            //mock all the music data
+            when(mResultSetMock.next()).thenReturn(true, true, true, false);
+            when(mResultSetMock.getInt(mActualSongPersistenceHSQLDB.COLUMN_ID)).thenReturn(songIdList.get(0), songIdList.subList(1, len).toArray(new Integer[len - 1]));
+            when(mResultSetMock.getString(mActualSongPersistenceHSQLDB.COLUMN_SONG_NAME)).thenReturn(songNameList.get(0), songNameList.subList(1, len).toArray(new String[len - 1]));
+            when(mResultSetMock.getString(mActualSongPersistenceHSQLDB.COLUMN_ARTIST)).thenReturn(songArtistList.get(0), songArtistList.subList(1, len).toArray(new String[len - 1]));
+            when(mResultSetMock.getString(mActualSongPersistenceHSQLDB.COLUMN_ALBUM_NAME)).thenReturn(songAlbumNameList.get(0), songAlbumNameList.subList(1, len).toArray(new String[len - 1]));
+            when(mResultSetMock.getInt(mActualSongPersistenceHSQLDB.COLUMN_IS_LIKED)).thenReturn(songLikedList.get(0), songLikedList.subList(1, len).toArray(new Integer[len - 1]));
+
+            List<Song> actualSongList = mActualSongPersistenceHSQLDB.getAllSongs();
+
+            verify(mConnectionMock, times(1)).createStatement();
+            // The executeQuery() method verifies that the PreparedStatement object is called once
+            verify(statementMock, times(1)).executeQuery(anyString());
+            verify(mResultSetMock, times(len)).getInt(mActualSongPersistenceHSQLDB.COLUMN_ID);
+            verify(mResultSetMock, times(len)).getString(mActualSongPersistenceHSQLDB.COLUMN_SONG_NAME);
+            verify(mResultSetMock, times(len)).getString(mActualSongPersistenceHSQLDB.COLUMN_ARTIST);
+            verify(mResultSetMock, times(len)).getString(mActualSongPersistenceHSQLDB.COLUMN_ALBUM_NAME);
+            verify(mResultSetMock, times(len)).getInt(mActualSongPersistenceHSQLDB.COLUMN_IS_LIKED);
+
+            /*
+             *We started to add music data by default, but because our song data table is auto-increment with id primary key, we cannot simply compare the whole object,
+             * so we need to loop the comparison of name, artist, etc
+             */
+
+            //Just compare the length of the data
+            assertEquals(actualSongList.size(), songList.size());
+            for (int i = 0; i < songList.size(); i++) {
+                Song mockSong = songList.get(i);
+                Song actualSong = actualSongList.get(i);
+                assertEquals(actualSong.getId(), mockSong.getId());
+                assertEquals(actualSong.getSongName(), mockSong.getSongName());
+                assertEquals(actualSong.getArtist(), mockSong.getArtist());
+                assertEquals(actualSong.getAlbumName(), mockSong.getAlbumName());
+                assertEquals(actualSong.isLiked(), mockSong.isLiked());
             }
-            rs.close();
-            st.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    @Test
-    public void updateSong() {
-        try {
-            final PreparedStatement st = c.prepareStatement(String.format("UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ?", TABLE_SONG, COLUMN_SONG_NAME, COLUMN_ARTIST, COLUMN_ALBUM_NAME, COLUMN_IS_LIKED));
-            st.setString(1, "test_111");
-            st.setString(2, "test_111");
-            st.setString(3, "test_111");
-            st.setInt(4, 1);
-            st.executeUpdate();
-            st.close();
-            getLastSong();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Test
-    public void deleteSong() {
+    public void testInsertSong() {
         try {
-            int lastId = getLastSong();
-            System.out.println("lastId==" + lastId);
-            final PreparedStatement st = c.prepareStatement(String.format("DELETE FROM %s WHERE %s = ?", TABLE_SONG, COLUMN_ID));
-            st.setInt(1, lastId);
-            st.executeUpdate();
-            st.close();
-            System.out.println("2222==lastId==" + getLastSong());
+            //Here, we re-mock because we need to get the primary key
+            when(mConnectionMock.prepareStatement(anyString(), anyInt())).thenReturn(mStatementMock);
+            when(mStatementMock.executeUpdate()).thenReturn(1);
+            when(mStatementMock.getGeneratedKeys()).thenReturn(mResultSetMock);
+
+            //mock all the music data
+            when(mResultSetMock.next()).thenReturn(true);
+            when(mResultSetMock.getInt(mActualSongPersistenceHSQLDB.COLUMN_ID)).thenReturn(100);
+
+            Song song = new Song("Test-Name", "Test-Artist", "Test-Album-Name", true);
+            song = mActualSongPersistenceHSQLDB.insertSong(song);
+
+            verify(mConnectionMock, times(1)).prepareStatement(anyString(), anyInt());
+            verify(mStatementMock).setString(eq(1), eq("Test-Name"));
+            verify(mStatementMock).setString(eq(2), eq("Test-Artist"));
+            verify(mStatementMock).setString(eq(3), eq("Test-Album-Name"));
+            verify(mStatementMock).setInt(eq(4), eq(1));
+            // The executeUpdate() method verifies that the PreparedStatement object is called once
+            verify(mStatementMock, times(1)).executeUpdate();
+            verify(mResultSetMock, times(1)).getInt(mActualSongPersistenceHSQLDB.COLUMN_ID);
+            assertEquals(100, song.getId());
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void testUpdateSong() {
+        try {
+            Song song = new Song(100, "Test-Name", "Test-Artist-update", "Test-Album-Name-update", true);
+            mActualSongPersistenceHSQLDB.updateSong(song);
+            verify(mConnectionMock, times(1)).prepareStatement(anyString());
+            verify(mStatementMock).setString(eq(1), eq("Test-Name"));
+            verify(mStatementMock).setString(eq(2), eq("Test-Artist-update"));
+            verify(mStatementMock).setString(eq(3), eq("Test-Album-Name-update"));
+            verify(mStatementMock).setInt(eq(4), eq(1));
+            verify(mStatementMock).setInt(eq(5), eq(100));
+            // The executeUpdate() method verifies that the PreparedStatement object is called once
+            verify(mStatementMock, times(1)).executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void testDeleteSong() {
+        try {
+            Song song = new Song(100);
+            mActualSongPersistenceHSQLDB.deleteSong(song);
+            verify(mConnectionMock, times(1)).prepareStatement(anyString());
+            verify(mStatementMock).setInt(eq(1), eq(100));
+            // The executeUpdate() method verifies that the PreparedStatement object is called once
+            verify(mStatementMock, times(1)).executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -120,20 +198,31 @@ public class SongPersistenceHSQLDBTest {
     @Test
     public void getAllSongName() {
         try {
-            final PreparedStatement st = c.prepareStatement(String.format("SELECT %s FROM %s", COLUMN_SONG_NAME, TABLE_SONG));
-            final ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                System.out.println("songName==" + rs.getString(COLUMN_SONG_NAME));
-            }
-            rs.close();
-            st.close();
+            //Here we're simulating three pieces of music data, so we need to write three true's here
+            List<String> songNameList = new ArrayList<>();
+            songNameList.add("Rain Man");
+            songNameList.add("Not Enough To Give");
+            songNameList.add("Nightfall");
+            when(mResultSetMock.next()).thenReturn(true, true, true, false);
+            int len = songNameList.size();
+            when(mResultSetMock.getString(mActualSongPersistenceHSQLDB.COLUMN_SONG_NAME)).thenReturn(songNameList.get(0), songNameList.subList(1, len).toArray(new String[len - 1]));
+
+            List<String> nameList = mActualSongPersistenceHSQLDB.allSongNames();
+
+            verify(mConnectionMock, times(1)).prepareStatement(anyString());
+            // The executeQuery() method verifies that the PreparedStatement object is called once
+            verify(mStatementMock, times(1)).executeQuery();
+            verify(mResultSetMock, times(len)).getString(mActualSongPersistenceHSQLDB.COLUMN_SONG_NAME);
+
+            assertEquals(songNameList, nameList);
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Test
-    public void likeSong(){
+    public void likeSong() {
 
     }
 
