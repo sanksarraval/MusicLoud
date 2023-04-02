@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import com.example.musicloud.R;
 import com.example.musicloud.application.MyApp;
 import com.example.musicloud.business.AccessUsers;
+import com.example.musicloud.business.EmptyUserIDException;
+import com.example.musicloud.business.PasswordTooShortException;
 import com.example.musicloud.business.ValidationInput;
 import com.example.musicloud.business.ValidateException;
 import com.example.musicloud.objects.User;
@@ -30,7 +32,7 @@ public class RegisterActivity extends Activity {
     private TextInputEditText userEditText;
     private TextInputEditText passwordEditText;
     private TextInputEditText fullNameEditText;
-    private boolean flag = false;
+    private final boolean flag = false;
 
 
 
@@ -59,12 +61,18 @@ public class RegisterActivity extends Activity {
 
             ValidationInput vi = new ValidationInput();
 
-            try{
-                vi.validateInput(userID, password, fullName);
-            }
-            catch(ValidateException e){
-                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                flag = true;
+            try {
+                ValidationInput validator = new ValidationInput();
+                validator.validateInput(userID, password, fullName);
+            } catch (EmptyUserIDException e) {
+                // Handle empty user ID
+                showErrorMessage("User ID cannot be empty.");
+            } catch (PasswordTooShortException e) {
+                // Handle password too short
+                showErrorMessage("Password must be at least 2 characters long.");
+            } catch (ValidateException e) {
+                // Handle other validation errors
+                showErrorMessage("Invalid input: " + e.getMessage());
             }
 
             if(accessUsers.accountFound(userID))
@@ -86,6 +94,10 @@ public class RegisterActivity extends Activity {
 
             }
         });
+    }
+
+    public void showErrorMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void copyDatabaseToDevice() {
