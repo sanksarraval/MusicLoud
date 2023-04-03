@@ -15,21 +15,28 @@
     * Persistence
 
 ### Layers
-| Presentation/UI | Logic/Business | Persistence/Data|
-|-----------------|----------------|-----------------|
-| Login           | LoginManager   | UserManagement  |
-| Regsiter        | AccessUsers    | UserManagement  |
-| PlayActivity    | AccessSongs    | SongPersistence |
-| MediaPlayerUtil | AccessSongs    | UserManagement  |
+| Presentation/UI | Logic/Business | Persistence/Data     |
+|-----------------|----------------|----------------------|
+| Login           | LoginManager   | UserManagementHSQLDB |
+| Regsiter        | AccessUsers    | UserManagementHSQLDB |
+| PlayActivity    | AccessSongs    | SongPersistenceHSQLDB|
+| MediaPlayerUtil | AccessSongs    | SongPersistenceHSQLDB|
+| LikedActivity   | AccessSongs    | SongPersistenceHSQLDB|
+| Messages        |                |                      |
+| PlayActivity    | AccessSongs    | SongPersistenceHSQLDB|
 
 ### Overview
 ### Three tiered architecture:
 
 We have untilized a multi-tiered system to develop our application. This includes three main tiers: `Persistance`, `Business`, and `Presentation`. The communication between these packages is strict in order to maintian the stucture of our code. 
 
-[![](https://mermaid.ink/img/pako:eNpNj7EOwjAMRH8l8gw_kKEDYkWqxOrFalyI1DgQOwOq-u-kRRXd7Hvnk2-GIQcGD8rvyjLwNdKjUELpCyuLkcUs5667VI3Cqt6h7HOTj64jco25notGtTV2ZYd1w_9IOEHikiiG9smM4hyCPTkxQjuEwCPVyRBQlmalavn-kQG8lconqK9Atj8OfqRJm8ohWi63X7ut5PIFeqZTbw?type=png)](https://mermaid.live/edit#pako:eNpNj7EOwjAMRH8l8gw_kKEDYkWqxOrFalyI1DgQOwOq-u-kRRXd7Hvnk2-GIQcGD8rvyjLwNdKjUELpCyuLkcUs5667VI3Cqt6h7HOTj64jco25notGtTV2ZYd1w_9IOEHikiiG9smM4hyCPTkxQjuEwCPVyRBQlmalavn-kQG8lconqK9Atj8OfqRJm8ohWi63X7ut5PIFeqZTbw)
-
-
+```mermaid
+sequenceDiagram
+Presentation->>Business: 
+Business->>Presentation: 
+Business ->> Persistence: 
+Persistence ->> Business: 
+```
 ## Diagram
 
 ### Presentation
@@ -37,6 +44,8 @@ We have untilized a multi-tiered system to develop our application. This include
 - For new users, the `RegisterActivity` is run in order to create new login credentials. 
 - `PlayActivity` is responsible for facilitating the interface to play each song. 
 - `MediaPlayerUtil` is resposible for managing the songs and keeping them in order. 
+- `LikedActivity` is responsible for the new UI of Liked songs.
+- `PlayActivity` is responsible for the Music Play/Pause UI.
 
 
 ### Business
@@ -50,9 +59,43 @@ Included in the persistance layer is UserManagement, UserManagementStub, SongPer
 - `UserManagement` is the interface that is implemented by `UserManagementStubs` and `UserManagementHSQLDB`.
 - `SongPersistence` is the interface that is implemented by `SongPersistenceStubs` and `SongPersistenceHSQLDB`.
 
-[![](https://mermaid.ink/img/pako:eNqFkbFuwzAMRH-F0Jz8gIYMRdcAAbpqISTaIWBTqUilKIL8e2kngTu1GyHd3SOOt5BroRCD0mcnyfTOODack5waKYmhcZX94fDWlYVUI3SlBrkRGilgzrWLJXn9g2vhRE1ZbcmLoHhlGUHo66WGQoY86X8QNKP5YgpTHYHlTwhhy2dfaKjtYWbxcV6TnbNpV-8GulLjgd24mDaCi37vtgCkKOQqAz9Twy7M5DMXr--WBCAFO9NMKUQfCw3YJ0shyd2l2K1-fEsO0VqnXeiX4gU-2w5xwEn9lQpbbcfHSdbL3H8A1meYwA?type=png)](https://mermaid.live/edit#pako:eNqFkbFuwzAMRH-F0Jz8gIYMRdcAAbpqISTaIWBTqUilKIL8e2kngTu1GyHd3SOOt5BroRCD0mcnyfTOODack5waKYmhcZX94fDWlYVUI3SlBrkRGilgzrWLJXn9g2vhRE1ZbcmLoHhlGUHo66WGQoY86X8QNKP5YgpTHYHlTwhhy2dfaKjtYWbxcV6TnbNpV-8GulLjgd24mDaCi37vtgCkKOQqAz9Twy7M5DMXr--WBCAFO9NMKUQfCw3YJ0shyd2l2K1-fEsO0VqnXeiX4gU-2w5xwEn9lQpbbcfHSdbL3H8A1meYwA)
+```mermaid
+sequenceDiagram
+Presentation->>Business: user creates account
+Business ->> Persistence: saving new account details
+Presentation->>Business: user attempts log in
+Business ->> Persistence: searches for user information
+Persistence ->> Business: verifies user
+Business->>Presentation: sends confirmation
+Presentation->>Business: user clicks a song
+Business ->> Persistence: Requests the song from the database
+Persistence ->> Business: Fetched the song 
+Business->>Presentation: Plays the song
+Presentation->>Business: user Likes a song
+Business ->> Persistence: Updates the database 
+Presentation->>Business: User clicks the `Liked Songs` button
+Persistence ->> Business: Fetched the liked songs from the database
+Business->>Presentation: Returns likedsongs list.
+```
 
 ## Branching Strategy
 We've been using Modified GitHub Flow branching strategy because it allows us to work on seperate features and user stories in seperate branches. At the end of the iteration, we merge respective branches into the main branch which is then ready for release.
 
+## What is currently complete and working?
+1. Implementation and connection to the HSQLDB
+2. A new feature: Liked songs
+3. Liking a song and viewing the liked song in a new page.
+4. We worked on the code smells and bugs with the highest priority.
+
+## Any special instructions on using the app?
+- Register using the register button before logging into the app. 
+- You can use the username = "admin", password = "admin" if you don't want to register. 
+
+## What did we move to the next Iteration?
+- On the Dev branch, we implemented the playlist feature.
+- The whole logic layer is almost implemented, we just couldn't figure out how to connect it to the database so we decided to push it to the next iteration.
+
+## APK
+- The APK is too large to attach to GitLabs.
+- Here's the sharable link for the APK : https://drive.google.com/file/d/1S1yxcCjBmBCqdILQpHculU7wcKPMQ_pw/view?usp=sharing
 

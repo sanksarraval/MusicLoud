@@ -70,7 +70,7 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
      */
     private final List<IPlayStateCallback> mPlayStateCallbackList = new ArrayList<>();
 
-    /*
+    /**
      * constructor
      */
     private MediaPlayerUtil() {
@@ -81,7 +81,7 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
         mPlayer.setOnPreparedListener(this);
     }
 
-    /*
+    /**
      * Set the playback list
      *
      * @param musicList music list
@@ -100,15 +100,18 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
     }
 
 
-    /*
+    /**
      * Gets the position being played
      *
      * @return The position that is playing
+     */
 
     public int getPlayingPosition() {
-        return mPlayingPosition;
+        int pos = mPlayingPosition%accessSongs.getSongs().size();
+        System.out.println(pos);
+        return pos;
     }
-    */
+
 
     /**
      * play
@@ -343,7 +346,6 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
      * @param mp    MediaPlayer
      * @param what  what the Message is
      * @param extra extra of Message
-     * @return
      */
     @Override
     public boolean onError(MediaPlayer mp, int what, int extra) {
@@ -412,7 +414,7 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
      *
      * @param name Song title
      */
-    private void notifyPlayPrepare(String name) {
+    public void notifyPlayPrepare(String name) {
         for (int i = 0; i < mPlayStateCallbackList.size(); i++) {
             IPlayStateCallback callback = mPlayStateCallbackList.get(i);
             if (callback != null) {
@@ -478,7 +480,7 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
      * @param name     Song title
      * @param progress Play schedule
      */
-    private void notifyPlayProgress(String name, int progress) {
+    public void notifyPlayProgress(String name, int progress) {
         for (int i = 0; i < mPlayStateCallbackList.size(); i++) {
             IPlayStateCallback callback = mPlayStateCallbackList.get(i);
             if (callback != null) {
@@ -492,13 +494,35 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
      *
      * @param name Song title
      */
-    private void notifyPlayComplete(String name) {
+    public void notifyPlayComplete(String name) {
         for (int i = 0; i < mPlayStateCallbackList.size(); i++) {
             IPlayStateCallback callback = mPlayStateCallbackList.get(i);
             if (callback != null) {
                 callback.onComplete(name);
             }
         }
+    }
+
+    /**
+     * The position of the previous song
+     *
+     * @param playingPosition Play position
+     * @return The calculated play position
+     */
+    public int getLastPlayingPosition(int playingPosition) {
+        int playListSize = mPlayMusicList.size();
+        return playingPosition - 1 < 0 ? playListSize - 1 : playingPosition - 1;
+    }
+
+    /**
+     * The position of the next song
+     *
+     * @param playingPosition Play position
+     * @return The calculated play position
+     */
+    public int getNextPlayingPosition(int playingPosition) {
+        int playListSize = mPlayMusicList.size();
+        return playingPosition + 1 >= playListSize ? 0 : playingPosition + 1;
     }
 
 }

@@ -3,12 +3,22 @@ package com.example.musicloud.business;
 import com.example.musicloud.objects.User;
 
 public class LoginManager {
-    private AccessUsers accessUsers;
+    /**
+     * AccessUsers instance
+     * */
+    private final AccessUsers accessUsers;
 
+    /**
+     * LoginManager Constructor
+     * */
     public LoginManager(AccessUsers accessUsers) {
         this.accessUsers = accessUsers;
     }
 
+    /**
+     * login
+     * @return True if the user is verified.
+     * */
     public boolean login(String username, String password) {
         if (accessUsers.verifyUser(username, password)) {
             // Return true if the user is verified
@@ -18,7 +28,10 @@ public class LoginManager {
             return false;
         }
     }
-
+    /**
+     * getCurrentUser
+     * @return The User Object
+     * */
     public User getCurrentUser(String username) {
         return accessUsers.returnAccount(username);
     }

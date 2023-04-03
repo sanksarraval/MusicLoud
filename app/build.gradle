@@ -35,9 +35,16 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'org.hsqldb:hsqldb:2.4.1'
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:3.12.4'
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // test directory
+    testImplementation 'org.mockito:mockito-core:4.11.0'
+
+    // androidTest directory
+    //androidTestImplementation "org.mockito:mockito-android:4.11.0"
 
 }

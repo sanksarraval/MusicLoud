@@ -3,17 +3,28 @@ package com.example.musicloud.objects;
 import java.util.Objects;
 
 public class User {
-    private String userID;
-    private String userName;
-    private String password;
+    /**
+     * Private Access Variables
+     * */
+    private String userID; // Stores a Unique UserID
+    private String userName; // Stores the Users Name
+    private String password; // Stores the password
 
+    /**
+     * User Constructor
+     * @param userID: The userID
+     * @param password: The password which user enters
+     * @param userName: The User's Name
+     * */
     public User(String userID, String userName, String password)
     {
         this.userID = userID;
         this.userName = userName;
         this.password = password;
     }
-
+    /**
+     * Getter Methods: Used for testing
+     * */
     public String getUserID() {
         return userID;
     }
@@ -25,6 +36,10 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    /**
+     * Setter Methods: Used for testing
+     * */
 
     public void setUserID(String userID) {
         this.userID = userID;
