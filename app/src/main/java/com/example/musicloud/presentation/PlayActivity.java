@@ -428,12 +428,5 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    /**
-     * Removes the selected Playlist
-     *
-     * @param v
-     */
-    public void removePlaylistButton(View v) {
 
-    }
 }

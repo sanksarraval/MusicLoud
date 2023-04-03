@@ -6,16 +6,17 @@
     android:layout_height="match_parent"
     android:background="#7f6b97"
     android:orientation="vertical">
-
+    <!-- Remove Playlist -->
     <TextView
         android:id="@+id/playlist_songs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginStart="12dp"
-        android:text="@string/LikedSongs"
         android:textColor="@color/black"
         android:textSize="38sp" />
+
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -38,6 +39,16 @@
 
 
     </ScrollView>
+    <Button
+        android:id="@+id/remove_playlist_button"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="0dp"
+        android:background="#3d036b"
+        android:backgroundTint="@color/gray"
+        android:onClick="removePlaylistButton"
+        android:text="@string/RemovePlaylist" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

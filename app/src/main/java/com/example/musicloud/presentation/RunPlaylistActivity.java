@@ -35,7 +35,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
     private AppCompatImageView ivReplay;
     private AppCompatImageView ivLike;
     private ProgressBar pbProgress;
-    private AccessSongs songs = new AccessSongs();
+    private final AccessSongs songs = new AccessSongs();
     private List<String> musicList = songs.getSongNames();
     private Song currentSong; // declare a field to hold the current song object
     private int currentPos;
@@ -68,8 +68,6 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
         Intent intent = getIntent();
         int getPIndex = intent.getIntExtra("number",0);
         currentP = allP.get(getPIndex);
-        playlistSongs = currentP.getSongs();
-
         TextView headingP = findViewById(R.id.playlist_songs);
         headingP.setText(currentP.getName());
 
@@ -84,7 +82,6 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
 
             layout.setOnClickListener(view -> {
 
-                musicList = currentP.getSongNames();
 
                 // get the position of the clicked song item
                 currentPos = index; // use the index to set the current position

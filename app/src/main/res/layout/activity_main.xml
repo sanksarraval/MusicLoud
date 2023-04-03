@@ -188,17 +188,6 @@
                 android:onClick="addPlaylistButton"
                 android:text="@string/AddPlaylist" />
 
-            <!-- Remove Playlist -->
-            <Button
-                android:id="@+id/remove_playlist_button"
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="0dp"
-                android:background="#3d036b"
-                android:backgroundTint="@color/gray"
-                android:onClick="removePlaylistButton"
-                android:text="@string/RemovePlaylist" />
 
         </LinearLayout>
 
