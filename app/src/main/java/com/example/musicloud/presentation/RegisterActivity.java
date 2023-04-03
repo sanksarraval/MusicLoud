@@ -16,6 +16,7 @@ import com.example.musicloud.business.AccessUsers;
 import com.example.musicloud.business.AccountAlreadyExistsException;
 import com.example.musicloud.business.EmptyUserIDException;
 import com.example.musicloud.business.PasswordTooShortException;
+import com.example.musicloud.business.ValidateException;
 import com.example.musicloud.business.ValidationInput;
 import com.example.musicloud.business.ValidateException;
 import com.example.musicloud.objects.User;
