@@ -1,13 +1,17 @@
 package com.example.musicloud.presentation;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,7 +32,10 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView tvName;
     private AppCompatImageView ivPlay;
+
+    private AutoCompleteTextView actvSearch;
     private AppCompatImageView ivLike;
+    private ImageView ivClear;
     private ProgressBar pbProgress;
     private final AccessSongs songs = new AccessSongs();
     private final List<Song> songList = songs.getSongs();
@@ -42,6 +49,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @param savedInstanceState
      */
+    @SuppressLint("MissingInflatedId")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,39 +60,31 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         tvName = findViewById(R.id.tvName);
         AppCompatImageView ivLast = findViewById(R.id.ivLast);
         ivPlay = findViewById(R.id.ivPlay);
+        actvSearch = findViewById(R.id.actvSearch);
+        ivClear = findViewById(R.id.ivClear);
         AppCompatImageView ivNext = findViewById(R.id.ivNext);
         AppCompatImageView ivReplay = findViewById(R.id.ivReplay);
         pbProgress = findViewById(R.id.pbProgress);
         ivLike = findViewById(R.id.ivLike);
-
 
         //Loop
         LinearLayout songLayout = findViewById(R.id.song);
 
         for (int i = 0; i < songList.size(); i++) {
             Song song = songList.get(i);
-            @SuppressLint("InflateParams") FrameLayout layout = (FrameLayout) getLayoutInflater().inflate(R.layout.song_item, null);
+            @SuppressLint("InflateParams") LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.song_item, null);
             layout.setId(i);
 
+            Button button = layout.findViewById(R.id.song_button);
+            button.setId(View.generateViewId());
+            button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
             int finalI = i;
-            layout.setOnClickListener(view -> {
+            button.setOnClickListener(view -> {
                 // get the position of the clicked song item
-                currentPos = finalI; // use the index to set the current position
+                currentPos = finalI;
                 mediaPlayerUtil.setPlayingPosition(finalI);
                 mediaPlayerUtil.play(songList.get(finalI).getSongName());
                 setHeart(currentSong);
-
-                // add click animation
-                view.animate()
-                        .scaleX(0.9f)
-                        .scaleY(0.9f)
-                        .setDuration(100)
-                        .withEndAction(() -> view.animate()
-                                .scaleX(1f)
-                                .scaleY(1f)
-                                .setDuration(100)
-                                .start())
-                        .start();
             });
             TextView songNameTextView = layout.findViewById(R.id.song_name_textview);
             songNameTextView.setText(song.getSongName());
@@ -97,19 +97,41 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         //Set play source
         Intent intent = getIntent();
-        currentPos = mediaPlayerUtil.getPlayingPosition();
-        int position = intent.getIntExtra("position", currentPos);
+        int position = intent.getIntExtra("position", 0);
         mediaPlayerUtil.setPlayMusicList(musicList);
         mediaPlayerUtil.setPlayingPosition(position);
+        currentPos = position;
         setMusicInfo(musicList.get(position));
         currentSong = songList.get(position);
         setHeart(currentSong);
 
+        /*
+         * Automatic search control setup logic
+         */
+        //Define data set
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, musicList);
+        //Set data set
+        actvSearch.setAdapter(adapter);
+        //Set at least a few characters to display the prompt
+        actvSearch.setThreshold(1);
+        actvSearch.setOnItemClickListener((adapterView, view, pos, id) -> {
+            //Set the name of the song to play
+            //Get the content clicked on
+            String name = (String) adapterView.getItemAtPosition(pos);
+            //Gets the index location based on the content
+            mediaPlayerUtil.setPlayingPosition(musicList.indexOf(name));
+            //play the song
+            mediaPlayerUtil.play(name);
+            //Simultaneous vanishing keyboard
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(actvSearch.getWindowToken(), 0);
+        });
 
         ivLast.setOnClickListener(this);
         ivPlay.setOnClickListener(this);
         ivNext.setOnClickListener(this);
         ivReplay.setOnClickListener(this);
+        ivClear.setOnClickListener(this);
     }
 
     /**
@@ -123,6 +145,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
     /**
      * Switch to the previous song
      *
@@ -242,16 +265,16 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @param current
      */
-    public void setLikedInfo(@NonNull Song current){
+    public void setLikedInfo(@NonNull Song current) {
         boolean liked = songs.isLiked(current);
-        if(!liked){
+        if (!liked) {
             songs.likeSong(current);
         } else {
             songs.unlikeSong(current);
         }
         setHeart(current);
         likedSongs = songs.getLikedSongs();
-        for(int i = 0; i < likedSongs.size(); i++){
+        for (int i = 0; i < likedSongs.size(); i++) {
             System.out.println(likedSongs.get(i));
         }
     }
@@ -261,9 +284,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @param current
      */
-    public void setHeart(@NonNull Song current){
+    public void setHeart(@NonNull Song current) {
         boolean liked = songs.isLiked(current);
-        if(!liked){
+        if (!liked) {
             ivLike.setImageResource(R.mipmap.openheart);
         } else {
             ivLike.setImageResource(R.mipmap.heart);
@@ -319,6 +342,9 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                     mediaPlayerUtil.play();
                 }
                 break;
+            case R.id.ivClear:
+                actvSearch.setText("");
+                break;
             default:
         }
     }
@@ -328,7 +354,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @param v
      */
-    public void buttonLikeClick(View v){
+    public void buttonLikeClick(View v) {
         setLikedInfo(currentSong);
     }
 
@@ -344,6 +370,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * Goes from main UI to Liked Songs UI
+     *
      * @param v
      */
     public void likedButtonClick(View v) {

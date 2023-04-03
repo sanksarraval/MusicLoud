@@ -11,8 +11,8 @@
         android:id="@+id/library"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginStart="12dp"
         android:text="@string/Library"
         android:textColor="@color/black"
         android:textSize="40sp" />
@@ -21,12 +21,52 @@
         android:id="@+id/separator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:background="#000000" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/actvSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_input_bg"
+            android:hint="@string/str_auto_search_hint"
+            android:paddingStart="15dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="8dp"
+            android:text=""
+            android:textColorHint="@color/white_be"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/ivClear"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp"
+            android:src="@mipmap/ic_clear"
+            app:layout_constraintBottom_toBottomOf="@id/actvSearch"
+            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintEnd_toEndOf="@id/actvSearch"
+            app:layout_constraintTop_toTopOf="@id/actvSearch" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="2dp"
         android:layout_weight="1"
         android:orientation="vertical"
         android:paddingTop="@dimen/activity_horizontal_margin"
@@ -43,10 +83,10 @@
                 android:id="@+id/songs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Songs"
-                android:textColor="@color/black"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
+                android:text="@string/Songs"
+                android:textColor="@color/black"
                 android:textSize="25sp" />
 
 
@@ -92,9 +132,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:background="#E9D6EC"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:background="#E9D6EC">
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/tvName"
@@ -155,10 +195,10 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivLike"
-            android:onClick="buttonLikeClick"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="10dp"
+            android:onClick="buttonLikeClick"
             app:layout_constraintBottom_toBottomOf="@id/ivPlay"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivReplay"

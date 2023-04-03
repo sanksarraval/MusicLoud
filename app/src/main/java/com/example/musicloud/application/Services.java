@@ -14,15 +14,15 @@ public class Services {
 
     public static synchronized UserManagement getAccountManagement() {
         if (accountManagement == null) {
-            //accountManagement = new UserManagementHSQLDB(MyApp.getDBPathName());
-            accountManagement = new UserManagementStub();
+            accountManagement = new UserManagementHSQLDB(MyApp.getDBPathName());
+
         }
         return accountManagement;
     }
 
     public static synchronized SongPersistence getSongPersistence() {
         if (songPersistence == null) {
-            //songPersistence = new SongPersistenceStub();
+
             songPersistence = new SongPersistenceHSQLDB(MyApp.getDBPathName());
         }
         return songPersistence;

@@ -21,45 +21,11 @@ public class UserManagementHSQLDB implements UserManagement {
      * */
     public UserManagementHSQLDB(String dbPath) {
         this.dbPath = dbPath;
-        try{
-            createTable();
-            insertDummyData();
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-        }
+
     }
 
     private Connection connection() throws SQLException {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
-    }
-    /**
-     * createTable: Creates a Table if not created already.
-     *
-     * */
-    private void createTable() throws SQLException {
-        final Connection conn = connection();
-        String query = "CREATE TABLE IF NOT EXISTS Users (UserID VARCHAR(50) PRIMARY KEY, UserName VARCHAR(50), Password VARCHAR(50))";
-        Statement stmt = conn.createStatement();
-        stmt.executeUpdate(query);
-        stmt.close();
-    }
-    /**
-     * insertDummyData: Inserting the Dummy Data
-     *
-     * */
-    private void insertDummyData() throws SQLException {
-        final Connection conn = connection();
-        String query1 = "INSERT INTO Users VALUES('ravals1', 'Sanskar Raval', 'Sanskar123')";
-        String query2 = "INSERT INTO Users VALUES('chauhana', 'Aakash Chaohan', 'Aakash123')";
-        String query3 = "INSERT INTO Users VALUES('seraspij', 'Jacob Seraspi', 'Jacob123')";
-        String query4 = "INSERT INTO Users VALUES('admin', 'admin', 'admin')";
-        Statement stmt = conn.createStatement();
-        stmt.executeUpdate(query1);
-        stmt.executeUpdate(query2);
-        stmt.executeUpdate(query3);
-        stmt.executeUpdate(query4);
-        stmt.close();
     }
 
     /**
