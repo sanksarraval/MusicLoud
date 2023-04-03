@@ -70,6 +70,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
         currentP = allP.get(getPIndex);
         TextView headingP = findViewById(R.id.playlist_songs);
         headingP.setText(currentP.getName());
+        playlistSongs = currentP.getSongs();
 
         //Loop for songs
         LinearLayout songLayout = findViewById(R.id.playlist_song);
@@ -374,6 +375,10 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
         super.onDestroy();
         //Cancel playback status listening
         MediaPlayerUtil.getInstance().unregisterCallback(this);
+    }
+
+    public void removePlaylistButton(View v){
+
     }
 
 }
