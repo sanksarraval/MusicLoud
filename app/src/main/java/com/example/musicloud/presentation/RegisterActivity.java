@@ -34,6 +34,7 @@ public class RegisterActivity extends Activity {
     private TextInputEditText passwordEditText;
     private TextInputEditText fullNameEditText;
     private boolean flag = false;
+    private static String dbName = "SC";
 
 
 
@@ -102,51 +103,39 @@ public class RegisterActivity extends Activity {
 
 
     private void copyDatabaseToDevice() {
-        final String DB_PATH = "db";
-
+        final String dbPath = "db";
         String[] assetNames;
-        Context context = getApplicationContext();
-        File dataDirectory = context.getDir(DB_PATH, Context.MODE_PRIVATE);
+        File dataDirectory = getApplicationContext().getDir(dbPath, Context.MODE_PRIVATE);
+        dbName = dataDirectory.getAbsolutePath() + "/SC";
+        System.out.println(dbName);
         AssetManager assetManager = getAssets();
-
         try {
-
-            assetNames = assetManager.list(DB_PATH);
+            assetNames = assetManager.list(dbPath);
             for (int i = 0; i < assetNames.length; i++) {
-                assetNames[i] = DB_PATH + "/" + assetNames[i];
+                assetNames[i] = dbPath + "/" + assetNames[i];
             }
-
             copyAssetsToDirectory(assetNames, dataDirectory);
-
-            MyApp.setDBPathName(dataDirectory.toString() + "/" + MyApp.getDBPathName());
-
         } catch (final IOException ioe) {
-            Messages.warning(this, "Unable to access application data: " + ioe.getMessage());
+            ioe.printStackTrace();
         }
     }
 
-    public void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
+    private void copyAssetsToDirectory(String[] assets, File directory) throws IOException {
         AssetManager assetManager = getAssets();
-
         for (String asset : assets) {
             String[] components = asset.split("/");
             String copyPath = directory.toString() + "/" + components[components.length - 1];
-
             char[] buffer = new char[1024];
             int count;
-
             File outFile = new File(copyPath);
-
             if (!outFile.exists()) {
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
-
                 count = in.read(buffer);
                 while (count != -1) {
                     out.write(buffer, 0, count);
                     count = in.read(buffer);
                 }
-
                 out.close();
                 in.close();
             }
