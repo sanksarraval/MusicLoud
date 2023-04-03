@@ -75,11 +75,11 @@ public class AccessUsers {
     /**
      * addAccount Adds a new account.
      * */
-     public void addAccount(User newUser)
-     {
-         if(newUser != null)
-         {
-            userManagement.addAccount(newUser);
-         }
-     }
+    public void addAccount(User newUser) throws AccountAlreadyExistsException {
+        if (accountFound(newUser.getUserName())) {
+            throw new AccountAlreadyExistsException("User already exists with ID: " + newUser.getUserName());
+        }
+        userManagement.addAccount(newUser);
+    }
+
 }
