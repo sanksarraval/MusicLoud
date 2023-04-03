@@ -79,7 +79,6 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             button.setId(View.generateViewId());
             button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
             int finalI = i;
-
             button.setOnClickListener(view -> {
                 // get the position of the clicked song item
                 currentPos = finalI;
