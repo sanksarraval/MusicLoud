@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/liked_songs"
+        android:id="@+id/playlist_songs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -26,7 +26,7 @@
         android:background="#3d036b">
 
         <LinearLayout
-            android:id="@+id/songs_liked"
+            android:id="@+id/playlist_song"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">

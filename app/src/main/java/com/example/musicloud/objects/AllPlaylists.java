@@ -27,4 +27,15 @@ public class AllPlaylists {
     public void remove(Playlist rem){
         allP.remove(rem);
     }
+
+    //getSize
+    public int size(){
+        return allP.size();
+    }
+
+    //get method
+    public Playlist get(int i){
+        return allP.get(i);
+    }
+
 }

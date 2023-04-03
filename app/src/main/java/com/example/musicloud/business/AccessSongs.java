@@ -1,6 +1,8 @@
 package com.example.musicloud.business;
 
 import com.example.musicloud.application.Services;
+import com.example.musicloud.objects.AllPlaylists;
+import com.example.musicloud.objects.Playlist;
 import com.example.musicloud.objects.Song;
 import com.example.musicloud.persistence.SongPersistence;
 
@@ -98,5 +100,22 @@ public class AccessSongs {
         songNames = songPersistence.allSongNames();
         return songNames;
     }
-    
+
+    //USES FAKE DB, to return an AllPlaylists object, fake db for testing
+    public AllPlaylists getAllPlaylists(){
+        Playlist p1 = new Playlist("P1");
+        p1.addSong(new Song("Not Enough To Give", "Ketsa", "Ketsa - Not Enough To Give"));
+        p1.addSong(new Song("Nightfall", "Stereohada", "Stereohada - Nightfall"));
+
+        Playlist p2 = new Playlist("P2");
+        p2.addSong(new Song("Rain Man","Ketsa","Ketsa - Rain Man"));
+        p2.addSong(new Song("Nightfall", "Stereohada", "Stereohada - Nightfall"));
+
+        AllPlaylists allP = new AllPlaylists();
+        allP.add(p1);
+        allP.add(p2);
+
+        return allP;
+    }
+
 }

@@ -35,4 +35,22 @@ public class Playlist {
         }
     }
 
+    //to get all song list
+    public List<Song> getSongs(){
+        return songs;
+    }
+
+    //to get playlist name
+    public String getName(){
+        return name;
+    }
+
+    public List<String> getSongNames(){
+        List<String> names = new ArrayList<String>();
+
+        for(int i=0;i<songs.size();i++){
+            names.add(songs.get(i).getSongName());
+        }
+        return names;
+    }
 }
