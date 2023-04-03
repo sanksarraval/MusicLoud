@@ -1,7 +1,5 @@
 package com.example.musicloud.objects;
 
-import androidx.annotation.NonNull;
-
 public class Song {
 
     private int id;
@@ -119,7 +117,6 @@ public class Song {
     /**
      * toString for Song object
      */
-    @NonNull
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("Song{");
