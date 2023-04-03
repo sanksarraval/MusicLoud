@@ -44,6 +44,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private int currentPos;
     private List<Song> likedSongs = songs.getLikedSongs();
 
+
     /**
      * Initializes the main page
      *

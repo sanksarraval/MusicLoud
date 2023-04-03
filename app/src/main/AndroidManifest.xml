@@ -38,6 +38,7 @@
         </activity>
         <activity android:name="com.example.musicloud.presentation.PlayActivity" />
         <activity android:name="com.example.musicloud.presentation.LikedActivity" />
+        <activity android:name=".presentation.AddPlaylistActivity" />
     </application>
 
 </manifest>

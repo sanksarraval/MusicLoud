@@ -48,12 +48,20 @@ public class AddPlaylistActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_playlist);
+        setContentView(R.layout.activity_like);
         MediaPlayerUtil mediaPlayerUtil = MediaPlayerUtil.getInstance();
         //Register for playback status listening
         mediaPlayerUtil.registerCallback(this);
+        tvName = findViewById(R.id.tvName);
+        ivLast = findViewById(R.id.ivLast);
+        ivPlay = findViewById(R.id.ivPlay);
+        ivNext = findViewById(R.id.ivNext);
+        ivReplay = findViewById(R.id.ivReplay);
+        pbProgress = findViewById(R.id.pbProgress);
+        ivLike = findViewById(R.id.ivLike);
 
         //Loop for songs
+        LinearLayout songLayout = findViewById(R.id.songs_liked);
 
         for (int i = 0; i < likedSongs.size(); i++) {
             Song song = likedSongs.get(i);
@@ -87,6 +95,7 @@ public class AddPlaylistActivity extends AppCompatActivity implements View.OnCli
             TextView artistTextView = layout.findViewById(R.id.artist_textview2);
             artistTextView.setText(song.getArtist());
 
+            songLayout.addView(layout);
         }
 
 
