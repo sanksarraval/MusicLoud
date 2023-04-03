@@ -18,8 +18,8 @@
 
         <ImageView
             android:id="@+id/song_button2"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginTop="5dp"
             android:src="@android:color/transparent"
             android:background="@drawable/nightfall"
@@ -37,7 +37,7 @@
                 android:id="@+id/song_name_textview2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/white" />
 
             <TextView
@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="15sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 

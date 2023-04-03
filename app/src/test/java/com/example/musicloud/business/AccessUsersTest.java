@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
@@ -68,16 +68,9 @@ public class AccessUsersTest {
 
     @Test
     public void testAddAccount() {
-        User user1 = new User("testID", "User1", "password");
-        try {
-        // Add the first user
-        accessUsers.addAccount(user1);
-        verify(userManagement, times(1)).addAccount(user1);
-        } catch (AccountAlreadyExistsException e) {
-            // Expected exception was thrown
-        }
+        User user = new User("testID", "User1","password");
 
-        // Verify that the second user was not added
-        verify(userManagement, times(1)).addAccount(user1);
+        accessUsers.addAccount(user);
+        verify(userManagement, times(1)).addAccount(user);
     }
 }

@@ -138,8 +138,8 @@ public class LikedActivity extends AppCompatActivity implements View.OnClickList
      */
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(LikedActivity.this, PlayActivity.class);
-        LikedActivity.this.startActivity(intent);
+        // Navigate to the Home screen of your app
+        super.onBackPressed();
     }
     /**
      * Switch to the previous song

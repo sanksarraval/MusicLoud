@@ -102,7 +102,7 @@
                     android:id="@+id/song"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#3d036b"
+                    android:background="@color/white"
                     android:orientation="horizontal">
 
 
