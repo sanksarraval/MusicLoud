@@ -111,10 +111,8 @@ public class MediaPlayerUtil implements MediaPlayer.OnCompletionListener, MediaP
             return 0;
         }
         int pos = mPlayingPosition%accessSongs.getSongs().size();
-        System.out.println(pos);
         return pos;
     }
-
 
 
     /**
