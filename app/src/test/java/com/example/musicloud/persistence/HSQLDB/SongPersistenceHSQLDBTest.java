@@ -20,6 +20,7 @@ public class SongPersistenceHSQLDBTest {
     private final String COLUMN_SONG_NAME = "song_name";
     private final String COLUMN_ARTIST = "artist";
     private final String COLUMN_ALBUM_NAME = "album_name";
+    private final String COLUMN_IMG_ID = "image_id";
     private final String COLUMN_IS_LIKED = "is_liked";
 
     private Connection c;
@@ -61,7 +62,7 @@ public class SongPersistenceHSQLDBTest {
         final ResultSet rs = stQuery.executeQuery(String.format("SELECT * FROM %s order by id desc", TABLE_SONG));
         if (rs.next()) {
             id = rs.getInt(COLUMN_ID);
-            Song song = new Song(id, rs.getString(COLUMN_SONG_NAME), rs.getString(COLUMN_ARTIST), rs.getString(COLUMN_ALBUM_NAME), rs.getInt(COLUMN_IS_LIKED) == 1);
+            Song song = new Song(id, rs.getString(COLUMN_SONG_NAME), rs.getString(COLUMN_ARTIST), rs.getString(COLUMN_ALBUM_NAME), rs.getString(COLUMN_IMG_ID), rs.getInt(COLUMN_IS_LIKED) == 1);
             System.out.println("song==" + song);
         }
         rs.close();
@@ -75,7 +76,7 @@ public class SongPersistenceHSQLDBTest {
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery(String.format("SELECT * FROM %s", TABLE_SONG));
             while (rs.next()) {
-                Song song = new Song(rs.getInt(COLUMN_ID), rs.getString(COLUMN_SONG_NAME), rs.getString(COLUMN_ARTIST), rs.getString(COLUMN_ALBUM_NAME), rs.getInt(COLUMN_IS_LIKED) == 1);
+                Song song = new Song(rs.getInt(COLUMN_ID), rs.getString(COLUMN_SONG_NAME), rs.getString(COLUMN_ARTIST), rs.getString(COLUMN_ALBUM_NAME), rs.getString(COLUMN_IMG_ID), rs.getInt(COLUMN_IS_LIKED) == 1);
                 System.out.println("song==" + song);
             }
             rs.close();

@@ -21,7 +21,6 @@
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:src="@android:color/transparent"
-            android:background="@drawable/nightfall"
             android:layout_marginTop="10dp"/>
 
         <TextView

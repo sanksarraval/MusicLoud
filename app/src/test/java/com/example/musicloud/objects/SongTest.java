@@ -17,9 +17,9 @@ public class SongTest {
 
         song = new Song("song","artist");
         song1 = new Song("song1","artist1","album1");
-        song2 = new Song(102,"song2","artist2","album2", true);
+        song2 = new Song(102,"song2","artist2","album2", "imgid2", true);
         song3 = new Song(103);
-        song4 = new Song ("song4", "artist4","album4", true);
+        song4 = new Song ("song4", "artist4","album4", "imgid3", true);
     }
 
     @Test

@@ -12,6 +12,8 @@ public class Song {
 
     private final String albumName;
 
+    private final String imgID;
+
     /**
      * boolean indicating if song has been liked
      */
@@ -24,6 +26,7 @@ public class Song {
         this.songName = songName;
         this.artist = artist;
         albumName = "na";
+        imgID = "na";
         liked = false;
     }
 
@@ -34,26 +37,29 @@ public class Song {
         this.songName = songName;
         this.artist = artist;
         this.albumName = albumName;
+        imgID = "na";
     }
 
     /**
      * constructor
      */
-    public Song (String songName, String artist, String albumName, boolean liked) {
+    public Song (String songName, String artist, String albumName, String imgID, boolean liked) {
         this.songName = songName;
         this.artist = artist;
         this.albumName = albumName;
+        this.imgID = imgID;
         this.liked = liked;
     }
 
     /**
      * constructor
      */
-    public Song(int id, String songName, String artist, String albumName, boolean liked) {
+    public Song(int id, String songName, String artist, String albumName, String imgID, boolean liked) {
         this.id = id;
         this.songName = songName;
         this.artist = artist;
         this.albumName = albumName;
+        this.imgID = imgID;
         this.liked = liked;
     }
 
@@ -64,6 +70,7 @@ public class Song {
         this.id = id;
         this.songName = null;
         this.artist = null;
+        this.imgID = "na";
         this.albumName = "na";
     }
 
@@ -103,6 +110,10 @@ public class Song {
     }
 
     /**
+     * @return image id
+     */
+    public String getImgID() {return imgID; }
+    /**
      * @return whether song is liked or not
      */
     public boolean isLiked() {
@@ -134,6 +145,9 @@ public class Song {
         }
         if (albumName != null){
             s.append("album name='").append(albumName).append("', ");
+        }
+        if (imgID != null){
+            s.append("image id='").append(imgID).append("', ");
         }
         s.append("liked='").append(liked).append("'}");
 
