@@ -8,12 +8,12 @@ public class ValidationInput {
         // UserID and Password should not contain spaces and must match a regex expression.
         if (userID.isEmpty() || password.isEmpty() || fullName.isEmpty() ||
                 !userID.matches("^[a-zA-Z0-9]+$")) {
-            throw new ValidateException("User ID, password, and full name cannot be empty, and must be alphanumeric and not contain spaces");
+            throw new EmptyUserIDException("User ID, password, and full name cannot be empty, and must be alphanumeric and not contain spaces");
         }
 
         // Password length should be greater than 2.
         else if (password.length() < 2) {
-            throw new ValidateException("Password must be at least 2 characters long");
+            throw new PasswordTooShortException("Password must be at least 2 characters long");
         }
     }
 }
