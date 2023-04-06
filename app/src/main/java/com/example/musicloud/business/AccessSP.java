@@ -3,6 +3,7 @@ package com.example.musicloud.business;
 import android.util.Log;
 
 import com.example.musicloud.application.Services;
+import com.example.musicloud.objects.Playlist;
 import com.example.musicloud.objects.SP;
 import com.example.musicloud.objects.Song;
 import com.example.musicloud.persistence.SPPersistence;
@@ -112,17 +113,9 @@ public class AccessSP {
         return songs;
     }
 
-    public List<String> allSongNames(String playlistName){
-        if (elements == null){
-            elements = dataAccess.getPS(playlistName);
-        }
-
-        List<String> names = new ArrayList<String>();
-
-        for(int i=0; i<elements.size();i++){
-            names.add(elements.get(i).getSongName());
-        }
-
-        return names;
+    public void removeData(Playlist current){
+       dataAccess.deletePairs(current);
     }
+
+
 }

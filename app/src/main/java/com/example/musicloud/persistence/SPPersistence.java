@@ -1,5 +1,6 @@
 package com.example.musicloud.persistence;
 
+import com.example.musicloud.objects.Playlist;
 import com.example.musicloud.objects.SP;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface SPPersistence {
      * returns list of all PS objects with playlist name passed to method
      */
     List<SP> getPS (final String playlistName);
+
+    void deletePairs(Playlist current);
 }

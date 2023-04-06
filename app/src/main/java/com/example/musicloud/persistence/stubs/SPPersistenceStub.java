@@ -69,4 +69,9 @@ public class SPPersistenceStub implements SPPersistence {
         }
         return newSPs;
     }
+
+    public void deletePairs(Playlist current){
+
+    }
+
 }

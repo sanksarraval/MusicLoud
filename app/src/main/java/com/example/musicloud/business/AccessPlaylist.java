@@ -43,4 +43,11 @@ public class AccessPlaylist {
     public Playlist insertPlaylist (Playlist currentPlaylist){
         return playlistPersistence.insertPlaylist(currentPlaylist);
     }
+
+    /**
+     * removePlaylist
+     */
+    public void removePlaylist(Playlist current){
+        playlistPersistence.deletePlaylist(current);
+    }
 }

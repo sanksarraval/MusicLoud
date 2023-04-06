@@ -136,4 +136,14 @@ public class SPPersistenceHSQLDB implements SPPersistence {
         stmt.close();
     }
 
+    public void deletePairs(Playlist current){
+        try (final Connection c = connection()) {
+            final PreparedStatement sc = c.prepareStatement("DELETE FROM songsPlaylists WHERE playlist_id = ?");
+            sc.setInt(1, current.getId());
+            sc.executeUpdate();
+            sc.close();
+        } catch (final SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

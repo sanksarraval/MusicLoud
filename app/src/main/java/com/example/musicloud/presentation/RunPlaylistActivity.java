@@ -38,11 +38,12 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
     private AppCompatImageView ivReplay;
     private AppCompatImageView ivLike;
     private ProgressBar pbProgress;
-    private final AccessSongs songs = new AccessSongs();
+    private AccessSongs songs = new AccessSongs();
+    private List<Song> songList = songs.getSongs();
+    private List<String> musicList = songs.getSongNames();
     private final AccessPlaylist playlists = new AccessPlaylist();
     private final AccessSP allPairs = new AccessSP();
 
-    private List<String> musicList;
     private Song currentSong; // declare a field to hold the current song object
     private int currentPos;
     private List<Song> likedSongs = songs.getLikedSongs();
@@ -85,6 +86,9 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
         for (int i = 0; i < playlistSongs.size(); i++) {
             Song song = playlistSongs.get(i);
             int index = findPos(song); // get the index of the current song in likedSongs
+            Log.wtf("songindex", index+"");
+
+
             @SuppressLint("InflateParams") FrameLayout layout = (FrameLayout) getLayoutInflater().inflate(R.layout.liked_item, null);
             layout.setId(i);
 
@@ -94,7 +98,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
                 // get the position of the clicked song item
                 currentPos = index; // use the index to set the current position
                 mediaPlayerUtil.setPlayingPosition(index);
-                mediaPlayerUtil.play(playlistSongs.get(index).getSongName());
+                mediaPlayerUtil.play(songList.get(index).getSongName());
                 setHeart(currentSong);
 
                 // add click animation
@@ -122,19 +126,17 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
 
 
 
+
         //Set play source
         intent = getIntent();
         currentPos = mediaPlayerUtil.getPlayingPosition();
         int position = intent.getIntExtra("position", currentPos);
-        if(position >= playlistSongs.size()){
-            position = 0;
-        }
 
-        musicList = allPairs.allSongNames(currentP.getPlaylistName());
+
         mediaPlayerUtil.setPlayMusicList(musicList);
         mediaPlayerUtil.setPlayingPosition(position);
         setMusicInfo(musicList.get(position));
-        currentSong = playlistSongs.get(position);
+        currentSong = songList.get(position);
         setHeart(currentSong);
 
 
@@ -152,9 +154,8 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
      */
     public int findPos(Song current){
         int pos = 0;
-        for(int i = 0; i < playlistSongs.size(); i++){
-            Log.wtf("extra", playlistSongs.get(0).getId()+"");
-            if(playlistSongs.get(i).getSongName().equals(current.getSongName())){
+        for(int i = 0; i < songList.size(); i++){
+            if(songList.get(i).getSongName().equals(current.getSongName())){
                 pos = i;
             }
         }
@@ -388,7 +389,14 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void removePlaylistButton(View v){
+        playlists.removePlaylist(currentP); //remove from playlist table
+        allPairs.removeData(currentP);  //remove related data from SP table
 
+        MediaPlayerUtil mediaPlayerUtil = MediaPlayerUtil.getInstance();
+        mediaPlayerUtil.pause();
+
+        Intent intent = new Intent(RunPlaylistActivity.this, PlayActivity.class);
+        RunPlaylistActivity.this.startActivity(intent);
     }
 
 }
