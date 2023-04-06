@@ -43,10 +43,4 @@
     <string name="artist5">Tysm</string>
     <string name="album5">na</string>
     <string name="LikedSongs">Liked Songs</string>
-    <string name="todo">TODO</string>
-    <string name="str_auto_search_hint">Please enter the name of the song</string>
-    <string name="AddPlaylist">Add PLaylist</string>
-    <string name="RemovePlaylist">Remove PLaylist</string>
-
-
 </resources>
