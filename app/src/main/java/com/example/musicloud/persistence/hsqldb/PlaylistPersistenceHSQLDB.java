@@ -22,7 +22,6 @@ public class PlaylistPersistenceHSQLDB implements PlaylistPersistence {
         this.dbPath = dbPath;
         try{
             createTable();
-            insertDummyData();
         }
         catch(SQLException e){
             e.printStackTrace();

@@ -110,22 +110,16 @@
             </HorizontalScrollView>
 
             <!-- Liked Songs -->
-            <TextView
-                android:id="@+id/like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/LikedSongs"
-                android:textColor="@color/black"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:textSize="25sp" />
             <Button
                 android:id="@+id/random_button"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
+                android:text="@string/LikedSongs"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="0dp"
+                android:background="#3d036b"
                 android:backgroundTint="@color/gray"
-                android:onClick="likedButtonClick"
-                android:layout_marginLeft="10dp"/>
+                android:onClick="likedButtonClick" />
 
         </LinearLayout>
 
@@ -191,7 +185,6 @@
                 android:backgroundTint="@color/gray"
                 android:onClick="addPlaylistButton"
                 android:text="@string/AddPlaylist" />
-
 
         </LinearLayout>
 

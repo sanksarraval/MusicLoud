@@ -2,8 +2,10 @@ package com.example.musicloud.business;
 
 import com.example.musicloud.application.Services;
 import com.example.musicloud.objects.SP;
+import com.example.musicloud.objects.Song;
 import com.example.musicloud.persistence.SPPersistence;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccessSP {
@@ -92,5 +94,34 @@ public class AccessSP {
             currentPS = 0;
         }
         return songPlaylist;
+    }
+
+
+    public List<Song> allSongs(String playlistName){
+        if (elements == null){
+            elements = dataAccess.getPS(playlistName);
+        }
+
+        List<Song> songs = new ArrayList<Song>();
+
+        for(int i=0; i<elements.size();i++){
+            songs.add(elements.get(i).getSong());
+        }
+
+        return songs;
+    }
+
+    public List<String> allSongNames(String playlistName){
+        if (elements == null){
+            elements = dataAccess.getPS(playlistName);
+        }
+
+        List<String> names = new ArrayList<String>();
+
+        for(int i=0; i<elements.size();i++){
+            names.add(elements.get(i).getSongName());
+        }
+
+        return names;
     }
 }

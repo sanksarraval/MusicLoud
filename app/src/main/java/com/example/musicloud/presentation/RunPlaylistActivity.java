@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.example.musicloud.R;
+import com.example.musicloud.business.AccessPlaylist;
+import com.example.musicloud.business.AccessSP;
 import com.example.musicloud.business.AccessSongs;
 import com.example.musicloud.objects.AllPlaylists;
 import com.example.musicloud.objects.Playlist;
@@ -36,14 +38,18 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
     private AppCompatImageView ivLike;
     private ProgressBar pbProgress;
     private final AccessSongs songs = new AccessSongs();
+    private final AccessPlaylist playlists = new AccessPlaylist();
+    private final AccessSP allPairs = new AccessSP();
+
     private List<String> musicList = songs.getSongNames();
     private Song currentSong; // declare a field to hold the current song object
     private int currentPos;
     private List<Song> likedSongs = songs.getLikedSongs();
 
-    private AllPlaylists allP = songs.getAllPlaylists();
+    private List<Playlist> allP = playlists.getPlaylists();
     private Playlist currentP; //current playlist
     private List<Song> playlistSongs; // current playlist songs
+
 
     /**
      * Creates the likes songs interface and keeps the state of the mediaplayer
@@ -69,8 +75,8 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
         int getPIndex = intent.getIntExtra("number",0);
         currentP = allP.get(getPIndex);
         TextView headingP = findViewById(R.id.playlist_songs);
-        headingP.setText(currentP.getName());
-        playlistSongs = currentP.getSongs();
+        headingP.setText(currentP.getPlaylistName());
+        playlistSongs = allPairs.allSongs(currentP.getPlaylistName());
 
         //Loop for songs
         LinearLayout songLayout = findViewById(R.id.playlist_song);
@@ -118,11 +124,11 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
         intent = getIntent();
         currentPos = mediaPlayerUtil.getPlayingPosition();
         int position = intent.getIntExtra("position", currentPos);
-        if(position >= currentP.getSongs().size()){
+        if(position >= playlistSongs.size()){
             position = 0;
         }
 
-        mediaPlayerUtil.setPlayMusicList(currentP.getSongNames());
+        mediaPlayerUtil.setPlayMusicList(allPairs.allSongNames(currentP.getPlaylistName()));
         mediaPlayerUtil.setPlayingPosition(position);
         setMusicInfo(musicList.get(position));
         currentSong = playlistSongs.get(position);

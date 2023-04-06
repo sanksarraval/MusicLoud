@@ -23,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.example.musicloud.R;
+import com.example.musicloud.business.AccessPlaylist;
+import com.example.musicloud.business.AccessSP;
 import com.example.musicloud.business.AccessSongs;
 import com.example.musicloud.objects.AllPlaylists;
 import com.example.musicloud.objects.Playlist;
@@ -40,14 +42,16 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView ivClear;
     private ProgressBar pbProgress;
     private final AccessSongs songs = new AccessSongs();
+    private final AccessPlaylist playlists = new AccessPlaylist();
+    private final AccessSP allPairs = new AccessSP();
     private final List<Song> songList = songs.getSongs();
     private final List<String> musicList = songs.getSongNames();
     private Song currentSong; // declare a field to hold the current song object
     private int currentPos;
     private List<Song> likedSongs = songs.getLikedSongs();
+    private List<Playlist> allP = playlists.getPlaylists();
 
     //all playlist obj
-    private AllPlaylists allP = songs.getAllPlaylists();
 
 
 
@@ -109,7 +113,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         //Loop
         LinearLayout playListLayout = findViewById(R.id.playlist);
 
-        for (int i = 0; i < allP.size(); i++) {
+        for (int i = 0; i <allP.size(); i++) {
             Playlist onePlaylist = allP.get(i);
 
             @SuppressLint("InflateParams") LinearLayout layout =
@@ -119,7 +123,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             Button button = layout.findViewById(R.id.playlist_button);
             button.setId(View.generateViewId());
             button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.purple_500)));
-            button.setText(onePlaylist.getName());
+            button.setText(onePlaylist.getPlaylistName());
 
             int number = i;
 
