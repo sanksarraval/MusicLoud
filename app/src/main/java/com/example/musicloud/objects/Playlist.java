@@ -29,9 +29,9 @@ public class Playlist {
         this.description = description;
     }
 
-    public Playlist(int playlistId) {
+    public Playlist(int playlistId, String pName) {
         this.id = playlistId;
-        this.playlistName = null;
+        this.playlistName = pName;
         this.description = null;
     }
 

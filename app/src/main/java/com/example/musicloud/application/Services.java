@@ -1,5 +1,7 @@
 package com.example.musicloud.application;
 
+import android.util.Log;
+
 import com.example.musicloud.objects.SP;
 import com.example.musicloud.persistence.PlaylistPersistence;
 import com.example.musicloud.persistence.SPPersistence;
@@ -40,6 +42,7 @@ public class Services {
         if (playlistPersistence == null) {
 //            playlistPersistence = new PlaylistPersistenceStub();
             playlistPersistence = new PlaylistPersistenceHSQLDB(MyApp.getDBPathName());
+            Log.wtf("extra", MyApp.getDBPathName());
         }
         return playlistPersistence;
     }

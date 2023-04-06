@@ -1,5 +1,7 @@
 package com.example.musicloud.business;
 
+import android.util.Log;
+
 import com.example.musicloud.application.Services;
 import com.example.musicloud.objects.SP;
 import com.example.musicloud.objects.Song;
@@ -103,7 +105,6 @@ public class AccessSP {
         }
 
         List<Song> songs = new ArrayList<Song>();
-
         for(int i=0; i<elements.size();i++){
             songs.add(elements.get(i).getSong());
         }

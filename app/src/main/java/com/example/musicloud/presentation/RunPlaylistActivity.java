@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -41,7 +42,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
     private final AccessPlaylist playlists = new AccessPlaylist();
     private final AccessSP allPairs = new AccessSP();
 
-    private List<String> musicList = songs.getSongNames();
+    private List<String> musicList;
     private Song currentSong; // declare a field to hold the current song object
     private int currentPos;
     private List<Song> likedSongs = songs.getLikedSongs();
@@ -120,6 +121,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
 
 
 
+
         //Set play source
         intent = getIntent();
         currentPos = mediaPlayerUtil.getPlayingPosition();
@@ -128,7 +130,8 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
             position = 0;
         }
 
-        mediaPlayerUtil.setPlayMusicList(allPairs.allSongNames(currentP.getPlaylistName()));
+        musicList = allPairs.allSongNames(currentP.getPlaylistName());
+        mediaPlayerUtil.setPlayMusicList(musicList);
         mediaPlayerUtil.setPlayingPosition(position);
         setMusicInfo(musicList.get(position));
         currentSong = playlistSongs.get(position);
@@ -150,6 +153,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
     public int findPos(Song current){
         int pos = 0;
         for(int i = 0; i < playlistSongs.size(); i++){
+            Log.wtf("extra", playlistSongs.get(0).getId()+"");
             if(playlistSongs.get(i).getSongName().equals(current.getSongName())){
                 pos = i;
             }

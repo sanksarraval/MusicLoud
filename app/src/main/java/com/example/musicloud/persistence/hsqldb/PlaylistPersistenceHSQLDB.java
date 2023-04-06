@@ -21,20 +21,20 @@ public class PlaylistPersistenceHSQLDB implements PlaylistPersistence {
      */
     public PlaylistPersistenceHSQLDB(String dbPath) {
         this.dbPath = dbPath;
-        try{
-            createTable();
-
-            if(wasCreated){
-
-            }
-            else{
-                wasCreated = true;
-                insertDummyData();
-            }
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-        }
+//        try{
+//            createTable();
+//
+//            if(wasCreated){
+//
+//            }
+//            else{
+//                wasCreated = true;
+//                insertDummyData();
+//            }
+//        }
+//        catch(SQLException e){
+//            e.printStackTrace();
+//        }
     }
 
     /**

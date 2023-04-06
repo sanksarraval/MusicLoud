@@ -121,7 +121,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             layout.setId(i);
 
             Button button = layout.findViewById(R.id.playlist_button);
-            button.setId(View.generateViewId());
+                button.setId(View.generateViewId());
             button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.purple_500)));
             button.setText(onePlaylist.getPlaylistName());
 
