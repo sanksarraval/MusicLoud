@@ -38,6 +38,7 @@ public class SongPersistenceHSQLDB implements SongPersistence {
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Rain Man', 'Ketsa', 'Ketsa - Rain Man', 'rainman', 0);", sqlStartStr));
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('Not Enough To Give', 'Ketsa', 'Ketsa - Not Enough To Give', 'notenoughtogive', 0);", sqlStartStr));
                 st.executeUpdate(String.format("INSERT INTO %s VALUES ('NightFall', 'Stereohada', 'Stereohada - Nightfall', 'nightfall', 0);", sqlStartStr));
+                st.executeUpdate(String.format("INSERT INTO %s VALUES ('Above the Clouds', 'Scott Holmes Music', 'Indie-Pop & Acoustic Background Music', 'abovetheclouds', 0);", sqlStartStr));
             }
             rs.close();
             st.close();
