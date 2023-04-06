@@ -14,6 +14,7 @@ import java.util.List;
 
 public class PlaylistPersistenceHSQLDB implements PlaylistPersistence {
     private final String dbPath;
+    private static boolean wasCreated = false;
 
     /**
      * constructor
@@ -22,6 +23,14 @@ public class PlaylistPersistenceHSQLDB implements PlaylistPersistence {
         this.dbPath = dbPath;
         try{
             createTable();
+
+            if(wasCreated){
+
+            }
+            else{
+                wasCreated = true;
+                insertDummyData();
+            }
         }
         catch(SQLException e){
             e.printStackTrace();
