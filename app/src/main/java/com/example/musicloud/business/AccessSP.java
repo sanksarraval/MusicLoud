@@ -116,6 +116,4 @@ public class AccessSP {
     public void removeData(Playlist current){
        dataAccess.deletePairs(current);
     }
-
-
 }
