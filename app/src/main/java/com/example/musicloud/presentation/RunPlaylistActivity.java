@@ -61,7 +61,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_playlist);
+        setContentView(R.layout.activity_run_playlist);
         MediaPlayerUtil mediaPlayerUtil = MediaPlayerUtil.getInstance();
         //Register for playback status listening
         mediaPlayerUtil.registerCallback(this);

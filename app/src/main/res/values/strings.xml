@@ -48,6 +48,8 @@
 
     <string name="RemovePlaylist">Remove</string>
     <string name="AddPlaylist">Add Playlist</string>
+    <string name="SavePlaylist">Save</string>
+    <string name="NewPlaylistInputText">Enter Playlist Name</string>
 
 
 </resources>
