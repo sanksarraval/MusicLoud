@@ -1,25 +1,15 @@
 package com.example.musicloud.presentation;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageView;
 
 import com.example.musicloud.R;
 import com.example.musicloud.business.AccessPlaylist;
@@ -27,7 +17,6 @@ import com.example.musicloud.business.AccessSP;
 import com.example.musicloud.business.AccessSongs;
 import com.example.musicloud.objects.Playlist;
 import com.example.musicloud.objects.Song;
-import com.example.musicloud.persistence.SongPersistence;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,16 +76,21 @@ public class AddPlaylistActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void savePlaylistButton(View v){
-//        EditText inputBox = findViewById(R.id.new_play_name);
-//        String playlistName = inputBox.getText().toString();
-//
-//        if(clicked.size()>0){
-//            //only make playlist if at least 1 song selected
-//            playlists.insertPlaylist(new Playlist(playlistName));
-//
-//            for(int i=0;i<clicked.size();i++){
-//                allPairs.
-//            }
-//        }
+        EditText inputBox = findViewById(R.id.new_play_name);
+        String playlistName = inputBox.getText().toString();
+
+        if(clicked.size()>0){
+            //only make playlist if at least 1 song selected
+            playlists.insertPlaylist(new Playlist(playlistName));
+            int pId = playlists.getPlaylistId(playlistName);
+
+            for(int i=0;i<clicked.size();i++){
+                int sId = clicked.get(i).getId();
+                allPairs.insertData(pId, playlistName, sId, clicked.get(i).getSongName());
+            }
+        }
+
+        Intent intent = new Intent(AddPlaylistActivity.this, PlayActivity.class );
+        AddPlaylistActivity.this.startActivity(intent);
     }
 }

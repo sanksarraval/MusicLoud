@@ -146,4 +146,19 @@ public class SPPersistenceHSQLDB implements SPPersistence {
             e.printStackTrace();
         }
     }
+
+
+    public void insertPairs(int pId, String playlistName, int sId,  String songName){
+        try (final Connection c = connection()) {
+            final PreparedStatement sc = c.prepareStatement("INSERT INTO songsPlaylists VALUES( ?, ?, ?, ?)");
+            sc.setInt(1, pId);
+            sc.setString(2, playlistName);
+            sc.setInt(3, sId);
+            sc.setString(4, songName);
+            sc.executeUpdate();
+            sc.close();
+        } catch (final SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -116,4 +116,8 @@ public class AccessSP {
     public void removeData(Playlist current){
        dataAccess.deletePairs(current);
     }
+
+
+    public void insertData(int pId, String playlistName, int sId, String songName){
+        dataAccess.insertPairs(pId, playlistName, sId, songName);}
 }

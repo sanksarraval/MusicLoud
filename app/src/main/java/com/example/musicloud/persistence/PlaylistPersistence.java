@@ -24,4 +24,5 @@ public interface PlaylistPersistence {
      * delete playlist
      */
     void deletePlaylist (Playlist currentPlaylist);
+
 }

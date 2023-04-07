@@ -74,4 +74,8 @@ public class SPPersistenceStub implements SPPersistence {
 
     }
 
+
+    public void insertPairs(int pId, String playlistName, int sId, String songName){
+
+    }
 }

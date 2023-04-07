@@ -50,4 +50,17 @@ public class AccessPlaylist {
     public void removePlaylist(Playlist current){
         playlistPersistence.deletePlaylist(current);
     }
+
+
+    public int getPlaylistId(String playlistName){
+        playlists = playlistPersistence.getPlaylist();
+
+
+        for(int i=0;i<playlists.size();i++){
+            if(playlistName.equals(playlists.get(i).getPlaylistName())){
+                return playlists.get(i).getId();
+            }
+        }
+        return -1;
+    }
 }

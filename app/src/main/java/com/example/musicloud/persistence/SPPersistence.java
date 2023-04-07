@@ -17,4 +17,7 @@ public interface SPPersistence {
     List<SP> getPS (final String playlistName);
 
     void deletePairs(Playlist current);
+
+     void insertPairs(int pId, String playlistName, int sId, String songName);
+
 }
