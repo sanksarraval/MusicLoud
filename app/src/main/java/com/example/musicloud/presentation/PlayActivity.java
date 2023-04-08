@@ -11,15 +11,18 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.example.musicloud.R;
@@ -32,28 +35,54 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView tvName;
     private AppCompatImageView ivPlay;
-
     private AutoCompleteTextView actvSearch;
     private AppCompatImageView ivLike;
-    private ImageView ivClear;
     private ProgressBar pbProgress;
     private final AccessSongs songs = new AccessSongs();
     private final List<Song> songList = songs.getSongs();
     private final List<String> musicList = songs.getSongNames();
     private Song currentSong; // declare a field to hold the current song object
     private int currentPos;
-    private List<Song> likedSongs = songs.getLikedSongs();
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
+    private Switch aSwitch;
+
+    private static final String SWITCH_STATE_KEY = "switch_state";
 
     /**
      * Initializes the main page
      *
-     * @param savedInstanceState
+     * @param savedInstanceState: A mapping from String keys to various Parcelable  values.
      */
     @SuppressLint("MissingInflatedId")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        aSwitch = findViewById(R.id.switch1);
+        if (savedInstanceState != null) {
+            // Restore switch state from saved instance state
+            aSwitch.setChecked(savedInstanceState.getBoolean(SWITCH_STATE_KEY));
+        } else {
+            // Set default switch state
+            aSwitch.setChecked(false);
+        }
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                {
+                    // Night Mode
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+                else
+                {
+                    // Day Mode
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
+            }
+        });
+
         MediaPlayerUtil mediaPlayerUtil = MediaPlayerUtil.getInstance();
         //Register for playback status listening
         mediaPlayerUtil.registerCallback(this);
@@ -61,7 +90,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         AppCompatImageView ivLast = findViewById(R.id.ivLast);
         ivPlay = findViewById(R.id.ivPlay);
         actvSearch = findViewById(R.id.actvSearch);
-        ivClear = findViewById(R.id.ivClear);
+        ImageView ivClear = findViewById(R.id.ivClear);
         AppCompatImageView ivNext = findViewById(R.id.ivNext);
         AppCompatImageView ivReplay = findViewById(R.id.ivReplay);
         pbProgress = findViewById(R.id.pbProgress);
@@ -133,6 +162,24 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         ivReplay.setOnClickListener(this);
         ivClear.setOnClickListener(this);
     }
+
+    /**
+     * Save switch state in the bundle
+     *
+     * @param savedInstanceState: A mapping from String keys to various Parcelable  values.
+     */
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putBoolean(SWITCH_STATE_KEY, aSwitch.isChecked());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getDelegate().applyDayNight(); // Apply the current day/night mode
+    }
+
 
     /**
      * What happens when back is pressed on the phone
@@ -263,7 +310,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Likes and unlikes the song
      *
-     * @param current
+     * @param current: Current song object
      */
     public void setLikedInfo(@NonNull Song current) {
         boolean liked = songs.isLiked(current);
@@ -273,7 +320,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             songs.unlikeSong(current);
         }
         setHeart(current);
-        likedSongs = songs.getLikedSongs();
+        List<Song> likedSongs = songs.getLikedSongs();
         for (int i = 0; i < likedSongs.size(); i++) {
             System.out.println(likedSongs.get(i));
         }
@@ -282,7 +329,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Sets the image for the heart of the song
      *
-     * @param current
+     * @param current: Current song Object
      */
     public void setHeart(@NonNull Song current) {
         boolean liked = songs.isLiked(current);
@@ -296,7 +343,8 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * What happens when certain buttons are pressed
      *
-     * @param view
+     * @param view: This class represents the basic building block for user interface components.
+     *              A View occupies a rectangular area on the screen and is responsible for drawing and event handling.
      */
     @SuppressLint("NonConstantResourceId")
     @Override
@@ -352,7 +400,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * What happens when the heart button is pressed
      *
-     * @param v
+     * @param v: This class represents the basic building block for user interface components.
      */
     public void buttonLikeClick(View v) {
         setLikedInfo(currentSong);
@@ -371,7 +419,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * Goes from main UI to Liked Songs UI
      *
-     * @param v
+     * @param v: This class represents the basic building block for user interface components.
      */
     public void likedButtonClick(View v) {
         Intent intent = new Intent(PlayActivity.this, LikedActivity.class);
