@@ -12,14 +12,6 @@ public class AccessSongs {
      * SongPersistence instance
      */
     private final SongPersistence songPersistence;
-    /**
-     * List of all songs
-     */
-    private List<Song> songs;
-    /**
-     * List of all song names
-     */
-    private List<String> songNames;
 
 
     /**
@@ -27,12 +19,6 @@ public class AccessSongs {
      */
     public AccessSongs(){
         songPersistence = Services.getSongPersistence();
-        songs = null;
-        songNames = null;
-
-
-        //FAKE DB
-
     }
 
     /**
@@ -40,8 +26,7 @@ public class AccessSongs {
      * @return list of all songs in songPersistence
      */
     public List<Song> getSongs(){
-        songs = songPersistence.getAllSongs();
-        return Collections.unmodifiableList(songs);
+        return Collections.unmodifiableList(songPersistence.getAllSongs());
     }
 
     /**
@@ -100,8 +85,7 @@ public class AccessSongs {
      * @return list of all song names
      */
     public List<String> getSongNames(){
-        songNames = songPersistence.allSongNames();
-        return songNames;
+        return songPersistence.allSongNames();
     }
 
 }

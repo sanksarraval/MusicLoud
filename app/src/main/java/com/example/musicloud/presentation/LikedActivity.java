@@ -27,10 +27,7 @@ import java.util.List;
 public class LikedActivity extends AppCompatActivity implements View.OnClickListener, IPlayStateCallback{
 
     private TextView tvName;
-    private AppCompatImageView ivLast;
     private AppCompatImageView ivPlay;
-    private AppCompatImageView ivNext;
-    private AppCompatImageView ivReplay;
     private AppCompatImageView ivLike;
     private ProgressBar pbProgress;
     private AccessSongs songs = new AccessSongs();
@@ -43,7 +40,6 @@ public class LikedActivity extends AppCompatActivity implements View.OnClickList
     /**
      * Creates the likes songs interface and keeps the state of the mediaplayer
      *
-     * @param savedInstanceState
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,10 +49,10 @@ public class LikedActivity extends AppCompatActivity implements View.OnClickList
         //Register for playback status listening
         mediaPlayerUtil.registerCallback(this);
         tvName = findViewById(R.id.tvName);
-        ivLast = findViewById(R.id.ivLast);
+        AppCompatImageView ivLast = findViewById(R.id.ivLast);
         ivPlay = findViewById(R.id.ivPlay);
-        ivNext = findViewById(R.id.ivNext);
-        ivReplay = findViewById(R.id.ivReplay);
+        AppCompatImageView ivNext = findViewById(R.id.ivNext);
+        AppCompatImageView ivReplay = findViewById(R.id.ivReplay);
         pbProgress = findViewById(R.id.pbProgress);
         ivLike = findViewById(R.id.ivLike);
 
@@ -139,7 +135,9 @@ public class LikedActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onBackPressed() {
         // Navigate to the Home screen of your app
-        super.onBackPressed();
+        Intent intent = new Intent(LikedActivity.this, PlayActivity.class);
+        LikedActivity.this.startActivity(intent);
+
     }
     /**
      * Switch to the previous song
