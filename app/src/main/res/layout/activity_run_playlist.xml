@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7f6b97"
+    android:background="@color/mainBG"
     android:orientation="vertical">
     <!-- Remove Playlist -->
     <TextView
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginStart="12dp"
-        android:textColor="@color/black"
+        android:textColor="@color/songTextColor"
         android:textSize="38sp" />
 
 
@@ -24,7 +24,7 @@
         android:layout_weight="1"
         android:orientation="vertical"
         tools:context=".MainActivity"
-        android:background="#3d036b">
+        android:background="@color/songItemBG">
 
         <LinearLayout
             android:id="@+id/playlist_song"

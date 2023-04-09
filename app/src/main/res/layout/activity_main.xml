@@ -107,7 +107,7 @@
                      inside a Horizontal Scroll View -->
                 <LinearLayout
                     android:id="@+id/song"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:orientation="horizontal">
@@ -158,21 +158,21 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="@string/Playlists"
-                android:textColor="@color/black"
+                android:textColor="@color/songTextColor"
                 android:textSize="25sp" />
 
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#3d036b"
+                android:background="@color/songItemBG"
                 android:scrollbars="none">
 
                 <!-- using linear layout to store multiple view
                      inside a Horizontal Scroll View -->
                 <LinearLayout
                     android:id="@+id/playlist"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:orientation="horizontal">

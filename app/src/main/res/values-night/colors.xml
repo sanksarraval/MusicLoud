@@ -5,4 +5,5 @@
     <color name="mainBG">#000000</color>
     <color name="libColor">#EABBBB</color>
     <color name="songTextColor">#E6A9A9</color>
+    <color name="likeActionBG">#6E1904</color>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7f6b97"
+    android:background="@color/mainBG"
     android:orientation="vertical">
 
     <EditText
@@ -12,7 +12,7 @@
         android:hint="@string/NewPlaylistInputText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/songTextColor"
         android:textSize="35sp" />
 
     <ScrollView
@@ -21,7 +21,7 @@
         android:layout_weight="1"
         android:orientation="vertical"
         tools:context=".MainActivity"
-        android:background="#3d036b">
+        android:background="@color/songItemBG">
 
         <LinearLayout
             android:id="@+id/songs_to_add"
