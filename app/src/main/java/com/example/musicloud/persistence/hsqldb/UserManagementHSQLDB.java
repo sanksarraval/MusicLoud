@@ -14,20 +14,25 @@ import java.util.List;
 
 public class UserManagementHSQLDB implements UserManagement {
 
-    private final String dbPath;
+    private static final String TAG = "UserManagementHSQLDB";
 
     /**
      * UserManagementHSQLDB Constructor
      *
      * @param dbPath: Inject the dbPath
      */
-    public UserManagementHSQLDB(String dbPath) {
-        this.dbPath = dbPath;
-
+    public UserManagementHSQLDB(final String dbPath) {
+        try {
+            this.mConnection = DriverManager.getConnection(String.format("jdbc:hsqldb:file:%s;shutdown=true", dbPath), "SA", "");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
+    private Connection mConnection;
+
+    public void setConnection(Connection connection) {
+        this.mConnection = connection;
     }
 
     /**
@@ -38,11 +43,10 @@ public class UserManagementHSQLDB implements UserManagement {
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        try (final Connection conn = connection();
-             final Statement stmt = conn.createStatement();
+        try (final Statement stmt = mConnection.createStatement();
              final ResultSet rs = stmt.executeQuery("SELECT * FROM USERS")) {
             while (rs.next()) {
-                User user = new User(rs.getString("userID"), rs.getString("password"), rs.getString("userName"));
+                User user = new User(rs.getString("userID"), rs.getString("userName"), rs.getString("password"));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -58,12 +62,11 @@ public class UserManagementHSQLDB implements UserManagement {
      */
     @Override
     public User getUser(String userID) {
-        try (final Connection conn = connection();
-             final PreparedStatement stmt = conn.prepareStatement("SELECT * FROM USERS WHERE userID = ?")) {
+        try (final PreparedStatement stmt = mConnection.prepareStatement("SELECT * FROM USERS WHERE userID = ?")) {
             stmt.setString(1, userID);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return new User(rs.getString("userID"), rs.getString("password"), rs.getString("userName"));
+                    return new User(rs.getString("userID"), rs.getString("userName"), rs.getString("password"));
                 }
             }
         } catch (final SQLException e) {
@@ -80,8 +83,7 @@ public class UserManagementHSQLDB implements UserManagement {
     @Override
     public boolean verifyUser(String userID, String password) {
         boolean flag = false;
-        try (final Connection conn = connection();
-             final PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM USERS WHERE userID = ? AND password = ?")) {
+        try (final PreparedStatement stmt = mConnection.prepareStatement("SELECT COUNT(*) FROM USERS WHERE userID = ? AND password = ?")) {
             stmt.setString(1, userID);
             stmt.setString(2, password);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -103,8 +105,7 @@ public class UserManagementHSQLDB implements UserManagement {
      */
     @Override
     public User addAccount(User newUser) {
-        try (final Connection conn = connection();
-             final PreparedStatement stmt = conn.prepareStatement("INSERT INTO USERS VALUES (?, ?, ?)")) {
+        try (final PreparedStatement stmt = mConnection.prepareStatement("INSERT INTO USERS VALUES (?, ?, ?)")) {
             stmt.setString(1, newUser.getUserID());
             stmt.setString(2, newUser.getUserName());
             stmt.setString(3, newUser.getPassword());
@@ -120,8 +121,7 @@ public class UserManagementHSQLDB implements UserManagement {
      * cleanTable: Cleans the database for Testing.
      */
     public void cleanTable() {
-        try (final Connection conn = connection();
-             final Statement stmt = conn.createStatement()) {
+        try (final Statement stmt = mConnection.createStatement()) {
             stmt.executeUpdate("DELETE FROM USERS");
         } catch (final SQLException e) {
             e.printStackTrace();
@@ -132,8 +132,7 @@ public class UserManagementHSQLDB implements UserManagement {
      * dropTable: Drops the database for Testing.
      */
     public void dropTable() {
-        try (final Connection conn = connection();
-             final Statement stmt = conn.createStatement()) {
+        try (final Statement stmt = mConnection.createStatement()) {
             stmt.executeUpdate("DROP TABLE IF EXISTS USERS");
         } catch (final SQLException e) {
             e.printStackTrace();

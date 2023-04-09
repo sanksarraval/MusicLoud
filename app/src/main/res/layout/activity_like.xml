@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/likeActionBG"
+    android:background="#7f6b97"
     android:orientation="vertical">
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginStart="12dp"
         android:text="@string/LikedSongs"
-        android:textColor="@color/songTextColor"
+        android:textColor="@color/black"
         android:textSize="38sp" />
 
     <ScrollView
@@ -23,7 +23,7 @@
         android:layout_weight="1"
         android:orientation="vertical"
         tools:context=".MainActivity"
-        android:background="@color/songItemBG">
+        android:background="#3d036b">
 
         <LinearLayout
             android:id="@+id/songs_liked"

@@ -3,6 +3,7 @@ package com.example.musicloud.application;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -60,6 +61,8 @@ public class MyApp extends Application {
         String[] assetNames;
         File dataDirectory = getApplicationContext().getDir(dbPath, Context.MODE_PRIVATE);
         dbName = dataDirectory.getAbsolutePath() + "/SC";
+        Log.wtf("extra", dbName);
+
         System.out.println(dbName);
         AssetManager assetManager = getAssets();
         try {
