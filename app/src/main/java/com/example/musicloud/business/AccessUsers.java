@@ -26,6 +26,8 @@ public class AccessUsers {
      */
     public AccessUsers(UserManagement UM) {
         userManagement = UM;
+        User user = null;
+        int currUser = 0;
     }
 
     /**
