@@ -3,6 +3,7 @@ package com.example.musicloud.business;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import com.example.musicloud.objects.Playlist;
 import com.example.musicloud.objects.Song;
 
 import org.junit.Test;
