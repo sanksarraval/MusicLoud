@@ -10,10 +10,10 @@ The purpose of the MusicLoud project is to provide a comprehensive music managem
 
 To run MusicLoud, follow these steps:
 
-1. Clone the repository from GitHub.
-2. Install all the dependencies using `npm install`.
-3. Start the application using `npm start`.
-4. Access the application at `http://localhost:3000`.
+1. Clone the repository from GitLab.
+2. Click "get from VCS" in Android Studio
+3. Paste the URL, click "clone"
+4. Build and run it
 
 ## Documentation
 
