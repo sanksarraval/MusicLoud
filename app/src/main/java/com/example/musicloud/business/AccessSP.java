@@ -1,8 +1,6 @@
 package com.example.musicloud.business;
 
-import android.util.Log;
-
-import com.example.musicloud.application.Services;
+import com.example.musicloud.application.MyApp;
 import com.example.musicloud.objects.Playlist;
 import com.example.musicloud.objects.SP;
 import com.example.musicloud.objects.Song;
@@ -42,7 +40,7 @@ public class AccessSP {
      * constructor
      */
     public AccessSP() {
-        dataAccess = Services.getSpPersistence();
+        dataAccess = MyApp.getSpPersistence();
         elements = null;
         currentSP = 0;
         currentPS = 0;

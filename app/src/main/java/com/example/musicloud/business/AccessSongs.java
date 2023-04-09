@@ -1,6 +1,6 @@
 package com.example.musicloud.business;
 
-import com.example.musicloud.application.Services;
+import com.example.musicloud.application.MyApp;
 import com.example.musicloud.objects.Song;
 import com.example.musicloud.persistence.SongPersistence;
 
@@ -18,7 +18,7 @@ public class AccessSongs {
      * constructor
      */
     public AccessSongs() {
-        songPersistence = Services.getSongPersistence();
+        songPersistence = MyApp.getSongPersistence();
     }
 
     /**
