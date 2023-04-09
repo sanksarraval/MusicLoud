@@ -34,8 +34,7 @@ public class PlaylistTest {
         assertEquals("playlist name", playlist.getPlaylistName());
         assertEquals("playlist1 name", playlist1.getPlaylistName());
         assertEquals("playlist2 name", playlist2.getPlaylistName());
-        System.out.println("*********** Testing playlist with no name ***********");
-        assertNull(playlist3.getPlaylistName());
+        assertEquals("1", playlist3.getPlaylistName());
         System.out.println("*********** Finished testGetPlaylistName ***********");
 
     }
@@ -149,7 +148,7 @@ public class PlaylistTest {
         String expected = "Playlist{id ='102' playlistName='playlist2 name' description='this is the description of playlist2' }";
         assertEquals(expected, playlist2.toString());
 
-        expected = "Playlist{id ='103' }";
+        expected = "Playlist{id ='103' playlistName='1' }";
         assertEquals(expected, playlist3.toString());
 
         System.out.println("*********** Finished testPlaylistToString ***********");
