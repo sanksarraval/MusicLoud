@@ -2,7 +2,6 @@ package com.example.musicloud.application;
 
 import android.util.Log;
 
-import com.example.musicloud.objects.SP;
 import com.example.musicloud.persistence.PlaylistPersistence;
 import com.example.musicloud.persistence.SPPersistence;
 import com.example.musicloud.persistence.SongPersistence;
@@ -11,9 +10,7 @@ import com.example.musicloud.persistence.hsqldb.PlaylistPersistenceHSQLDB;
 import com.example.musicloud.persistence.hsqldb.SPPersistenceHSQLDB;
 import com.example.musicloud.persistence.hsqldb.SongPersistenceHSQLDB;
 import com.example.musicloud.persistence.hsqldb.UserManagementHSQLDB;
-import com.example.musicloud.persistence.stubs.PlaylistPersistenceStub;
-import com.example.musicloud.persistence.stubs.SPPersistenceStub;
-import com.example.musicloud.persistence.stubs.UserManagementStub;
+
 
 public class Services {
 

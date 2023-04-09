@@ -15,7 +15,7 @@ public class PlaylistTest {
         playlist = new Playlist("playlist name","this is the description of playlist");
         playlist1 = new Playlist("playlist1 name");
         playlist2 = new Playlist(102,"playlist2 name","this is the description of playlist2");
-        playlist3 = new Playlist(103);
+        playlist3 = new Playlist(103,"1");
 
     }
 

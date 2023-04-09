@@ -184,7 +184,7 @@ public class SongPersistenceHSQLDBTest {
     @Test
     public void testDeleteSong() {
         try {
-            Song song = new Song(100);
+            Song song = new Song(100,"1");
             mActualSongPersistenceHSQLDB.deleteSong(song);
             verify(mConnectionMock, times(1)).prepareStatement(anyString());
             verify(mStatementMock).setInt(eq(1), eq(100));

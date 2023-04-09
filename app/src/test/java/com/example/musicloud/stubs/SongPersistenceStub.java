@@ -1,4 +1,4 @@
-package com.example.musicloud.persistence.stubs;
+package com.example.musicloud.stubs;
 
 import androidx.annotation.NonNull;
 

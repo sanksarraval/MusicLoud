@@ -3,7 +3,7 @@ package com.example.musicloud.persistence;
 import static org.junit.Assert.*;
 
 import com.example.musicloud.objects.User;
-import com.example.musicloud.persistence.stubs.UserManagementStub;
+import com.example.musicloud.stubs.UserManagementStub;
 
 import org.junit.Before;
 import org.junit.Test;
