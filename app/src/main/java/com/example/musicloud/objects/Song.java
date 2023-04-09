@@ -58,11 +58,11 @@ public class Song {
     /**
      * constructor
      */
-    public Song(int id) {
+    public Song(int id, String name) {
         this.id = id;
-        this.songName = null;
+        this.songName = name;
         this.artist = null;
-        this.albumName = "na";
+        this.albumName = null;
     }
 
     /**
@@ -136,4 +136,6 @@ public class Song {
 
         return s.toString();
     }
+
+
 }

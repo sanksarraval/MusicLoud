@@ -23,7 +23,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.example.musicloud.R;
+import com.example.musicloud.business.AccessPlaylist;
+import com.example.musicloud.business.AccessSP;
 import com.example.musicloud.business.AccessSongs;
+import com.example.musicloud.objects.Playlist;
 import com.example.musicloud.objects.Song;
 
 import java.util.List;
@@ -38,11 +41,14 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView ivClear;
     private ProgressBar pbProgress;
     private final AccessSongs songs = new AccessSongs();
+    private final AccessPlaylist playlists = new AccessPlaylist();
+    private final AccessSP allPairs = new AccessSP();
     private final List<Song> songList = songs.getSongs();
     private final List<String> musicList = songs.getSongNames();
     private Song currentSong; // declare a field to hold the current song object
     private int currentPos;
     private List<Song> likedSongs = songs.getLikedSongs();
+
 
     /**
      * Initializes the main page
@@ -94,6 +100,38 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
             songLayout.addView(layout);
         }
+
+
+
+
+        //Loop to show all playlists, add all playlist buttons
+        //Loop
+        LinearLayout playListLayout = findViewById(R.id.playlist);
+
+        for (int i = 0; i <allP.size(); i++) {
+            Playlist onePlaylist = allP.get(i);
+
+            @SuppressLint("InflateParams") LinearLayout layout =
+                    (LinearLayout) getLayoutInflater().inflate(R.layout.playlist_item, null);
+            layout.setId(i);
+
+            Button button = layout.findViewById(R.id.playlist_button);
+                button.setId(View.generateViewId());
+            button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.purple_500)));
+            button.setText(onePlaylist.getPlaylistName());
+
+            int number = i;
+
+            button.setOnClickListener(view -> {
+                //to do when a playlist is clicked
+                Intent intent = new Intent(PlayActivity.this, RunPlaylistActivity.class);
+                intent.putExtra("number", number);
+                PlayActivity.this.startActivity(intent);
+            });
+
+            playListLayout.addView(layout);
+        }
+
 
         //Set play source
         Intent intent = getIntent();
@@ -377,4 +415,17 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(PlayActivity.this, LikedActivity.class);
         PlayActivity.this.startActivity(intent);
     }
+
+    /**
+     * Goes from main UI to Add Playlist UI
+     *
+     * @param v
+     */
+    public void addPlaylistButton(View v) {
+        Intent intent = new Intent(PlayActivity.this, AddPlaylistActivity.class);
+        PlayActivity.this.startActivity(intent);
+    }
+
+
+
 }

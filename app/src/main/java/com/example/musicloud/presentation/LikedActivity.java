@@ -62,7 +62,7 @@ public class LikedActivity extends AppCompatActivity implements View.OnClickList
         for (int i = 0; i < likedSongs.size(); i++) {
             Song song = likedSongs.get(i);
             int index = findPos(song); // get the index of the current song in likedSongs
-            @SuppressLint("InflateParams") FrameLayout layout = (FrameLayout) getLayoutInflater().inflate(R.layout.liked_item, null);
+            FrameLayout layout = (FrameLayout) getLayoutInflater().inflate(R.layout.liked_item, null);
             layout.setId(i);
 
             layout.setOnClickListener(view -> {
