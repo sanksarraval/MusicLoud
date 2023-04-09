@@ -13,10 +13,4 @@
     <color name="transparent_20">#33000000</color>
     <color name="transparent_30">#4d000000</color>
     <color name="transparent_40">#66000000</color>
-
-    <color name="songItemBG">#3d036b</color>
-    <color name="mainBG">#7f6b97</color>
-    <color name="libColor">#000000</color>
-    <color name="songTextColor">#000000</color>
-    <color name="likeActionBG">#7f6b97</color>
 </resources>

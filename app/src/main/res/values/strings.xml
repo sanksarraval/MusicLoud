@@ -45,14 +45,4 @@
     <string name="LikedSongs">Liked Songs</string>
     <string name="todo">TODO</string>
     <string name="str_auto_search_hint">Please enter the name of the song</string>
-
-
-    <string name="RemovePlaylist">Remove</string>
-    <string name="AddPlaylist">Add Playlist</string>
-    <string name="SavePlaylist">Save</string>
-    <string name="NewPlaylistInputText">Enter Playlist Name</string>
-
-
-    <string name="dark">Dark</string>
-
 </resources>

@@ -18,16 +18,13 @@ public class LoginActivity extends Activity {
     private EditText usernameEditText, passwordEditText;
     Button loginBtn;
 
-    private AccessUsers accessUsers;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
 
-        accessUsers = new AccessUsers();
-        accessUsers.getAccounts();
+
 
         usernameEditText = findViewById(R.id.username);
         passwordEditText = findViewById(R.id.Password);
@@ -41,7 +38,7 @@ public class LoginActivity extends Activity {
                 String userID = usernameEditText.getText().toString();
                 String pass = passwordEditText.getText().toString();
 
-                LoginManager loginManager = new LoginManager(accessUsers);
+                LoginManager loginManager = new LoginManager(new AccessUsers());
 
                 if (loginManager.login(userID, pass)) {
                     //User currUser = loginManager.getCurrentUser(userID);

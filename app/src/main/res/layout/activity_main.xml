@@ -4,16 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainBG"
+    android:background="#7f6b97"
     android:orientation="vertical">
-
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_gravity="end"
-        android:layout_height="wrap_content"
-        android:text="@string/dark"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <TextView
         android:id="@+id/library"
@@ -22,7 +14,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         android:text="@string/Library"
-        android:textColor="@color/libColor"
+        android:textColor="@color/black"
         android:textSize="40sp" />
 
     <View
@@ -94,7 +86,7 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:text="@string/Songs"
-                android:textColor="@color/songTextColor"
+                android:textColor="@color/black"
                 android:textSize="25sp" />
 
 
@@ -294,6 +286,4 @@
             app:layout_constraintTop_toBottomOf="@id/ivPlay" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </LinearLayout>
