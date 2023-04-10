@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,7 +57,10 @@ public class AddPlaylistActivity extends AppCompatActivity implements View.OnCli
             TextView artistTextView = layout.findViewById(R.id.artist_textview2);
             artistTextView.setText(song.getArtist());
 
-
+            ImageView imageView = layout.findViewById(R.id.song_button2);
+            String curr = song.getSongName();
+            curr = curr.replaceAll("\\s+", "").toLowerCase();
+            imageView.setBackgroundResource(getResources().getIdentifier(curr,"drawable", getApplicationContext().getPackageName()));
 
             layout.setOnClickListener(view->{
                 if(clicked.contains(song)){

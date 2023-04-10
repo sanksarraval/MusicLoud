@@ -96,7 +96,6 @@ public class LikedActivity extends AppCompatActivity implements View.OnClickList
             ImageView imageView = layout.findViewById(R.id.song_button2);
             String curr = song.getSongName();
             curr = curr.replaceAll("\\s+", "").toLowerCase();
-            System.out.println(curr);
             imageView.setBackgroundResource(getResources().getIdentifier(curr,"drawable", getApplicationContext().getPackageName()));
 
             songLayout.addView(layout);
