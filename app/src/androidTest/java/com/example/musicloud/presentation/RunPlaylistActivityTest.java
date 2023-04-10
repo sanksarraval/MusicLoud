@@ -38,24 +38,30 @@ public class RunPlaylistActivityTest {
         onView(withId(R.id.save_playlist_button)).perform(closeSoftKeyboard(), click());
         SystemClock.sleep(1000 * 2);
 
+
         //type playlist name as play1, save and wait
-        onView(withId(R.id.new_play_name)).perform(typeTextIntoFocusedView("noway10"));
+        onView(withId(R.id.new_play_name)).perform(typeTextIntoFocusedView("noway110"));
         SystemClock.sleep(1000*1);
         onView(withId(R.id.save_playlist_button)).perform(closeSoftKeyboard(), click());
         SystemClock.sleep(1000 * 2);
+
 
 
         //making another playlist
         onView(withId(R.id.add_playlist_button)).perform(closeSoftKeyboard(), click());
 
+
         onView(withId(R.id.songs_to_add)).perform(closeSoftKeyboard(), click());
         SystemClock.sleep(1000 * 2);
 
-        onView(withId(R.id.new_play_name)).perform(typeTextIntoFocusedView("noway10"));
+
+        onView(withId(R.id.new_play_name)).perform(typeTextIntoFocusedView("noway110"));
         SystemClock.sleep(1000*1);
+
 
         onView(withId(R.id.save_playlist_button)).perform(closeSoftKeyboard(), click());
         SystemClock.sleep(1000 * 2);
+        onView(withId(R.id.save_playlist_button)).perform(closeSoftKeyboard(), click());
 
         onView(withId(R.id.new_play_name)).perform(clearText());
         onView(withId(R.id.new_play_name)).perform(typeTextIntoFocusedView("noway111"));

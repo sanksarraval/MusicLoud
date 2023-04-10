@@ -120,5 +120,10 @@ public class PlayActivityTest {
         //Next track in 10 seconds
         SystemClock.sleep(1000 * 10);
         onView(withId(R.id.ivNext)).perform(click());
+
+        //pause and wait
+        onView(withId(R.id.ivPlay)).perform(click(), closeSoftKeyboard());
+        SystemClock.sleep(1000 * 3);
+
     }
 }
