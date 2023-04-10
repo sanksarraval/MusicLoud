@@ -14,8 +14,8 @@ import com.example.musicloud.presentation.RunPlaylistActivityTest;
         DayNightViewTest.class,
         LoginActivityTest.class,
         RegisterActivityTest.class,
-        PlayActivityTest.class,
         RunPlaylistActivityTest.class,
+        PlayActivityTest.class,
 })
 
 
