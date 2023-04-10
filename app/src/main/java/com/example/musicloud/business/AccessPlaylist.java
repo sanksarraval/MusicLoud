@@ -63,10 +63,30 @@ public class AccessPlaylist {
 
 
         for(int i=0;i<playlists.size();i++){
-            if(playlistName.equals(playlists.get(i).getPlaylistName())){
+            if(playlistName.toLowerCase().equals(playlists.get(i).getPlaylistName().toLowerCase())){
                 return playlists.get(i).getId();
             }
         }
         return -1;
+    }
+
+    /**
+     * method to validate if the new playlist to be added has valid
+     * input from user
+     * @param size size of the new playlist
+     * @param playlistName new playlist name
+     * @return true is playlist not exists already and size is more than 0
+     */
+    public boolean canAddPlaylist(int size, String playlistName){
+        playlists = playlistPersistence.getPlaylist();
+        int index = -1;
+        for(int i=0;i<playlists.size();i++){
+            if(playlistName.toLowerCase().equals(playlists.get(i).getPlaylistName().toLowerCase())){
+                index =  playlists.get(i).getId();
+                break;
+            }
+        }
+
+        return (!playlistName.trim().equals("") && index == -1 && size>0);
     }
 }

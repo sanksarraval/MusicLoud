@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -90,8 +91,9 @@ public class AddPlaylistActivity extends AppCompatActivity implements View.OnCli
     public void savePlaylistButton(View v){
         EditText inputBox = findViewById(R.id.new_play_name);
         String playlistName = inputBox.getText().toString();
+        boolean isValid = playlists.canAddPlaylist(clicked.size(), playlistName);
 
-        if(clicked.size()>0){
+        if(isValid){
             //only make playlist if at least 1 song selected
             playlists.insertPlaylist(new Playlist(playlistName));
             int pId = playlists.getPlaylistId(playlistName);
@@ -100,9 +102,20 @@ public class AddPlaylistActivity extends AppCompatActivity implements View.OnCli
                 int sId = clicked.get(i).getId();
                 allPairs.insertData(pId, playlistName, sId, clicked.get(i).getSongName());
             }
+
+            Intent intent = new Intent(AddPlaylistActivity.this, PlayActivity.class );
+            AddPlaylistActivity.this.startActivity(intent);
+        }
+        else if(clicked.size() == 0){
+            //toast message to choose right values
+            Toast.makeText(AddPlaylistActivity.this, "Please Select at least one song", Toast.LENGTH_SHORT).show();
+        }
+        else if(playlistName.trim().equals("")){
+            Toast.makeText(AddPlaylistActivity.this, "Playlist Name cannot be Empty!!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(AddPlaylistActivity.this, "Playlist with this name Exists, Please enter a new name!!", Toast.LENGTH_SHORT).show();
         }
 
-        Intent intent = new Intent(AddPlaylistActivity.this, PlayActivity.class );
-        AddPlaylistActivity.this.startActivity(intent);
     }
 }
