@@ -73,53 +73,56 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
         ivLike = findViewById(R.id.ivLike);
 
         Intent intent = getIntent();
-        int getPIndex = intent.getIntExtra("number",0);
-        currentP = allP.get(getPIndex);
-        TextView headingP = findViewById(R.id.playlist_songs);
-        headingP.setText(currentP.getPlaylistName());
-        playlistSongs = allPairs.allSongs(currentP.getPlaylistName());
+        int getPIndex = intent.getIntExtra("number",-1);
 
-        //Loop for songs
-        LinearLayout songLayout = findViewById(R.id.playlist_song);
+        if(allP.size() > 0){
+            currentP = allP.get(getPIndex);
+            TextView headingP = findViewById(R.id.playlist_songs);
+            headingP.setText(currentP.getPlaylistName());
+            playlistSongs = allPairs.allSongs(currentP.getPlaylistName());
 
-        for (int i = 0; i < playlistSongs.size(); i++) {
-            Song song = playlistSongs.get(i);
-            int index = findPos(song); // get the index of the current song in likedSongs
-            Log.wtf("songindex", index+"");
+            //Loop for songs
+            LinearLayout songLayout = findViewById(R.id.playlist_song);
 
-
-            @SuppressLint("InflateParams") FrameLayout layout = (FrameLayout) getLayoutInflater().inflate(R.layout.liked_item, null);
-            layout.setId(i);
-
-            layout.setOnClickListener(view -> {
+            for (int i = 0; i < playlistSongs.size(); i++) {
+                Song song = playlistSongs.get(i);
+                int index = findPos(song); // get the index of the current song in likedSongs
+                Log.wtf("songindex", index+"");
 
 
-                // get the position of the clicked song item
-                currentPos = index; // use the index to set the current position
-                mediaPlayerUtil.setPlayingPosition(index);
-                mediaPlayerUtil.play(songList.get(index).getSongName());
-                setHeart(currentSong);
+                @SuppressLint("InflateParams") FrameLayout layout = (FrameLayout) getLayoutInflater().inflate(R.layout.liked_item, null);
+                layout.setId(i);
 
-                // add click animation
-                view.animate()
-                        .scaleX(0.9f)
-                        .scaleY(0.9f)
-                        .setDuration(100)
-                        .withEndAction(() -> view.animate()
-                                .scaleX(1f)
-                                .scaleY(1f)
-                                .setDuration(100)
-                                .start())
-                        .start();
-            });
+                layout.setOnClickListener(view -> {
 
-            TextView songNameTextView = layout.findViewById(R.id.song_name_textview2);
-            songNameTextView.setText(song.getSongName());
 
-            TextView artistTextView = layout.findViewById(R.id.artist_textview2);
-            artistTextView.setText(song.getArtist());
+                    // get the position of the clicked song item
+                    currentPos = index; // use the index to set the current position
+                    mediaPlayerUtil.setPlayingPosition(index);
+                    mediaPlayerUtil.play(songList.get(index).getSongName());
+                    setHeart(currentSong);
 
-            songLayout.addView(layout);
+                    // add click animation
+                    view.animate()
+                            .scaleX(0.9f)
+                            .scaleY(0.9f)
+                            .setDuration(100)
+                            .withEndAction(() -> view.animate()
+                                    .scaleX(1f)
+                                    .scaleY(1f)
+                                    .setDuration(100)
+                                    .start())
+                            .start();
+                });
+
+                TextView songNameTextView = layout.findViewById(R.id.song_name_textview2);
+                songNameTextView.setText(song.getSongName());
+
+                TextView artistTextView = layout.findViewById(R.id.artist_textview2);
+                artistTextView.setText(song.getArtist());
+
+                songLayout.addView(layout);
+            }
         }
 
 
@@ -275,10 +278,12 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
         ivPlay.setImageResource(MediaPlayerUtil.getInstance().isPlaying() ? R.mipmap.pause : R.mipmap.play);
 
         // find the current song object in the songList
-        for (Song song : playlistSongs) {
-            if (song.getSongName().equals(name)) {
-                currentSong = song;
-                break;
+        if(playlistSongs != null && playlistSongs.size() > 0){
+            for (Song song : playlistSongs) {
+                if (song.getSongName().equals(name)) {
+                    currentSong = song;
+                    break;
+                }
             }
         }
     }

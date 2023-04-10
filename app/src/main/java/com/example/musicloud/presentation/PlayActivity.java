@@ -156,7 +156,6 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             button.setText(onePlaylist.getPlaylistName());
 
             int number = i;
-
             button.setOnClickListener(view -> {
                 //to do when a playlist is clicked
                 Intent intent = new Intent(PlayActivity.this, RunPlaylistActivity.class);
