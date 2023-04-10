@@ -93,6 +93,10 @@ public class SPPersistenceHSQLDB implements SPPersistence {
         return songPlaylists;
     }
 
+    /**
+     * deletes all the pairs from the table which have the provided playlist id
+     * @param current
+     */
     public void deletePairs(Playlist current){
         try (final Connection c = connection()) {
             final PreparedStatement sc = c.prepareStatement("DELETE FROM songsPlaylists WHERE playlist_id = ?");
@@ -104,7 +108,13 @@ public class SPPersistenceHSQLDB implements SPPersistence {
         }
     }
 
-
+    /**
+     * This method inserts the data values as a record into the songsPlaylists table
+     * @param pId id of the playlist
+     * @param playlistName name of the playlist
+     * @param sId song id
+     * @param songName song name
+     */
     public void insertPairs(int pId, String playlistName, int sId,  String songName){
         try (final Connection c = connection()) {
             final PreparedStatement sc = c.prepareStatement("INSERT INTO songsPlaylists VALUES( ?, ?, ?, ?)");

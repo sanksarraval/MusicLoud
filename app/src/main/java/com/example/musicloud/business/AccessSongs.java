@@ -2,9 +2,7 @@ package com.example.musicloud.business;
 
 import com.example.musicloud.application.MyApp;
 import com.example.musicloud.objects.Song;
-import com.example.musicloud.objects.User;
 import com.example.musicloud.persistence.SongPersistence;
-import com.example.musicloud.persistence.UserManagement;
 
 import java.util.Collections;
 import java.util.List;
@@ -115,10 +113,18 @@ public class AccessSongs {
         return songPersistence.allSongNames();
     }
 
+    /**
+     * returns the current playing song index
+     * @return int index value
+     */
     public int getCurrentSong(){
         return currentSong;
     }
 
+    /**
+     * updates the current song index
+     * @param newSong index of the new song to be played
+     */
     public void setCurrentSong(int newSong){
         currentSong = newSong;
     }

@@ -43,6 +43,9 @@ public class SP {
         return String.format("SP: \nSong: %s\nPlaylist: %s", song.getSongName(), playlist.getPlaylistName());
     }
 
+    /**
+     * to return the song data Object
+     */
     public Song getSong(){
         return song;
     }

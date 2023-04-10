@@ -97,7 +97,11 @@ public class AccessSP {
         return songPlaylist;
     }
 
-
+    /**
+     * returns a list of all the songs of a given playlist
+     * @param playlistName name of the playlist
+     * @return a list of Song objects
+     */
     public List<Song> allSongs(String playlistName){
         if (elements == null){
             elements = dataAccess.getPS(playlistName);
@@ -111,6 +115,10 @@ public class AccessSP {
         return songs;
     }
 
+    /**
+     * removes all the data of a given playlist
+     * @param current playlist objects
+     */
     public void removeData(Playlist current){
        dataAccess.deletePairs(current);
     }

@@ -2,12 +2,9 @@ package com.example.musicloud.presentation;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -53,7 +50,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
 
 
     /**
-     * Creates the likes songs interface and keeps the state of the mediaplayer
+     * Creates the runPlaylist songs interface and keeps the state of the mediaplayer
      *
      * @param savedInstanceState
      */
@@ -390,6 +387,10 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
         MediaPlayerUtil.getInstance().unregisterCallback(this);
     }
 
+
+    /**
+     * removes the playlist and go backs to playActivity UI
+     */
     public void removePlaylistButton(View v){
         playlists.removePlaylist(currentP); //remove from playlist table
         allPairs.removeData(currentP);  //remove related data from SP table

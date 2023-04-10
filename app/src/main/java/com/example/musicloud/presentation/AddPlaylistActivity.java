@@ -31,7 +31,10 @@ public class AddPlaylistActivity extends AppCompatActivity implements View.OnCli
     private AccessSP allPairs = new AccessSP();
     private AccessPlaylist playlists = new AccessPlaylist();
 
-
+    /**
+     *  creates the add playlist interface with all the song buttons and front-end
+     * @param savedInstanceState
+     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_playlist);
@@ -70,11 +73,20 @@ public class AddPlaylistActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-
+    /**
+     *
+     * @param v
+     */
     public void onClick(View v){
-
+        //does something when a button is clicked, all buttons covered
+        //in onCreate, so nothing here, part of interface
     }
 
+    /**
+     * When the save playlist button is clicked, it stores all the clicked songs
+     * in the database tables and takes back to playActivity
+     * @param v
+     */
     public void savePlaylistButton(View v){
         EditText inputBox = findViewById(R.id.new_play_name);
         String playlistName = inputBox.getText().toString();
