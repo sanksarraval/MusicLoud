@@ -6,7 +6,6 @@ import org.junit.runners.Suite;
 import com.example.musicloud.presentation.LoginActivityTest;
 import com.example.musicloud.presentation.PlayActivityTest;
 import com.example.musicloud.presentation.RegisterActivityTest;
-import com.example.musicloud.presentation.RunPlaylistActivity;
 import com.example.musicloud.presentation.RunPlaylistActivityTest;
 
 @RunWith(Suite.class)
