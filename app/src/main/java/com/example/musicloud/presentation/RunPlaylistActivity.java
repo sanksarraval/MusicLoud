@@ -96,6 +96,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
                     songs.setCurrentSong(currentPos);
                     mediaPlayerUtil.setPlayingPosition(index);
                     mediaPlayerUtil.play(songList.get(index).getSongName());
+                    currentSong = songList.get(currentPos);
                     setHeart(currentSong);
 
                     // add click animation
