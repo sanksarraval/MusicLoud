@@ -75,7 +75,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
         Intent intent = getIntent();
         int getPIndex = intent.getIntExtra("number",-1);
 
-        if(allP.size() > 0){
+        if(getPIndex < allP.size()){
             currentP = allP.get(getPIndex);
             TextView headingP = findViewById(R.id.playlist_songs);
             headingP.setText(currentP.getPlaylistName());
