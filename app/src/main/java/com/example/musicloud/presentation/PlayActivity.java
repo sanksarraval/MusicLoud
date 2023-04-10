@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -113,26 +114,41 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         for (int i = 0; i < songList.size(); i++) {
             Song song = songList.get(i);
-            @SuppressLint("InflateParams") LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.song_item, null);
+            @SuppressLint("InflateParams") FrameLayout layout = (FrameLayout) getLayoutInflater().inflate(R.layout.song_item, null);
             layout.setId(i);
 
-            Button button = layout.findViewById(R.id.song_button);
-            button.setId(View.generateViewId());
-            button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray)));
             int finalI = i;
-            button.setOnClickListener(view -> {
+            layout.setOnClickListener(view -> {
                 // get the position of the clicked song item
                 songs.setCurrentSong(finalI);
                 currentPos = songs.getCurrentSong();
                 mediaPlayerUtil.setPlayingPosition(finalI);
                 mediaPlayerUtil.play(songList.get(finalI).getSongName());
                 setHeart(currentSong);
+
+                // add click animation
+                view.animate()
+                        .scaleX(0.9f)
+                        .scaleY(0.9f)
+                        .setDuration(100)
+                        .withEndAction(() -> view.animate()
+                                .scaleX(1f)
+                                .scaleY(1f)
+                                .setDuration(100)
+                                .start())
+                        .start();
             });
+
             TextView songNameTextView = layout.findViewById(R.id.song_name_textview);
             songNameTextView.setText(song.getSongName());
 
             TextView artistTextView = layout.findViewById(R.id.artist_textview);
             artistTextView.setText(song.getArtist());
+
+            ImageView imageView = layout.findViewById(R.id.song_button);
+            String curr = song.getSongName();
+            curr = curr.replaceAll("\\s+", "").toLowerCase();
+            imageView.setBackgroundResource(getResources().getIdentifier(curr,"drawable", getApplicationContext().getPackageName()));
 
             songLayout.addView(layout);
         }
