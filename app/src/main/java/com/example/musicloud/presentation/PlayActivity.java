@@ -163,12 +163,10 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i <allP.size(); i++) {
             Playlist onePlaylist = allP.get(i);
 
-            @SuppressLint("InflateParams") LinearLayout layout =
-                    (LinearLayout) getLayoutInflater().inflate(R.layout.playlist_item, null);
+            @SuppressLint("InflateParams") LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.playlist_item, null);
             layout.setId(i);
 
             Button button = layout.findViewById(R.id.playlist_button);
-                button.setId(View.generateViewId());
             button.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.purple_500)));
             button.setText(onePlaylist.getPlaylistName());
 
