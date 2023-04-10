@@ -1,9 +1,5 @@
 package com.example.musicloud.objects;
 
-import androidx.annotation.NonNull;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Playlist {
@@ -66,7 +62,6 @@ public class Playlist {
     public int getId(){ return id;}
     public void setId(int id){this.id = id;}
 
-    @NonNull
     public String toString(){
         StringBuilder s = new StringBuilder("Playlist{");
         if (id>0){
@@ -81,6 +76,5 @@ public class Playlist {
         s.append("}");
 
         return s.toString();
-//        return String.format("\nPlaylist: \n id: %d \n name: %s \n description: %s", id, playlistName, description);
     }
 }

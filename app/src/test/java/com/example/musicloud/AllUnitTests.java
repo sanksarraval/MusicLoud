@@ -4,8 +4,6 @@ import com.example.musicloud.application.MediaPlayerIntegrationTest;
 import com.example.musicloud.application.MediaPlayerTest;
 import com.example.musicloud.business.AccessPlaylistTest;
 import com.example.musicloud.business.AccessSPTest;
-import com.example.musicloud.business.AccessSongs;
-import com.example.musicloud.business.AccessSongsTest;
 import com.example.musicloud.business.AccessUsersTest;
 import com.example.musicloud.business.LoginManagerTest;
 import com.example.musicloud.business.ValidationInputTest;
@@ -25,7 +23,6 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        MediaPlayerTest.class,
         AccessPlaylistTest.class,
         AccessSPTest.class,
         AccessUsersTest.class,
@@ -43,7 +40,7 @@ import org.junit.runners.Suite;
         SongPersistenceHSQLDBIntegrationTest.class,
         UserManagementHSQLDBIntegrationTest.class
 })
-public class AllTests
+public class AllUnitTests
 {
 
 

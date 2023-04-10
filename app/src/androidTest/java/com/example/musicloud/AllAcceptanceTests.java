@@ -3,6 +3,7 @@ package com.example.musicloud;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import com.example.musicloud.presentation.DayNightViewTest;
 import com.example.musicloud.presentation.LoginActivityTest;
 import com.example.musicloud.presentation.PlayActivityTest;
 import com.example.musicloud.presentation.RegisterActivityTest;
@@ -10,6 +11,7 @@ import com.example.musicloud.presentation.RunPlaylistActivityTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses(value = {
+        DayNightViewTest.class,
         LoginActivityTest.class,
         RegisterActivityTest.class,
         PlayActivityTest.class,
