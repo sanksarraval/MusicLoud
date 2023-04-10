@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -91,6 +92,12 @@ public class LikedActivity extends AppCompatActivity implements View.OnClickList
 
             TextView artistTextView = layout.findViewById(R.id.artist_textview2);
             artistTextView.setText(song.getArtist());
+
+            ImageView imageView = layout.findViewById(R.id.song_button2);
+            String curr = song.getSongName();
+            curr = curr.replaceAll("\\s+", "").toLowerCase();
+            System.out.println(curr);
+            imageView.setBackgroundResource(getResources().getIdentifier(curr,"drawable", getApplicationContext().getPackageName()));
 
             songLayout.addView(layout);
         }

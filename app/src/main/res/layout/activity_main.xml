@@ -109,7 +109,7 @@
                     android:id="@+id/song"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="@color/songItemBG"
                     android:orientation="horizontal">
 
 
@@ -128,27 +128,6 @@
                 android:background="#3d036b"
                 android:backgroundTint="@color/gray"
                 android:onClick="likedButtonClick" />
-
-        </LinearLayout>
-
-
-    </ScrollView>
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="2dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingTop="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context=".MainActivity">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
             <!-- Playlists -->
             <TextView
@@ -198,8 +177,6 @@
 
 
     </ScrollView>
-
-
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
