@@ -51,6 +51,7 @@ SET SCHEMA PUBLIC
 INSERT INTO TABLE_SONG VALUES(101,'Rain Man','Ketsa','Ketsa - Rain Man',0)
 INSERT INTO TABLE_SONG VALUES(102,'Not Enough To Give','Ketsa','Ketsa - Not Enough To Give',0)
 INSERT INTO TABLE_SONG VALUES(103,'Nightfall','Stereohada','Stereohada - Nightfall',0)
+INSERT INTO TABLE_SONG VALUES(104,'Above the Clouds','Scott Holmes Music','Scott Holmes Music - Above the Clouds',0)
 INSERT INTO USERS VALUES('admin','admin','admin')
 INSERT INTO USERS VALUES('chauhana','Aakash Chaohan','Aakash123')
 INSERT INTO USERS VALUES('ravals1','Sanskar Raval','Sanskar123')
