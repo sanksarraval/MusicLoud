@@ -21,20 +21,6 @@ public class SPPersistenceHSQLDB implements SPPersistence {
 
     public SPPersistenceHSQLDB (final String dbPath) {
         this.dbPath = dbPath;
-//        try{
-//            createTable();
-//
-//            if(wasCreated){
-//
-//            }
-//            else{
-//                wasCreated = true;
-//                insertDummyData();
-//            }
-//        }
-//        catch(SQLException e){
-//            e.printStackTrace();
-//        }
     }
 
     private Connection connection() throws SQLException {
@@ -105,35 +91,6 @@ public class SPPersistenceHSQLDB implements SPPersistence {
             e.printStackTrace();
         }
         return songPlaylists;
-    }
-
-
-    /**
-     * creates table songsPlaylists if it doesn't exists yet
-     */
-    private void createTable() throws SQLException {
-        final Connection conn = connection();
-        String query = "CREATE TABLE IF NOT EXISTS songsPlaylists (playlist_id INTEGER , playlist_name VARCHAR(100), song_id INTEGER, song_name VARCHAR(100))";
-        Statement stmt = conn.createStatement();
-        stmt.executeUpdate(query);
-        stmt.close();
-    }
-
-    /**
-     * inserts dummy data into table
-     */
-    private void insertDummyData() throws SQLException {
-        final Connection conn = connection();
-        String query1 = "INSERT INTO songPlaylists VALUES(100, 'name', 101, 'Rain Man')";
-        String query2 = "INSERT INTO songPlaylists VALUES(101, 'good playlist', 102, 'Not Enough To Give')";
-        String query3 = "INSERT INTO songPlaylists VALUES(102, 'bad playlist', 103, 'Nightfall')";
-
-
-        Statement stmt = conn.createStatement();
-        stmt.executeUpdate(query1);
-        stmt.executeUpdate(query2);
-        stmt.executeUpdate(query3);
-        stmt.close();
     }
 
     public void deletePairs(Playlist current){

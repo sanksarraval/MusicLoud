@@ -2,7 +2,9 @@ package com.example.musicloud.business;
 
 import com.example.musicloud.application.MyApp;
 import com.example.musicloud.objects.Playlist;
+import com.example.musicloud.objects.User;
 import com.example.musicloud.persistence.PlaylistPersistence;
+import com.example.musicloud.persistence.UserManagement;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +13,7 @@ public class AccessPlaylist {
     /**
      * PlaylistPersistence instance
      * */
-    private PlaylistPersistence playlistPersistence;
+    PlaylistPersistence playlistPersistence;
     /**
      * list of all playlists
      */
@@ -22,6 +24,10 @@ public class AccessPlaylist {
      */
     public AccessPlaylist(){
         playlistPersistence = MyApp.getPlaylistPersistence();
+        playlists = null;
+    }
+    public AccessPlaylist(PlaylistPersistence AP) {
+        playlistPersistence = AP;
         playlists = null;
     }
 

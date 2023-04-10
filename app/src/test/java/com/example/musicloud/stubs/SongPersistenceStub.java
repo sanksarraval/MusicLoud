@@ -22,8 +22,7 @@ public class SongPersistenceStub implements SongPersistence {
 
         songs.add(new Song("Not Enough To Give", "Ketsa", "Ketsa - Not Enough To Give"));
         songs.add(new Song("Rain Man", "Ketsa", "Ketsa - Rain Man"));
-        songs.add(new Song("Above the Clouds", "Scott Holmes Music", "Above the Clouds.mp3"));
-        songs.add(new Song("Stereohada", "Nightfall", "Nightfall.mp3"));
+        songs.add(new Song("Nightfall", "Stereohada", "Nightfall.mp3"));
     }
 
     /**

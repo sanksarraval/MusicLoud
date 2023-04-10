@@ -21,7 +21,7 @@ public class SPPersistenceStub implements SPPersistence {
 
         final Song song = new Song("Not Enough To Give", "Ketsa", "Ketsa - Not Enough To Give");
         final Song song1 = new Song("Rain Man", "Ketsa", "Ketsa - Rain Man");
-        final Song song2 = new Song("Above the Clouds", "Scott Holmes Music", "Scott Holmes Music - Above the Clouds.mp3");
+        final Song song2 = new Song("Nightfall", "Stereohada", "Nightfall.mp3");
 
         this.sps.add(new SP(song, playlist1));
         this.sps.add(new SP(song1, playlist2));

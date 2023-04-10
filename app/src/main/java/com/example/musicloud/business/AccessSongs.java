@@ -2,7 +2,9 @@ package com.example.musicloud.business;
 
 import com.example.musicloud.application.MyApp;
 import com.example.musicloud.objects.Song;
+import com.example.musicloud.objects.User;
 import com.example.musicloud.persistence.SongPersistence;
+import com.example.musicloud.persistence.UserManagement;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +13,7 @@ public class AccessSongs {
     /**
      * SongPersistence instance
      */
-    private final SongPersistence songPersistence;
+    SongPersistence songPersistence;
 
 
     /**
@@ -19,6 +21,14 @@ public class AccessSongs {
      */
     public AccessSongs() {
         songPersistence = MyApp.getSongPersistence();
+    }
+    /**
+     * AccessSongs Constructor
+     *
+     * @param SP - SongPersistence instance for Testing
+     */
+    public AccessSongs(SongPersistence SP) {
+        songPersistence = SP;
     }
 
     /**

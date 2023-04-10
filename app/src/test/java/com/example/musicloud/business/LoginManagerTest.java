@@ -20,6 +20,7 @@ public class LoginManagerTest {
     }
     @Test
     public void testLoginWithValidCredentials() {
+        System.out.println("\n*********** Starting testLoginWithValidCredentials ***********");
         String username = "john";
         String password = "password";
         when(accessUsersMock.verifyUser(username, password)).thenReturn(true);
@@ -27,9 +28,11 @@ public class LoginManagerTest {
         boolean result = loginManager.login(username, password);
 
         assertTrue(result);
+        System.out.println("\n*********** Finished testLoginWithValidCredentials ***********");
     }
     @Test
     public void testLoginWithInvalidCredentials() {
+        System.out.println("\n*********** Starting testLoginWithInvalidCredentials ***********");
         String username = "john";
         String password = "password";
         when(accessUsersMock.verifyUser(username, password)).thenReturn(false);
@@ -37,9 +40,11 @@ public class LoginManagerTest {
         boolean result = loginManager.login(username, password);
 
         assertFalse(result);
+        System.out.println("\n*********** Finished testLoginWithInvalidCredentials ***********");
     }
     @Test
     public void testGetCurrentUserWithValidUsername() {
+        System.out.println("\n*********** Starting testGetCurrentUserWithValidUsername ***********");
         String username = "john";
         User user = new User("1",username, "password");
         when(accessUsersMock.returnAccount(username)).thenReturn(user);
@@ -47,14 +52,17 @@ public class LoginManagerTest {
         User result = loginManager.getCurrentUser(username);
 
         assertEquals(user, result);
+        System.out.println("\n*********** Finished testGetCurrentUserWithValidUsername ***********");
     }
     @Test
     public void testGetCurrentUserWithInvalidUsername() {
+        System.out.println("\n*********** Starting testGetCurrentUserWithInvalidUsername ***********");
         String username = "john";
         when(accessUsersMock.returnAccount(username)).thenReturn(null);
 
         User result = loginManager.getCurrentUser(username);
 
         assertNull(result);
+        System.out.println("\n*********** Finished testGetCurrentUserWithInvalidUsername ***********");
     }
 }

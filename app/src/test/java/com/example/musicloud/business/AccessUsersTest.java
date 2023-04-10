@@ -25,6 +25,7 @@ public class AccessUsersTest {
 
     @Test
     public void testGetAccounts() {
+        System.out.println("\n*********** Starting testGetAccounts ***********");
         List<User> expectedUsers = new ArrayList<>();
         User user1 = new User("id1", "User1","password1");
         User user2 = new User("id2", "User2","password2");
@@ -34,40 +35,48 @@ public class AccessUsersTest {
         when(userManagement.getAllUsers()).thenReturn(expectedUsers);
         List<User> actualUsers = accessUsers.getAccounts();
         assertEquals(expectedUsers, actualUsers);
+        System.out.println("\n*********** Finished testGetAccounts ***********");
     }
 
     @Test
     public void testVerifyUser() {
+        System.out.println("\n*********** Starting testVerifyUser ***********");
         String userID = "testID";
         String password = "testPassword";
 
         when(userManagement.verifyUser(userID, password)).thenReturn(true);
         boolean result = accessUsers.verifyUser(userID, password);
         assertTrue(result);
+        System.out.println("\n*********** Finished testVerifyUser ***********");
     }
 
     @Test
     public void testAccountFound() {
+        System.out.println("\n*********** Starting testAccountFound ***********");
         String userID = "testID";
         User user = new User(userID, "User1","password");
 
         when(userManagement.getUser(userID)).thenReturn(user);
         boolean result = accessUsers.accountFound(userID);
         assertTrue(result);
+        System.out.println("\n*********** Finished testAccountFound ***********");
     }
 
     @Test
     public void testReturnAccount() {
+        System.out.println("\n*********** Starting testReturnAccount ***********");
         String userID = "testID";
         User user = new User(userID, "User1","password");
 
         when(userManagement.getUser(userID)).thenReturn(user);
         User returnedUser = accessUsers.returnAccount(userID);
         assertEquals(user, returnedUser);
+        System.out.println("\n*********** Finished testReturnAccount ***********");
     }
 
     @Test
     public void testAddAccount() {
+        System.out.println("\n*********** Starting testAddAccount ***********");
         User user1 = new User("testID", "User1", "password");
         try {
         // Add the first user
@@ -79,5 +88,6 @@ public class AccessUsersTest {
 
         // Verify that the second user was not added
         verify(userManagement, times(1)).addAccount(user1);
+        System.out.println("\n*********** Finished testAddAccount ***********");
     }
 }
