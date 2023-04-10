@@ -44,7 +44,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
     private final AccessSP allPairs = new AccessSP();
 
     private Song currentSong; // declare a field to hold the current song object
-    private int currentPos;
+    private int currentPos = songs.getCurrentSong();
     private List<Song> likedSongs = songs.getLikedSongs();
 
     private List<Playlist> allP = playlists.getPlaylists();
@@ -73,7 +73,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
         ivLike = findViewById(R.id.ivLike);
 
         Intent intent = getIntent();
-        int getPIndex = intent.getIntExtra("number",-1);
+        int getPIndex = intent.getIntExtra("number",songs.getCurrentSong());
 
         if(getPIndex < allP.size()){
             currentP = allP.get(getPIndex);
@@ -87,8 +87,6 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
             for (int i = 0; i < playlistSongs.size(); i++) {
                 Song song = playlistSongs.get(i);
                 int index = findPos(song); // get the index of the current song in likedSongs
-                Log.wtf("songindex", index+"");
-
 
                 @SuppressLint("InflateParams") FrameLayout layout = (FrameLayout) getLayoutInflater().inflate(R.layout.liked_item, null);
                 layout.setId(i);
@@ -98,6 +96,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
 
                     // get the position of the clicked song item
                     currentPos = index; // use the index to set the current position
+                    songs.setCurrentSong(currentPos);
                     mediaPlayerUtil.setPlayingPosition(index);
                     mediaPlayerUtil.play(songList.get(index).getSongName());
                     setHeart(currentSong);
@@ -131,7 +130,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
 
         //Set play source
         intent = getIntent();
-        currentPos = mediaPlayerUtil.getPlayingPosition();
+        currentPos = songs.getCurrentSong();
         int position = intent.getIntExtra("position", currentPos);
 
 
@@ -302,9 +301,6 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
         }
         setHeart(current);
         likedSongs = songs.getLikedSongs();
-        for(int i = 0; i < likedSongs.size(); i++){
-            System.out.println(likedSongs.get(i));
-        }
     }
 
     /**
@@ -336,6 +332,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
                 mediaPlayerUtil.playLast();
                 setHeart(currentSong);
                 currentPos--;
+                songs.setCurrentSong(currentPos);
                 break;
             case R.id.ivPlay:
                 //Play or pause
@@ -350,6 +347,7 @@ public class RunPlaylistActivity extends AppCompatActivity implements View.OnCli
                 mediaPlayerUtil.playNext();
                 setHeart(currentSong);
                 currentPos++;
+                songs.setCurrentSong(currentPos);
                 break;
             case R.id.ivReplay:
                 //Hit replay

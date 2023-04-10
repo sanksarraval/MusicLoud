@@ -14,6 +14,7 @@ public class AccessSongs {
      * SongPersistence instance
      */
     SongPersistence songPersistence;
+    static int currentSong = 0;
 
 
     /**
@@ -112,6 +113,14 @@ public class AccessSongs {
      */
     public List<String> getSongNames() {
         return songPersistence.allSongNames();
+    }
+
+    public int getCurrentSong(){
+        return currentSong;
+    }
+
+    public void setCurrentSong(int newSong){
+        currentSong = newSong;
     }
 
 }

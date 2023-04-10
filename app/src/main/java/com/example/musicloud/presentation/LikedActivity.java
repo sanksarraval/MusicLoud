@@ -34,7 +34,7 @@ public class LikedActivity extends AppCompatActivity implements View.OnClickList
     private List<Song> songList = songs.getSongs();
     private List<String> musicList = songs.getSongNames();
     private Song currentSong; // declare a field to hold the current song object
-    private int currentPos;
+    private int currentPos = songs.getCurrentSong();
     private List<Song> likedSongs = songs.getLikedSongs();
 
     /**
@@ -68,6 +68,7 @@ public class LikedActivity extends AppCompatActivity implements View.OnClickList
             layout.setOnClickListener(view -> {
                 // get the position of the clicked song item
                 currentPos = index; // use the index to set the current position
+                songs.setCurrentSong(index);
                 mediaPlayerUtil.setPlayingPosition(index);
                 mediaPlayerUtil.play(songList.get(index).getSongName());
                 setHeart(currentSong);
@@ -98,7 +99,7 @@ public class LikedActivity extends AppCompatActivity implements View.OnClickList
 
         //Set play source
         Intent intent = getIntent();
-        currentPos = mediaPlayerUtil.getPlayingPosition();
+        currentPos = songs.getCurrentSong();
         int position = intent.getIntExtra("position", currentPos);
         mediaPlayerUtil.setPlayMusicList(musicList);
         mediaPlayerUtil.setPlayingPosition(position);
@@ -301,6 +302,7 @@ public class LikedActivity extends AppCompatActivity implements View.OnClickList
                 mediaPlayerUtil.playLast();
                 setHeart(currentSong);
                 currentPos--;
+                songs.setCurrentSong(currentPos);
                 break;
             case R.id.ivPlay:
                 //Play or pause
@@ -315,6 +317,7 @@ public class LikedActivity extends AppCompatActivity implements View.OnClickList
                 mediaPlayerUtil.playNext();
                 setHeart(currentSong);
                 currentPos++;
+                songs.setCurrentSong(currentPos);
                 break;
             case R.id.ivReplay:
                 //Hit replay

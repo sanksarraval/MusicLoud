@@ -47,7 +47,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
     private final List<Song> songList = songs.getSongs();
     private final List<String> musicList = songs.getSongNames();
     private Song currentSong; // declare a field to hold the current song object
-    private int currentPos;
+    private int currentPos = songs.getCurrentSong();
 
     private List<Song> likedSongs = songs.getLikedSongs();
     private List<Playlist> allP = playlists.getPlaylists();
@@ -122,7 +122,8 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
             int finalI = i;
             button.setOnClickListener(view -> {
                 // get the position of the clicked song item
-                currentPos = finalI;
+                songs.setCurrentSong(finalI);
+                currentPos = songs.getCurrentSong();
                 mediaPlayerUtil.setPlayingPosition(finalI);
                 mediaPlayerUtil.play(songList.get(finalI).getSongName());
                 setHeart(currentSong);
@@ -169,7 +170,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
 
         //Set play source
         Intent intent = getIntent();
-        int position = intent.getIntExtra("position", 0);
+        int position = intent.getIntExtra("position", songs.getCurrentSong());
         mediaPlayerUtil.setPlayMusicList(musicList);
         mediaPlayerUtil.setPlayingPosition(position);
         currentPos = position;
@@ -364,9 +365,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
         }
         setHeart(current);
         List<Song> likedSongs = songs.getLikedSongs();
-        for (int i = 0; i < likedSongs.size(); i++) {
-            System.out.println(likedSongs.get(i));
-        }
+
     }
 
     /**
@@ -399,6 +398,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                 mediaPlayerUtil.playLast();
                 setHeart(currentSong);
                 currentPos--;
+                songs.setCurrentSong(currentPos);
                 break;
             case R.id.ivPlay:
                 //Play or pause
@@ -413,6 +413,7 @@ public class PlayActivity extends AppCompatActivity implements View.OnClickListe
                 mediaPlayerUtil.playNext();
                 setHeart(currentSong);
                 currentPos++;
+                songs.setCurrentSong(currentPos);
                 break;
             case R.id.ivReplay:
                 //Hit replay
