@@ -120,6 +120,5 @@ public class PlayActivityTest {
         //Next track in 10 seconds
         SystemClock.sleep(1000 * 10);
         onView(withId(R.id.ivNext)).perform(click());
-
     }
 }
